@@ -116,5 +116,22 @@ namespace _17bang.Pages.Repository
 
             };
         }
+        public IList<Problem> GetProblems()
+        {
+            return _problems;
+        }
+        public IList<Problem> GetExclude(ProblemStatus status)
+        {
+            return _problems.Where(p => p.Status != status).ToList();
+        }
+        public IList<Problem> GetPaged(int pageIndex,int pageSize)
+        {
+            return _problems.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+        public int GetSum()
+        {
+            return _problems.Count;
+        }
+
     }
 }

@@ -1,8 +1,96 @@
 ﻿@page
 @model _17bang.Pages.ProblemModel.IndexModel
+@using _17bang.Pages.Entity
+@using _17bang.Pages.Repository
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
+@if (string.IsNullOrEmpty(Model.Exclude))
+{
+    <div>
+        不显示：
+        <a href="/ProblemModel?exclude=@ProblemStatus.Cancelled">已撤销</a>
+        <a href="/ProblemModel?exclude=@ProblemStatus.WaitingProcess">待协助</a>
+        <a href="/ProblemModel?exclude=@ProblemStatus.InProcess">协助中</a>
+        <a href="/ProblemModel?exclude=@ProblemStatus.Rewarded">已酬谢</a>
+    </div>
+}
+else
+{
+    ProblemStatus ExcludeStatus = Enum.Parse<ProblemStatus>(Model.Exclude);
+    if (ExcludeStatus == ProblemStatus.Cancelled)
+    {
+        <span>已撤销</span>
+    }
+    else
+    {
+        <a href="/ProblemModel?exclude=@ProblemStatus.Cancelled">已撤销</a>
+    }
+
+    if (ExcludeStatus == ProblemStatus.WaitingProcess)
+    {
+        <span>待协助</span>
+    }
+    else
+    {
+        <a href="/ProblemModel?exclude=@ProblemStatus.WaitingProcess">待协助</a>
+    }
+
+    if (ExcludeStatus == ProblemStatus.InProcess)
+    {
+        <span>协助中</span>
+    }
+    else
+    {
+        <a href="/ProblemModel?exclude=@ProblemStatus.Cancelled">协助中</a>
+    }
+
+    if (ExcludeStatus == ProblemStatus.Rewarded)
+    {
+        <span>已酬谢</span>
+    }
+    else
+    {
+        <a href="/ProblemModel?exclude=@ProblemStatus.Rewarded">已酬谢</a>
+    }
+
+}
+
+@foreach (var problem in Model.Problems)
+{
+    <div>
+        <small>
+            @problem.PublishTime.ToString("yyyy年mm月dd日  hh时mm分")
+            <a href="/ProblemModel/@problem.Author.Id">@problem.Author.Name</a>
+        </small>
+        <h4>
+            <span>@problem.Status.GetDescription()</span>
+            <a href="/ProblemModel/@problem.Id">@problem.Title</a>
+        </h4>
+        <p>@problem.Abstact</p>
+    </div>
+}
+@{
+    int CurrentPageIndex = Model.PageIndex == 0 ? 1 : Model.PageIndex;
+    int TotalPageIndex = (Model.SumOfProblems + Const.PageSize / 2) / Const.PageSize + 1;
+}
+@if (CurrentPageIndex > 1)
+{
+    <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex-1)">上一页</a>
+}
+
+@for (int i = 1; i < TotalPageIndex; i++)
+{
+    <a href="/ProblemModel?@Const.PageIndex=@i">第@(i)页</a>
+}
+@if (CurrentPageIndex < TotalPageIndex-1)
+{
+    <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex+1)">下一页</a>
+
+}
+
+<footer>
+</footer>
+<hr />
