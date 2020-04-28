@@ -44,7 +44,7 @@ else
     }
     else
     {
-        <a href="/ProblemModel?exclude=@ProblemStatus.Cancelled">协助中</a>
+        <a href="/ProblemModel?exclude=@ProblemStatus.InProcess">协助中</a>
     }
 
     if (ExcludeStatus == ProblemStatus.Rewarded)
@@ -76,21 +76,42 @@ else
     int CurrentPageIndex = Model.PageIndex == 0 ? 1 : Model.PageIndex;
     int TotalPageIndex = (Model.SumOfProblems + Const.PageSize / 2) / Const.PageSize + 1;
 }
-@if (CurrentPageIndex > 1)
+@if (string.IsNullOrEmpty(Model.Exclude))
 {
-    <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex-1)">上一页</a>
-}
+    if (CurrentPageIndex > 1)
+    {
+        <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex-1)">上一页</a>
+    }
 
-@for (int i = 1; i < TotalPageIndex; i++)
+    for (int i = 1; i < TotalPageIndex; i++)
+    {
+        <a href="/ProblemModel?@Const.PageIndex=@(i)">第@(i)页</a>
+    }
+    if (CurrentPageIndex < TotalPageIndex - 1)
+    {
+        <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex+1)">下一页</a>
+
+    }
+}
+else
 {
-    <a href="/ProblemModel?@Const.PageIndex=@i">第@(i)页</a>
-}
-@if (CurrentPageIndex < TotalPageIndex-1)
-{
-    <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex+1)">下一页</a>
+    ProblemStatus CurrentExclude = Enum.Parse<ProblemStatus>(Model.Exclude);
+    int PagedTotalIndex= (Model.SumOfExcludeProblems + Const.PageSize / 2) / Const.PageSize + 1;
+    if (CurrentPageIndex > 1)
+    {
+        <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex-1)&exclude=@CurrentExclude">上一页</a>
+    }
 
-}
+    for (int i = 1; i < PagedTotalIndex; i++)
+    {
+        <a href="/ProblemModel?@Const.PageIndex=@(i)&exclude=@CurrentExclude">第@(i)页</a>
+    }
+    if (CurrentPageIndex < PagedTotalIndex - 1)
+    {
+        <a href="/ProblemModel?@Const.PageIndex=@(CurrentPageIndex+1)&exclude=@CurrentExclude">下一页</a>
 
+    }
+}
 <footer>
 </footer>
 <hr />

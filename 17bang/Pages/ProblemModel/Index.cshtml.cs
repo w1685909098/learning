@@ -20,6 +20,7 @@ namespace _17bang.Pages.ProblemModel
         public string Exclude { get; set; }
         public int PageIndex { get;set; }
         public int SumOfProblems;
+        public int SumOfExcludeProblems;
         public void OnGet()
         {
              Exclude = Request.Query["exclude"];
@@ -30,9 +31,10 @@ namespace _17bang.Pages.ProblemModel
             else
             {
                 Problems = _repository.GetExclude(Enum.Parse<ProblemStatus>(Exclude));
+                SumOfExcludeProblems = Problems.Count;
             }
             PageIndex = Convert.ToInt32(Request.Query["pageIndex"]);
-            Problems = _repository.GetPaged(PageIndex, Const.PageSize);
+            Problems = _repository.GetPaged(Problems,PageIndex, Const.PageSize);
             SumOfProblems = _repository.GetSum();
         }
         public void OnPost()

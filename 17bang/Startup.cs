@@ -24,6 +24,10 @@ namespace _17bang
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddMvc().AddRazorPagesOptions(opt =>
+            {
+                opt.Conventions.AddPageRoute("/ProblemModel/Single", "/ProblemModel/{id}");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

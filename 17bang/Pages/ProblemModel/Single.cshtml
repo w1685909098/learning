@@ -1,0 +1,21 @@
+﻿@page
+@model _17bang.Pages.ProblemModel.SingleModel
+@using _17bang.Pages.Repository
+
+@{
+    ViewData["Title"] = "Single";
+}
+
+<h1>Single</h1>
+
+<div>
+    <small>@Model.Problem.PublishTime</small>
+    <a href="/@Model.Problem/@Model.Problem.Author.Id">@Model.Problem.Author.Name</a>
+</div>
+<div>
+    <h3>
+        <span>@Model.Problem.Status.GetDescription()</span>
+        <a href="/ProblemModel/@Model.Problem.Id">@Model.Problem.Title</a>>
+    </h3>
+</div>
+<p>@Model.Problem.Abstact</p>

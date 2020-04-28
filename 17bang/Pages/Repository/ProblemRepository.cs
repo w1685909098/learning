@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace _17bang.Pages.Repository
 {
-    public class ProblemRepository
+    public class ProblemRepository:BaseRepository<Problem>
     {
         private static IList<Problem> _problems;
-        public ProblemRepository()
+         static ProblemRepository()
         {
             _problems = new List<Problem>
             {
@@ -124,14 +124,17 @@ namespace _17bang.Pages.Repository
         {
             return _problems.Where(p => p.Status != status).ToList();
         }
-        public IList<Problem> GetPaged(int pageIndex,int pageSize)
-        {
-            return _problems.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-        }
+        //public IList<Problem> GetPaged(int pageIndex,int pageSize)
+        //{
+        //    return _problems.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        //}
         public int GetSum()
         {
             return _problems.Count;
         }
-
+        public Problem GetSingle(int Id)
+        {
+            return _problems.SingleOrDefault(p => p.Id == Id);
+        }
     }
 }

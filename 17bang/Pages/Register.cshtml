@@ -1,0 +1,35 @@
+﻿@page
+@model _17bang.Pages.RegisterModel
+@using _17bang.Pages.Entity
+@using _17bang.Pages.AddTagHelper;
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center" action="/Register?id=10">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <form method="post" >
+        <div>
+            <label>邀请人：（* 必填，没有邀请人）</label>
+            <input type="text" name="InviterName" />
+        </div>
+        <div>
+            <label>邀请码：（* 必填）</label>
+            <input type="text" name="InviterVerificationCode" />
+        </div>
+        <div>
+            <label>用户名：（* 必填）</label>
+            <input asp-for="@Model.User.Name" />
+        </div>
+        <div>
+            <label>密码：（* 必填）</label>
+            <input asp-for="@Model.Password" />
+        </div>
+        <button type="submit">提交</button>
+        <button type="reset">重置</button>
+
+    </form>
+</div>
