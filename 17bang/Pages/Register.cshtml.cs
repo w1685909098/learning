@@ -24,6 +24,7 @@ namespace _17bang.Pages
         public User User { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        public  string CheckPassword { get; set; }
 
         public void OnGet()
         {

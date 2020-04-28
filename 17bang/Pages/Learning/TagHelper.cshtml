@@ -1,0 +1,79 @@
+﻿@page
+@model _17bang.Pages.Learning.TagHelperModel
+@{
+    ViewData["Title"] = "TagHelper";
+}
+
+<h1>Html</h1>
+<form method="get">
+    <div>
+        <label>用户名</label>
+        <input type="text" name="UserName" value="" />
+    </div>
+    <div>
+    <label>密码</label>
+    <input type="password" name="Password" value="" />
+    </div>
+    <div>
+        <label>性别</label>
+        <label><input type="radio" name="gender" value="male" />男</label>
+        <label><input type="radio" name="gender" value="female"/>女</label>
+    </div>
+    <input type="button" name="unknow" />unkonw
+    <button type="submit" >提交</button>
+    <button type="reset">重置</button>
+    <input type="checkbox" />记住我
+    <div>
+        <input type="checkbox" />1
+        <input type="checkbox" />2
+        <input type="checkbox" />3
+        <input type="checkbox" />4
+        <input type="checkbox" />5
+    </div>
+    <label>自我介绍</label><br />
+    <textarea name="selfdescription"></textarea>
+    <div>
+        <label>下拉列表</label>
+        <select name="day">
+            <option value="1">one</option>
+            <option value="2">twp</option>
+            <option value="3">three</option>
+            <option value="4">four</option>
+        </select>
+    </div>
+</form>
+
+<hr />
+<h1>TagHlper</h1>
+<form method="post">
+    <div>
+        <label>用户名</label>
+        <input asp-for="@Model.name" />
+    </div>
+    <div>
+        <label>密码</label>
+        <input asp-for="@Model.password" />
+    </div>
+    <div>
+        <label>确认密码</label>
+        <input asp-for="@Model.checkpassword" />
+    </div>
+    <div>
+        <label>性别</label>
+        <label><input type="radio" asp-for="@Model.male" value="true" />男</label>
+        <label><input type="radio" asp-for="@Model.male" value="false" />女</label>
+    </div>
+    <input type="button" name="unknow" />unkonw
+    <button type="submit">提交</button>
+    <button type="reset">重置</button>
+    <input type="checkbox" />记住我
+    <div>
+        <select asp-for="@Model.choice" asp-items="@Model.lists"> 选择列表</select>
+    </div>
+    @for (int i = 0; i < Model.Options.Count; i++)
+    {
+        <label>@Model.Options[i].Id</label>
+        <input type="checkbox" asp-for="@Model.Options[i].Selected" />
+        <input type="hidden" asp-for="@Model.Options[i].Id" />
+    }
+</form>
