@@ -1,0 +1,23 @@
+﻿@page
+@model _17bang.Pages.Log.OnModel
+@{
+    ViewData["Title"] = "On";
+}
+
+<form method="post">
+    <div>
+        <label>用户名：（* 必填）</label>
+        <input asp-for="@Model.User.Name" />
+    </div>
+    <div>
+        <label>密码：（* 必填）</label>
+        <input asp-for="@Model.Password" />
+    </div>
+    <div>
+        <label>验证码：（* 必填） </label>
+        <input type="text" /> <img src="~/Image/一起帮logo.jpg" asp-append-version="true" />
+    </div>
+    <button type="submit">提交</button>
+    <input  asp-for="@Model.RememberMe"  />记住我
+</form>
+
