@@ -16,7 +16,7 @@ namespace _17bang.Pages.ProblemModel
             _repository=new ProblemRepository();
         }
         private ProblemRepository _repository;
-        public Problem Problem { get; set; }
+        public ViewModel.ProblemModel Problem { get; set; }
         public void OnGet()
         {
             int Id = Convert.ToInt32(Request.RouteValues["id"]);

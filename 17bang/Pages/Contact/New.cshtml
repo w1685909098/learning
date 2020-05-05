@@ -1,0 +1,30 @@
+﻿@page
+@model _17bang.Pages.Contact.NewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form method="post">
+    <div>
+        <label>QQ：</label>
+        <input asp-for="@Model.Model.QQnumber" placeholder="建议填写" />
+        <span asp-validation-for="@Model.Model.QQnumber"></span>
+    </div>
+    <div>
+        <label>微信：</label>
+        <input asp-for="@Model.Model.WeChat" placeholder="建议填写" />
+        <span asp-validation-for="@Model.Model.WeChat"></span>
+    </div>
+    <div>
+        <label>电话：</label>
+        <input type="tel" asp-for="@Model.Model.Telephone" placeholder="请谨慎考虑是否填写" />
+        <span asp-validation-for="@Model.Model.Telephone"></span>
+    </div>
+    <div>
+        <div><label>其他：</label></div>
+        <textarea asp-for="@Model.Model.Others"></textarea>
+        <span asp-validation-for="@Model.Model.Others"></span>
+    </div>
+    <button type="submit">提交</button>
+</form>

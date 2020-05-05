@@ -9,8 +9,9 @@ namespace _17bang.Pages.Entity
     public class User
     {
         public string Name { get; set; }
-        public string Password;
-        public string VerifivationCode;
-        public int Id;
+        public string Password { get; set; }
+        public string CheckPassword { get; set; }
+        public string VerifivationCode { get; set; }
+        public int Id { get; set; }
     }
 }

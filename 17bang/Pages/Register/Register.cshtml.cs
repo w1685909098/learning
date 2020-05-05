@@ -8,31 +8,32 @@ using Microsoft.Extensions.Logging;
 using _17bang.Pages.Entity;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using _17bang.Pages.ViewModel;
+using _17bang.Pages.Repository;
 
 namespace _17bang.Pages
 {
     [BindProperties]
     public class RegisterModel : PageModel
     {
-       
-        private readonly ILogger<IndexModel> _logger;
-
-        public RegisterModel(ILogger<IndexModel> logger)
+        public UserModel Register { get; set; }
+        private UserRepository _userrepository;
+        public RegisterModel()
         {
-            _logger = logger;
+            _userrepository = new UserRepository();
         }
-        public User User { get; set; }
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-        public  string CheckPassword { get; set; }
-
         public void OnGet()
         {
             
         }
         public void OnPost()
-        {
-
+        { 
+            if (!ModelState.IsValid)
+            {
+                return;
+            }
+            _userrepository.Save(Register);
+            Response.Cookies.Append("user", "xx");
         }
     }
 }

@@ -1,0 +1,37 @@
+﻿@page
+@model _17bang.Pages.Password.ForgetModel
+@{
+    ViewData["Title"] = "Forget";
+}
+
+<h1>Forget</h1>
+<form method="post">
+    <div>
+        <label>Email：（* 必填）</label>
+        <input type="email" asp-for="@Model.Model.Email" />
+        <span asp-validation-for="@Model.Model.Email"></span>
+    </div>
+    <div>
+        <label>通过用户名查找Email：</label>
+        <input type="email" asp-for="@Model.Model.SearchEmail" />
+        <span asp-validation-for="@Model.Model.SearchEmail"></span>
+    </div>
+    <div>
+        <label>验证码：（* 必填） </label>
+        <input asp-for="@Model.Model.VerificationCode" />
+        <span asp-validation-for="@Model.Model.VerificationCode"></span>
+    </div>
+
+    <div>
+        <label>QQ：</label>
+        <input asp-for="@Model.Model.QQnumber" />
+        <span asp-validation-for="@Model.Model.QQnumber"></span>
+    </div>
+    <div>
+        <label>Email：（* 必填）</label>
+        <input type="email" asp-for="@Model.Model.Email" />
+        <span asp-validation-for="@Model.Model.Email"></span>
+    </div>
+    <button type="submit">提交</button>
+    <button type="reset">重置</button>
+</form>

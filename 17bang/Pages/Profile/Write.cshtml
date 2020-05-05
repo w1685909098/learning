@@ -1,0 +1,34 @@
+﻿@page
+@model _17bang.Pages.Profile.WriteModel
+@{
+    ViewData["Title"] = "Write";
+}
+
+<h1>Write</h1>
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label>头像：（* 仅限jpg/png/gif）</label>
+        <input type="file" />
+    </div>
+    <div>
+        <label>性别：</label>
+        <label><input type="radio" asp-for="@Model.Model.IsMale" value="true" />男</label>
+        <label><input type="radio" asp-for="@Model.Model.IsMale" value="false" />女</label>
+    </div>
+    <div>
+        <div>生日：</div>
+        <select asp-for="@Model.Model.BirthYear" asp-items="@Model.Model.BirthYears">
+        <option value="null">-------</option>
+        </select>
+        <label>年</label>
+        <select asp-for="@Model.Model.BirthMonth" asp-items="@Model.Model.BirthMonths">
+        <option value="null">-------</option>
+        </select>
+        <label>月</label>
+    </div>
+    <div>
+        <div><label>自我介绍：</label></div>
+        <textarea asp-for="@Model.Model.SelfDescription"></textarea>
+    </div>
+    <button type="submit">提交 </button>
+</form>

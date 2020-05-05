@@ -3,17 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _17bang.Pages.ViewModel;
 
 namespace _17bang.Pages.Repository
 {
-    public class ProblemRepository:BaseRepository<Problem>
+    public class ProblemRepository:BaseRepository<ViewModel.ProblemModel>
     {
-        private static IList<Problem> _problems;
+        private static IList<ViewModel.ProblemModel> _problems;
          static ProblemRepository()
         {
-            _problems = new List<Problem>
+            _problems = new List<ViewModel.ProblemModel>
             {
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name=" M...",Id=1},
@@ -22,7 +23,7 @@ namespace _17bang.Pages.Repository
                      Id=1,
                      Abstact="ava语言写的代码需要先编译为可执行文件，才能被jvm执行。在下载的jdk安装目录下的bin目录，有两个可执行程序java.exe和javac.exe，javac就是用来编译的，java是执行编译后的class文件。刚写好的java程序是.java结尾的文件，需要经过编译，变为.class结尾的文件，然后交给虚拟机执行。新建一个HelloWorld.java文件，将以下代码贴入：public class HelloWorld { public static void main(String[] args……"
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name=" 28zhu ",Id=2},
@@ -31,7 +32,7 @@ namespace _17bang.Pages.Repository
                      Id=2,
                      Abstact="期望功能：当U盘被拔下后，系统崩溃或者退出。经历：之前看"
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name=" 友人.",Id=3},
@@ -40,7 +41,7 @@ namespace _17bang.Pages.Repository
                      Id=3,
                      Abstact="",
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name="  28zhu ",Id=4},
@@ -50,7 +51,7 @@ namespace _17bang.Pages.Repository
                      Abstact="RT，也不知道描述的清楚不清楚。求一个思路……",
 
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name=" WhiteWater",Id=5},
@@ -59,7 +60,7 @@ namespace _17bang.Pages.Repository
                      Id=5,
                      Abstact="运行就报这个错误，这个jar包我导入项目了的，不然编译都无法通过。……"
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name="chenzhiwei ",Id=6},
@@ -68,7 +69,7 @@ namespace _17bang.Pages.Repository
                      Id=6,
                      Abstact="现在是用electron-vue 做的 桌面应用程序用localStorage存放的用户信息重新安装之后 ",
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name=" 28zhu.",Id=7},
@@ -77,7 +78,7 @@ namespace _17bang.Pages.Repository
                      Id=7,
                      Abstact="Message未能加载文件或程序集“System.Runtime.CompilerServices.Unsafe, Vers11d"
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name="  瓜皮弟子头很铁 ",Id=8},
@@ -86,7 +87,7 @@ namespace _17bang.Pages.Repository
                      Id=8,
                      Abstact="protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)"
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name="  桂ILLL",Id=9},
@@ -95,7 +96,7 @@ namespace _17bang.Pages.Repository
                      Id=9,
                      Abstact="用的是vs2015的winform窗体程序，主要是类似于QQ的视频语音通信，语音功能搁浅了"
                 },
-                new Problem
+                new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
                     Author=new User{Name=" CristanoShow",Id=10},
@@ -104,23 +105,29 @@ namespace _17bang.Pages.Repository
                      Id=10,
                      Abstact="如题：dockpanel显示有多个标签栏，怎么将只显示当前活动窗体的标签栏……"
                 },
-                //new Problem
-                //{
-                //    PublishTime=DateTime.Now,
-                //    Author=new User{Name=" M.",Id=12},
-                //    Status=ProblemStatus.Cancelled,
-                //     Title="额，怎么说，看下吧，谢谢，我只有五个帮币，呜呜",
-                //     Id=12,
-                //     Abstact="有两个可执行程译，变为.cllic class HelloWorld { public static void main(String[] args……"
-                //},
+                new ViewModel.ProblemModel
+                {
+                    PublishTime=DateTime.Now,
+                    Author=new User{Name=" M.",Id=12},
+                    Status=ProblemStatus.Cancelled,
+                     Title="额，怎么说，看下吧，谢谢，我只有五个帮币，呜呜",
+                     Id=12,
+                     Abstact="有两个可执行程译，变为.cllic class HelloWorld { public static void main(String[] args……"
+                },
 
             };
         }
-        public IList<Problem> GetProblems()
+
+        public  void Save(ViewModel.ProblemModel model )
+        {
+            _problems.Add(model);
+        }
+
+        public IList<ViewModel.ProblemModel> GetProblems()
         {
             return _problems;
         }
-        public IList<Problem> GetExclude(ProblemStatus status)
+        public IList<ViewModel.ProblemModel> GetExclude(ProblemStatus status)
         {
             return _problems.Where(p => p.Status != status).ToList();
         }
@@ -132,7 +139,7 @@ namespace _17bang.Pages.Repository
         {
             return _problems.Count;
         }
-        public Problem GetSingle(int Id)
+        public ViewModel.ProblemModel GetSingle(int Id)
         {
             return _problems.SingleOrDefault(p => p.Id == Id);
         }

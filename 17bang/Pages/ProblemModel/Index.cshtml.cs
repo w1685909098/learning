@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using _17bang.Pages.Repository;
 using _17bang.Pages.Entity;
+using _17bang.Pages.ViewModel;
 
 namespace _17bang.Pages.ProblemModel
 {
@@ -16,7 +17,7 @@ namespace _17bang.Pages.ProblemModel
             _repository = new ProblemRepository();
         }
         private ProblemRepository _repository;
-        public IList<Problem> Problems { get; set; }
+        public IList<ViewModel.ProblemModel> Problems { get; set; }
         public string Exclude { get; set; }
         public int PageIndex { get;set; }
         public int SumOfProblems;

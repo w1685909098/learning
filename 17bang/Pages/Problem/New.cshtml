@@ -1,0 +1,46 @@
+﻿@page
+@model _17bang.Pages.Problem.NewModel
+@using _17bang.Pages.ViewModel;
+@{
+    ViewData["Title"] = "New";
+}
+
+<h1>New</h1>
+
+<form method="post">
+    <div>
+        <label>标题：（* 必填）</label>
+        <input asp-for="@Model.Model.Title" />
+        <span asp-validation-for="@Model.Model.Title"></span>
+    </div>
+    <div>
+        <label>说明：（* 必填）</label>
+        <textarea asp-for="@Model.Model.Description"></textarea>
+        <span asp-validation-for="@Model.Model.Description"></span>
+    </div>
+    <div>
+        <div><label>关键字：（* 使用空格分隔）</label></div>
+        <label>---一级---</label>
+        <select asp-for="@Model.Model.ProblemType" asp-items="@Model.Model.ProblemTypeSelects">
+        <option value="null"> </option>
+        </select>
+        <span asp-validation-for="@Model.Model.ProblemType"></span>
+        <label>--- 二级---</label>
+        <select asp-for="@Model.Model.LanguageType" asp-items="Html.GetEnumSelectList<LanguageTypeSelects>()">
+        <option value="null"> </option>
+        </select>
+        <input asp-for="@Model.Model.SelfDescription" placeholder="自定义关键字，使用空格分隔" />
+    </div>
+    <span asp-validation-for="@Model.Model.LanguageType"></span>
+    <div>
+        <div><label>定向求助：（推荐 ）</label></div>
+        <input asp-for="@Model.Model.UserName" />
+    </div>
+    <div>
+        <div><label>悬赏  帮帮币 ：（现有 枚  ）</label></div>
+        <input asp-for="@Model.Model.RewardHelpMoneyCount" />
+    </div>
+    <span asp-validation-for="@Model.Model.RewardHelpMoneyCount"></span>
+    <button type="submit">发布</button>
+    <button type="submit">保存基本文稿</button>
+</form>

@@ -2,6 +2,7 @@
 @model _17bang.Pages.RegisterModel
 @using _17bang.Pages.Entity
 @using _17bang.Pages.AddTagHelper;
+@using _17bang.Pages.ViewModel;
 @{
     ViewData["Title"] = "Home page";
 }
@@ -22,15 +23,18 @@
         </div>
         <div>
             <label>用户名：（* 必填）</label>
-            <input asp-for="@Model.User.Name" />
+            <input asp-for="@Model.Register.Name" />
+            <span asp-validation-for="@Model.Register.Name"></span>
         </div>
         <div>
             <label>密码：（* 必填）</label>
-            <input asp-for="@Model.Password" />
+            <input asp-for="@Model.Register.Password" />
+            <span asp-validation-for="@Model.Register.Password"></span>
         </div>
         <div>
             <label>验证密码：（* 必填）</label>
-            <input asp-for="@Model.CheckPassword" />
+            <input asp-for="@Model.Register.ConfirmPassword" />
+            <span asp-validation-for="@Model.Register.ConfirmPassword"></span>
         </div>
         <div>
             <label>验证码：（* 必填） </label> 
@@ -41,6 +45,6 @@
          </div>
         <button type="submit">提交</button>
         <button type="reset">重置</button>
-
+        <a   asp-page="/Log/On">登录</a>
     </form>
 </div>

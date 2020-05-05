@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +27,14 @@ namespace _17bang
             services.AddRazorPages();
             services.AddMvc().AddRazorPagesOptions(opt =>
             {
-                opt.Conventions.AddPageRoute("/ProblemModel/Single", "/ProblemModel/{id}");
+                opt.Conventions.AddPageRoute("/ProblemModel/Single", "/ProblemModel/{id}")
+                .AddPageRoute("/Message/Mine","/Message/Mine/{opt}");
+            });
+            services.AddMemoryCache();
+            services.AddSession(option => 
+            {
+                option.Cookie = new CookieBuilder { Name="SetSessionId",};
+                option.IdleTimeout = new TimeSpan(0, 0, 5);
             });
         }
 
@@ -48,6 +56,7 @@ namespace _17bang
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 

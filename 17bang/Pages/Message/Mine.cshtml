@@ -1,0 +1,34 @@
+﻿@page
+@model _17bang.Pages.Message.MineModel
+@{
+    ViewData["Title"] = "Mine";
+}
+
+<h1>Mine</h1>
+
+<form method="post">
+
+    <button type="submit" >提交 </button>
+    <button type="submit" asp-page="/Message/Mine" asp-route-opt="read">已读</button>
+    <button  type="submit" asp-page="/Message/Mine" asp-route-opt="delete">删除</button>
+
+    @for (int i = 0; i < Model.Messages.Count; i++)
+    {
+        string fontweight = Model.Messages[i].Selected ? "font-weight:500" : string.Empty;
+        string styles = "border:hidden;width:500px";
+        {<div>
+                <label style="@fontweight">@Model.Messages[i].Id</label>
+                <input type="checkbox" asp-for="@Model.Messages[i].Selected" />
+                <input type="hidden" asp-for="@Model.Messages[i].Id" />
+                <input style="@fontweight" asp-for="@Model.Messages[i].DateTime@*.ToString("yyyy年mm月dd日  hh时mm分")*@" />
+                <input type="hidden" asp-for="@Model.Messages[i].Id" />
+                <input style="@fontweight;@styles" asp-for="@Model.Messages[i].Content" />
+                <input type="hidden" asp-for="@Model.Messages[i].Id" />
+                @*<input asp-for="@Model.Messages[i].Selected" />*@
+                <input type="hidden" asp-for="@Model.Messages[i].Id" />
+            </div>
+
+        }
+
+    }
+</form>

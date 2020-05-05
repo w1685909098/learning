@@ -21,5 +21,19 @@ namespace _17bang.Pages
         {
 
         }
+        public ActionResult OnPost()
+        {
+            Response.Cookies.Append("tt", "23");
+            Response.Cookies.Append("xx", "25",
+                new Microsoft.AspNetCore.Http.CookieOptions
+                {/*Domain=".localhost",*/
+                    //Path = "/Pages/Message",
+                    Expires = DateTime.Now.AddDays(7)
+                }
+                );
+            Response.Cookies.Delete("tt");
+            return Redirect("/message/mine");
+            //return RedirectToPage("/Message/Mine");
+        }
     }
 }
