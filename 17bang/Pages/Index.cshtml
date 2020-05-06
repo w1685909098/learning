@@ -2,7 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-
+    IList<string> names = new List<string> { "c#", "java", "sql" };
 }
 
 <div class="text-center">
@@ -16,5 +16,3 @@
 <form method="post">
     <button>提交</button>
 </form>
-@*<partial name="_Keywords" for="@Model.Courses" />*@
-<partial name="_Keywords" model="@Model.Courses" />

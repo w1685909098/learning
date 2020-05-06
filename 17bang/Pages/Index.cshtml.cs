@@ -13,7 +13,7 @@ namespace _17bang.Pages
        public IList<string> Courses { get; set; }
         public ActionResult OnGet()
         {
-            Courses = new string[] {"C#","ASP.NET","Javascript","Jquery" };
+            Courses = new string[] {"C#","ASP.NET","Javascript","" };
             //return RedirectToPagePermanent("/*Pages/Message/Mine*/");
             return Page();
 
