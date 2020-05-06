@@ -28,12 +28,13 @@ namespace _17bang
             services.AddMvc().AddRazorPagesOptions(opt =>
             {
                 opt.Conventions.AddPageRoute("/ProblemModel/Single", "/ProblemModel/{id}")
+                .AddPageRoute("/Log/On","/LogOn")
                 .AddPageRoute("/Message/Mine","/Message/Mine/{opt}");
             });
             services.AddMemoryCache();
             services.AddSession(option => 
             {
-                option.Cookie = new CookieBuilder { Name="SetSessionId",};
+                option.Cookie = new CookieBuilder { Name="SetSessionId",Expiration=new TimeSpan(30,0,0,0),HttpOnly=false};
                 option.IdleTimeout = new TimeSpan(0, 0, 5);
             });
         }

@@ -10,15 +10,12 @@ namespace _17bang.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+       public IList<string> Courses { get; set; }
+        public ActionResult OnGet()
         {
-            _logger = logger;
-        }
-
-        public void OnGet()
-        {
+            Courses = new string[] {"C#","ASP.NET","Javascript","Jquery" };
+            //return RedirectToPagePermanent("/*Pages/Message/Mine*/");
+            return Page();
 
         }
         public ActionResult OnPost()
@@ -32,8 +29,8 @@ namespace _17bang.Pages
                 }
                 );
             Response.Cookies.Delete("tt");
-            return Redirect("/message/mine");
-            //return RedirectToPage("/Message/Mine");
+            return RedirectToPagePermanent("/LogOn");
+            //return RedirectToPage("LogOn");
         }
     }
 }

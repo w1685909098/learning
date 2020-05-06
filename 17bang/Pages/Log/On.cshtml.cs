@@ -24,7 +24,7 @@ namespace _17bang.Pages.Log
         }
         public LogOnModel LogOnModel { get; set; }
         public bool RememberMe { get; set; }
-        public ActionResult OnGet()
+        public PageResult OnGet()
         {
             ViewData["name"] = HttpContext.Session.GetString("name");
             return Page();
@@ -46,7 +46,7 @@ namespace _17bang.Pages.Log
                 new Microsoft.AspNetCore.Http.CookieOptions {Expires=DateTime.Now.AddDays(14) });
             HttpContext.Session.SetString("name", "Id");
 
-            return Page();
+            return RedirectToPage("/Log/On");
         }
     }
 }
