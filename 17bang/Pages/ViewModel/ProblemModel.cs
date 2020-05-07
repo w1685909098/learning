@@ -12,8 +12,8 @@ namespace _17bang.Pages.ViewModel
 {
     public class ProblemModel
     {
-        public DateTime PublishTime { get; set; }
-        public User Author { get; set; }
+        public DateTime PublishTime { get; set; } /*= DateTime.Now;*/
+        public User Author { get; set; }/* = new User { Name = "1", Id = 1 };*/
         public int Id { get; set; }
         public string Abstact { get; set; }
         public ProblemStatus Status { get; set; }

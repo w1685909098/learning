@@ -7,13 +7,15 @@ using _17bang.Pages.ViewModel;
 
 namespace _17bang.Pages.Repository
 {
-    public class ProblemRepository:BaseRepository<ViewModel.ProblemModel>
+    public class ProblemRepository : BaseRepository<ViewModel.ProblemModel>
     {
+        private static int _LastedId;
         private static IList<ViewModel.ProblemModel> _problems;
-         static ProblemRepository()
+        static ProblemRepository()
         {
             _problems = new List<ViewModel.ProblemModel>
             {
+#region new lists
                 new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
@@ -108,20 +110,20 @@ namespace _17bang.Pages.Repository
                 new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
-                    Author=new User{Name=" M.",Id=12},
+                    Author=new User{Name=" M.",Id=11},
                     Status=ProblemStatus.Cancelled,
                      Title="额，怎么说，看下吧，谢谢，我只有五个帮币，呜呜",
-                     Id=12,
+                     Id=11,
                      Abstact="有两个可执行程译，变为.cllic class HelloWorld { public static void main(String[] args……"
                 },
-
+#endregion
             };
         }
 
-        public  void Save(ViewModel.ProblemModel model )
-        {
-            _problems.Add(model);
-        }
+        //public  void Save(ViewModel.ProblemModel model )
+        //{
+        //    _problems.Add(model);
+        //}
 
         public IList<ViewModel.ProblemModel> GetProblems()
         {
@@ -142,6 +144,13 @@ namespace _17bang.Pages.Repository
         public ViewModel.ProblemModel GetSingle(int Id)
         {
             return _problems.SingleOrDefault(p => p.Id == Id);
+        }
+        public int ProblemSave(ViewModel.ProblemModel model)
+        {
+            _LastedId++;
+            model.Id = _LastedId;
+            _problems.Add(model);
+            return model.Id;
         }
     }
 }

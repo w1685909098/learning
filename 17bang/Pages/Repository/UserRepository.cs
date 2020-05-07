@@ -14,7 +14,7 @@ namespace _17bang.Pages.Repository
         {
             _users = new List<UserModel> { };
         }
-        public int Save(UserModel model)
+        public int UserSave(UserModel model)
         {
             _LastedId++;
             model.Id = _LastedId;

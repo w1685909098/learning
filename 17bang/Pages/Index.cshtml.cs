@@ -27,7 +27,7 @@ namespace _17bang.Pages
                 }
                 );
             Response.Cookies.Delete("tt");
-            return RedirectToPagePermanent("/LogOn");
+            return RedirectToPagePermanent("/Log/On");
             //return RedirectToPage("LogOn");
         }
     }

@@ -32,7 +32,7 @@ namespace _17bang.Pages
             {
                 return;
             }
-            _userrepository.Save(Register);
+            _userrepository.UserSave(Register);
             Response.Cookies.Append("user", "xx");
         }
     }

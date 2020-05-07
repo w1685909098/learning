@@ -28,14 +28,14 @@ namespace _17bang.Pages.Problem
         }
         public void OnPost()
         {
-            if (string.IsNullOrWhiteSpace(Model.ProblemType) )
-            {
-                ModelState.AddModelError("Model.ProblemType",  "* 关键字不能为空");
-            }
-            if (string.IsNullOrWhiteSpace(Model.LanguageType) )
-            {
-                ModelState.AddModelError("Model.LanguageType", "* 关键字不能为空");
-            }
+            //if (string.IsNullOrWhiteSpace(Model.ProblemType) )
+            //{
+            //    ModelState.AddModelError("Model.ProblemType",  "* 关键字不能为空");
+            //}
+            //if (string.IsNullOrWhiteSpace(Model.LanguageType) )
+            //{
+            //    ModelState.AddModelError("Model.LanguageType", "* 关键字不能为空");
+            //}
             if (string.IsNullOrWhiteSpace(Model.RewardHelpMoneyCount) )
             {
                 ModelState.AddModelError("odel.RewardHelpMoneyCount", "* 悬赏帮帮币不能为空");
@@ -45,7 +45,7 @@ namespace _17bang.Pages.Problem
             {
                 return;
             }
-            _problemrepository.Save(Model);
+            _problemrepository.ProblemSave(Model);
         }
     }
 }
