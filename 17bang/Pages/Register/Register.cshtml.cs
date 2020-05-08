@@ -26,14 +26,16 @@ namespace _17bang.Pages
         {
             
         }
-        public void OnPost()
+        public ActionResult OnPost()
         { 
             if (!ModelState.IsValid)
             {
-                return;
+                return Page();
             }
             _userrepository.UserSave(Register);
             Response.Cookies.Append("user", "xx");
+            //return Redirect(Request.Headers["Referer"]);
+            return Redirect(Request.Query["prepage"]);
         }
     }
 }

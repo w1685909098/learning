@@ -45,8 +45,9 @@ namespace _17bang.Pages.Log
             Response.Cookies.Append("zz", "zz",
                 new Microsoft.AspNetCore.Http.CookieOptions {Expires=DateTime.Now.AddDays(14) });
             HttpContext.Session.SetString("name", "Id");
+            return Redirect(Request.Query["prepage"]);
 
-            return RedirectToPage("/Log/On");
+            //return Redirect(Request.Headers["Referer"]);
         }
     }
 }
