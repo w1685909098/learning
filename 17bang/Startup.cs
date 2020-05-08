@@ -29,6 +29,7 @@ namespace _17bang
             {
                 opt.Conventions.AddPageRoute("/ProblemModel/Single", "/ProblemModel/{id}")
                 .AddPageRoute("/Log/On","/LogOn")
+                .AddPageRoute("/ProblemModel/Edit","/ProblemModel/Edit/{Id}")
                 .AddPageRoute("/Message/Mine","/Message/Mine/{opt}");
             });
             services.AddMemoryCache();

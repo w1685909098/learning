@@ -15,7 +15,7 @@ namespace _17bang.Pages.Repository
         {
             _problems = new List<ViewModel.ProblemModel>
             {
-#region new lists
+#region new lists的赋值
                 new ViewModel.ProblemModel
                 {
                     PublishTime=DateTime.Now,
@@ -151,6 +151,10 @@ namespace _17bang.Pages.Repository
             model.Id = _LastedId;
             _problems.Add(model);
             return model.Id;
+        }
+        public IList<ViewModel.ProblemModel> SaveChanges()
+        {
+            return _problems;
         }
     }
 }

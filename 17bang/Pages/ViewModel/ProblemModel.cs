@@ -39,6 +39,10 @@ namespace _17bang.Pages.ViewModel
             };
         //[Required(AllowEmptyStrings = false, ErrorMessage = "* 关键字2不能为空")]
         public string LanguageType { get; set; }
+        public ProblemModel Update(ProblemModel model)
+        {
+            return model;
+        }
     }
     public enum ProblemStatus
     {
