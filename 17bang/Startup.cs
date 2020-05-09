@@ -36,7 +36,7 @@ namespace _17bang
             services.AddSession(option => 
             {
                 option.Cookie = new CookieBuilder { Name="SetSessionId",Expiration=new TimeSpan(30,0,0,0),HttpOnly=false};
-                option.IdleTimeout = new TimeSpan(0, 0, 5);
+                option.IdleTimeout = new TimeSpan(30, 0, 5);
             });
         }
 

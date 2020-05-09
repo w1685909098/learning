@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using _17bang.Pages.Entity;
@@ -26,7 +27,16 @@ namespace _17bang.Pages.Log
         public bool RememberMe { get; set; }
         public PageResult OnGet()
         {
-            ViewData["name"] = HttpContext.Session.GetString("name");
+            ViewData["UserName"] = HttpContext.Session.GetString("UserName");
+            if (ViewData["UserName"] == null)
+            {
+                ViewData["UserName"] = "未登录";
+            }
+            else
+            {
+                ViewData["UserName"] = HttpContext.Session.GetString("UserName");
+            }
+            //ViewData["name"] = HttpContext.Session.GetString("name");
             return Page();
         }
         public ActionResult OnPost()
@@ -42,9 +52,13 @@ namespace _17bang.Pages.Log
                 ModelState.AddModelError("LogOnModel.Password", "* 用户名或密码输入错误");
                 return Page();
             }
-            Response.Cookies.Append("zz", "zz",
-                new Microsoft.AspNetCore.Http.CookieOptions {Expires=DateTime.Now.AddDays(14) });
-            HttpContext.Session.SetString("name", "Id");
+            //Response.Cookies.Append("zz", "zz",
+            //    new Microsoft.AspNetCore.Http.CookieOptions {Expires=DateTime.Now.AddDays(14) });
+            //HttpContext.Session.SetString("name", "Id");
+            //Response.Cookies.Append("UserName", LogOnModel.Name,
+            //    new CookieOptions { Expires = DateTime.Now.AddDays(14) }
+            //    );
+            HttpContext.Session.SetString("UserName", LogOnModel.Name);
             return Redirect(Request.Query["prepage"]);
 
             //return Redirect(Request.Headers["Referer"]);

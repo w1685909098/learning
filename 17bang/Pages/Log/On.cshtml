@@ -4,6 +4,8 @@
     ViewData["Title"] = "On";
 }
 
+<h4>用户名：@Model.ViewData["UserName"]</h4>
+
 <form method="post">
     <div>
         <label>用户名：（* 必填）</label>
@@ -25,4 +27,4 @@
     <a asp-page="/Register/Register">注册</a>
 </form>
 
-<h1>session:@Model.ViewData["name"]</h1>
+@*<h1>session:@Model.ViewData["name"]</h1>*@
