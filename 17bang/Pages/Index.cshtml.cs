@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _17bang.Pages.Entity;
+using _17bang.Pages.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -10,8 +12,14 @@ namespace _17bang.Pages
 {
     public class IndexModel : PageModel
     {
+        public UserPageModel User { get; set; }
+
         public ActionResult OnGet()
         {
+            User = new UserPageModel
+            {
+                users = new List<string> { "C#","Java","Python","SQL"}
+            };
             //return RedirectToPagePermanent("/*Pages/Message/Mine*/");
             return Page();
 
