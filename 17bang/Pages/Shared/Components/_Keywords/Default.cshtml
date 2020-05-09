@@ -1,6 +1,7 @@
-﻿@model IList<string>
-<h2>Default</h2>
+﻿@model IList<_17bang.Pages.ViewModel.Keyword>
+
+<h2>关键字</h2>
 @foreach (var item in Model)
 {
-    <span>@item</span>
+    <span>@item.Name</span>
 }
