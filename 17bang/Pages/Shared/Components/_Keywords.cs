@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace _17bang.Pages.Shared.Components._Keywords
@@ -10,7 +11,8 @@ namespace _17bang.Pages.Shared.Components._Keywords
     {
         public IViewComponentResult Invoke()
         {
-            return View();
+            IList<string> keywords = new List<string> { "25","23","26","35","48" };
+            return View(keywords);
         }
     }
 }

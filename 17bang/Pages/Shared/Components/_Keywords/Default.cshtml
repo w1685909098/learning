@@ -1,1 +1,6 @@
-﻿<h2>Default</h2>
+﻿@model IList<string>
+<h2>Default</h2>
+@foreach (var item in Model)
+{
+    <span>@item</span>
+}
