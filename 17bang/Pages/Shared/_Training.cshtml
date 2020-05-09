@@ -1,6 +1,6 @@
-﻿@model _17bang.Pages.ViewModel.UserPageModel
-<h1>Training partial view</h1>
-@foreach (var item in Model.users)
+﻿@model IList<_17bang.Pages.ViewModel.UserPageModel>
+
+@foreach (var item in Model)
 {
-    <span>@item</span>
+    <span>@item.Name</span>
 }

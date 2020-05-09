@@ -12,14 +12,14 @@ namespace _17bang.Pages
 {
     public class IndexModel : PageModel
     {
-        public UserPageModel User { get; set; }
-
+        public IList<UserPageModel>  models { get; set; }
         public ActionResult OnGet()
         {
-            User = new UserPageModel
-            {
-                users = new List<string> { "C#","Java","Python","SQL"}
-            };
+            UserPageModel CSharp = new UserPageModel { Name="C#"};
+            UserPageModel SQL = new UserPageModel { Name = "sql" };
+            UserPageModel Javasript = new UserPageModel { Name = "java" };
+            UserPageModel PHP = new UserPageModel { Name = "php" };
+            models=new List<UserPageModel> { CSharp,SQL,Javasript,PHP};
             //return RedirectToPagePermanent("/*Pages/Message/Mine*/");
             return Page();
 
