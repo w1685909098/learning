@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _17bang.Pages.Filter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace _17bang
 {
@@ -37,6 +39,10 @@ namespace _17bang
             {
                 option.Cookie = new CookieBuilder { Name="SetSessionId",Expiration=new TimeSpan(30,0,0,0),HttpOnly=false};
                 option.IdleTimeout = new TimeSpan(30, 0, 5);
+            });
+            services.AddMvc(Options =>
+            {
+                Options.Filters.Add(new GolablePerRequest());
             });
         }
 
