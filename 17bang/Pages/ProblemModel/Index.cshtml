@@ -65,6 +65,9 @@ else
         <small>
             @problem.PublishTime.ToString("yyyy年mm月dd日  hh时mm分")
             <partial name="_User" model="problem.Author" />
+            <a href="/ProblemModel/@problem.Id">修改-single</a>
+            <a href="/ProblemModel/Edit/@problem.Id">修改-具体</a>
+
             @*<a href="/ProblemModel/@problem.Author.Id">@problem.Author.Name</a>*@
         </small>
         <h4>

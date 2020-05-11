@@ -18,7 +18,8 @@ namespace _17bang.Pages.Filter
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
             //throw new NotImplementedException();
-            string CurrentUser = context.HttpContext.Session.GetString("UserName");
+            string CurrentUser = context.HttpContext.Request.Cookies["UserName"];
+            //string CurrentUser = context.HttpContext.Session.GetString("UserName");
             if (string.IsNullOrEmpty(CurrentUser))
             {
                 context.Result = new RedirectToPageResult("/Log/On");

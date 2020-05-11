@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _17bang.Pages.Filter;
 using _17bang.Pages.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace _17bang.Pages.ProblemModel
 {
+    [NeedLogOn]
     [BindProperties]
     public class EditModel : PageModel
     {
@@ -22,11 +24,17 @@ namespace _17bang.Pages.ProblemModel
         public int Id { get; set; }
         public void OnGet()
         {
+           
             Id = Convert.ToInt32(Request.RouteValues["Id"]);
             problem = _repository.GetSingle(Id);
+            if (HttpContext.Request.Cookies["UserName"] != problem.Author.Name)
+            {
+                throw new Exception("用户权限不正确，您不是当前文章的发布者或者管理员，无权修改该文章");
+            }
         }
         public ActionResult OnPost()
         {
+            
             if (ModelState.IsValid)
             {
                 return Page();

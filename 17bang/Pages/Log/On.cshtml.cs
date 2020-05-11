@@ -27,20 +27,30 @@ namespace _17bang.Pages.Log
         public bool RememberMe { get; set; }
         public PageResult OnGet()
         {
-            ViewData["UserName"] = HttpContext.Session.GetString("UserName");
+            ViewData["UserName"] = HttpContext.Request.Cookies["UserName"];
             if (ViewData["UserName"] == null)
             {
                 ViewData["UserName"] = "未登录";
             }
             else
             {
-                ViewData["UserName"] = HttpContext.Session.GetString("UserName");
+                ViewData["UserName"] = HttpContext.Request.Cookies["UserName"];
             }
+            //ViewData["UserName"] = HttpContext.Session.GetString("UserName");
+
+            //if (ViewData["UserName"] == null)
+            //{
+            //    ViewData["UserName"] = "未登录";
+            //}
+            //else
+            //{
+            //    ViewData["UserName"] = HttpContext.Session.GetString("UserName");
+            //}
             //ViewData["name"] = HttpContext.Session.GetString("name");
             return Page();
         }
         public ActionResult OnPost()
-        {
+        {   
             UserModel user = _userRepository.GetUserByName(LogOnModel.Name);
             if (user==null)
             {
@@ -58,9 +68,9 @@ namespace _17bang.Pages.Log
             //Response.Cookies.Append("UserName", LogOnModel.Name,
             //    new CookieOptions { Expires = DateTime.Now.AddDays(14) }
             //    );
+            Response.Cookies.Append("UserName", LogOnModel.Name);
             HttpContext.Session.SetString("UserName", LogOnModel.Name);
             return Redirect(Request.Query["prepage"]);
-
             //return Redirect(Request.Headers["Referer"]);
         }
     }
