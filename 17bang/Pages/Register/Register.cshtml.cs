@@ -22,9 +22,9 @@ namespace _17bang.Pages
         {
             _userrepository = new UserRepository();
         }
-        public void OnGet()
+        public ActionResult OnGet()
         {
-            
+            return Page();
         }
         public ActionResult OnPost()
         { 
@@ -35,7 +35,14 @@ namespace _17bang.Pages
             _userrepository.UserSave(Register);
             Response.Cookies.Append("user", "xx");
             //return Redirect(Request.Headers["Referer"]);
+
             return Redirect(Request.Query["prepage"]);
+            //string prepage = HttpContext.Request.Query["prepage"];
+            //if (string.IsNullOrEmpty(prepage))
+            //{
+            //    prepage = HttpContext.Request.Path + HttpContext.Request.QueryString;
+            //}
+            //return Redirect(Request.Query[prepage]);
         }
     }
 }

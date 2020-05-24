@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace _17bang.Pages.ProblemModel
 {
-    [NeedLogOn]
+    //[NeedLogOn]
     [BindProperties]
     public class EditModel : PageModel
     {
@@ -22,15 +22,16 @@ namespace _17bang.Pages.ProblemModel
         public ViewModel.ProblemModel problem { get; set; }
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
-        public void OnGet()
+        public ActionResult OnGet()
         {
-           
+
             Id = Convert.ToInt32(Request.RouteValues["Id"]);
             problem = _repository.GetSingle(Id);
-            if (HttpContext.Request.Cookies["UserName"] != problem.Author.Name)
-            {
-                throw new Exception("用户权限不正确，您不是当前文章的发布者或者管理员，无权修改该文章");
-            }
+            //if (HttpContext.Request.Cookies["UserName"] != problem.Author.Name)
+            //{
+            //    throw new Exception("用户权限不正确，您不是当前文章的发布者或者管理员，无权修改该文章");
+            //}
+            return Page();
         }
         public ActionResult OnPost()
         {
@@ -39,8 +40,10 @@ namespace _17bang.Pages.ProblemModel
             {
                 return Page();
             }
-            problem.PublishTime = DateTime.Now;
-            _repository.GetSingle(Id).Update(problem);
+            _repository.GetSingle(Id).PublishTime = problem.PublishTime;
+            _repository.GetSingle(Id).Title = problem.Title;
+            _repository.GetSingle(Id).Abstact = problem.Abstact;
+            //_repository.GetSingle(Id).Update(problem);
             //_repository.SaveChanges();
             return RedirectToPage("/ProblemModel/Single",new {Id=Id});
         }

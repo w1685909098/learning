@@ -1,0 +1,154 @@
+﻿@page
+@{
+    ViewData["Title"] = "Credit";
+}
+
+<h3>Q：如何才能获得帮帮点？</h3>
+<div>一句话：<a style="font-weight:700">尽可能的多的参加下社区活动。</a></div>
+<div>目前的奖励政策如下表所示：</div>
+<style>
+    .HrefColor{color:blue;}
+    #HelpMoneyColor{color:yellow;}
+</style>
+<table border="1">
+    <thead>
+        <tr>
+            <th style="font-weight:600">社区活动</th>
+            <th style="font-weight:600">点数</th>
+            <th style="font-weight:600">备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="3" style="background-color:pink">* 账号相关</td>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                <a class="HrefColor" href="">注册</a>
+                <a class="HrefColor" href="">邀请注册</a>
+            </td>
+            <td>10</td>
+            <td>使用了别人的<a class="HrefColor" href="">邀请码</a></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>别人使用了你的<a class="HrefColor" href="">邀请码</a>完成注册</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">激活Email</a></td>
+            <td>20</td>
+            <td>不是填写了Email就有点数，Email必须被<a class="HrefColor" href="">验证激活</a></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="background-color:pink">* 求助相关</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">新人测试</a></td>
+            <td>0-30</td>
+            <td>按<a class="HrefColor" href="">测试成绩</a>给点数奖励，每题3点</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">首次求助</a></td>
+            <td>20</td>
+            <td>只能是<a class="HrefColor" href="">第一次发布求助</a>，并且审核通过，才能获得点数奖励</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">酬谢</a></td>
+            <td></td>
+            <td>“求助人”   ，<a class="HrefColor" href="">酬谢</a>多少<a id="HelpMoneyColor" href="">帮帮币</a>就能获得10倍点数奖励</td>
+        </tr>
+        <tr>
+            <td>获得.*</td>
+            <td></td>
+            <td>
+                <a class="HrefColor" href="">全额酬谢</a>时，酬谢<a id="HelpMoneyColor" href="">  帮帮币 </a>枚数 * (2 * 获得评价星级)
+                ，且<a class="HrefColor" href=""> 5星好评</a>翻番，<a class="HrefColor" href=""> 问题没有解决</a>不能获得点数奖励。
+            </td>
+        </tr>
+        <tr>
+            <td>查看<a class="HrefColor"> 总结</a></td>
+            <td>2</td>
+            <td>只有注册用户才能<a class="HrefColor" href="">查看</a></td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor"> 总结</a>被查看</td>
+            <td>3</td>
+            <td>只有注册用户才能<a class="HrefColor" href="">查看</a></td>
+        </tr>
+        <tr>
+            <td>评论<a class="HrefColor"> 总结</a></td>
+            <td>5</td>
+            <td>自己不能<a class="HrefColor" href="">评论</a>自己，同一用户同一总结只奖励一次</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="background-color:pink">* 评价相关</td>
+        </tr>
+        <tr>
+            <td>
+                赞/踩：
+                <a class="HrefColor"> 总结</a>
+                <a class="HrefColor">文章</a>
+                <a class="HrefColor">意见建议</a>
+                及<a class="HrefColor">他们的评论</a>
+            </td>
+            <td>1</td>
+            <td>无论点赞，还是 拍砖，评价一次就得1点（可多次点击）</td>
+        </tr>
+        <tr>
+            <td>
+                <a class="HrefColor"> 总结</a>
+                <a class="HrefColor">文章</a>
+                <a class="HrefColor">意见建议</a>
+                及<a class="HrefColor">他们的评论</a>
+                被点赞
+            </td>
+            <td>2</td>
+            <td>被点赞一次就得2点</td>
+        </tr>
+        <tr>
+            <td>
+                文章评论
+                被<a class="HrefColor">精选</a>
+            </td>
+            <td>10	</td>
+            <td>由文章作者<a class="HrefColor">精选</a></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="background-color:pink">* 督促</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">发布目标</a></td>
+            <td></td>
+            <td>同目标的<a class="HrefColor" href="">未交作业惩罚</a>数</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">加入目标</a></td>
+            <td>5</td>
+            <td>只要加入，就可以获得</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">交作业</a></td>
+            <td>2</td>
+            <td>只要交一次作业，求助人就可以获得</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">验收</a></td>
+            <td>2</td>
+            <td>好心人验收通过，给予好心人的帮帮点奖励。拒绝或质疑不能获得（拒绝有“帮帮币”补偿）</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="background-color:pink">* 其他</td>
+        </tr>
+        <tr>
+            <td><a class="HrefColor" href="">意见建议</a></td>
+            <td></td>
+            <td>由管理员确定<a class="HrefColor" href="">奖励</a>点数</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+

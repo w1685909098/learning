@@ -6,9 +6,14 @@
     <title>@ViewData["Title"] - _17bang</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <a href="/Register/Register?prepage=@(Context.Request.Path+Context.Request.QueryString)">注册</a>
-    <a href="/Log/On?prepage=@(Context.Request.Path+Context.Request.QueryString)">登录</a>
-    <a href="/Log/Off?prepage=@(Context.Request.Path+Context.Request.QueryString)">退出登录</a>
+    @{string Prepage = Context.Request.Query["prepage"]; }
+    @if (string.IsNullOrEmpty(Prepage))
+    {
+        Prepage = Context.Request.Path + Context.Request.QueryString;
+    }
+    <a href="/Register/Register?prepage=@Prepage">注册</a>
+    <a href="/Log/On?prepage=@Prepage">登录</a>
+    <a href="/Log/Off?prepage=@Prepage">退出登录</a>
 
 </head>
 <body>

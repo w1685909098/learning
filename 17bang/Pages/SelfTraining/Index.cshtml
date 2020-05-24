@@ -1,0 +1,138 @@
+﻿@page
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div>
+    @*html标准结构*@
+    @*<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8" />
+                <meta name="password" content="" />
+                <link rel="stylesheet" />
+            </head>
+            <body>
+                <header>
+                    <nav>
+
+                    </nav>
+                </header>
+                <main>
+                    <article>
+                    </article>
+                </main>
+                <aside>
+                </aside>
+                <footer>
+                </footer>
+            </body>
+        </html>*@
+</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="password" content="" />
+    <link rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav>
+
+        </nav>
+    </header>
+    <main>
+        <article>
+        </article>
+        <h1>h1</h1>
+        <a href="http://www.baidu.com" target="_blank">a这是超链接标签</a>
+        <img src="~/Image/源栈上课啦.jpg" alt="上课" title="image" />
+        <style>
+            .test{color:yellow;
+                  font-size:22px;
+                  font-family:宋体;
+                  font-weight:400;
+                  background-color:royalblue
+            }
+        </style>
+        <div>
+            <h3 style="color:red;text-align:center">CSS练习</h3>
+            <a class="test">font</a>
+            <input style="border:solid;border-color:salmon" type="text"  placeholder="这是实体练习"/>
+            <ul>
+                <li style="list-style:outside">123</li>
+                <li style="list-style:square">222</li>
+            </ul>
+            <table border="1" style="border-color:darkblue">
+                <tbody>
+                    <tr>
+                        <td>234</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form method="post">
+            <div>
+                <label style="color:aqua">用户名：</label>
+                <input type="text" name="UserName" />
+            </div>
+            <div>
+                <label>密码：</label><input type="password" name="Password" />
+            </div>
+            <div>
+                <label>确认密码：</label><input type="password" name="ConfirmPassword" />
+            </div>
+            <div>
+                <label>性别：</label>
+                <label><input type="radio" name="gender" value="male" />男</label>
+                <label><input type="radio" name="gender" value="female" />女</label>
+            </div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>表头</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>表格列</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ol>
+                有序列表
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ol>
+            <ul>
+                无序列表
+                <li>11</li>
+                <li>22</li>
+                <li>33</li>
+            </ul>
+            <div>年龄：</div>
+            <select name="Age">
+                <option value="null">--</option>
+                <option value="one">11</option>
+                <option>22</option>
+                <option>33</option>
+                <option>44</option>
+                <option>55</option>
+            </select>
+            <div>自我介绍：</div>
+            <textarea name="SelfDeacription"></textarea>
+            <button>按钮</button>
+            <button type="submit">提交</button>
+            <button type="reset">重置</button>
+
+        </form>
+    </main>
+    <aside>
+    </aside>
+    <footer>
+    </footer>
+</body>
+</html>
+

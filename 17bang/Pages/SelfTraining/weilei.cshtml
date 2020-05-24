@@ -1,0 +1,44 @@
+﻿@page
+@{
+//ViewData["Title"] = "weieli";
+}
+ 
+<style>
+    /*伪类*/
+    a:hover{color:yellow;font-size:25px;}
+    a:active{color:red}
+    a:visited {
+        font-size: 40px
+    }
+    input:enabled{border:dashed;color:chartreuse}
+    input:disabled{border:dotted;color:saddlebrown}
+    /*盒子模型*/
+    .train h3{border:solid 1px;width:200px;height:40px;margin:2px;padding:3px;margin-left:auto;margin-right:auto}
+    .train span {
+        border: solid 1px;
+        width: 200px;
+        height: 40px;
+        margin: 2px;
+        padding: 3px
+    }
+
+</style>
+<div>
+    <a href="http://www.baidu.com">href</a>
+    <input type="text" />
+    <input type="password" disabled />
+</div>
+
+<div class="train">
+    <span>span流元素-1</span>
+    <span style="display:block">span流元素-2  变成块级元素</span>
+    <span>span流元素-3</span>
+
+    <h3 style="display:inline">div块元素-1 变成流级元素</h3>
+    <h3>div块元素-2</h3>
+    <h3>div块元素-2</h3>
+
+
+
+
+</div>m

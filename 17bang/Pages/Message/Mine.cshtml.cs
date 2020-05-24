@@ -20,9 +20,10 @@ namespace _17bang.Pages.Message
         }
         private MessageRepository _repositiry;
         public IList<MessageModel> Messages { get; set; }
-        public void OnGet()
+        public ActionResult OnGet()
         {
             Messages = _repositiry.Get();
+            return Page();
         }
         public ActionResult OnPost()
         {
@@ -38,6 +39,8 @@ namespace _17bang.Pages.Message
                     if (Request.RouteValues["opt"].ToString()=="read")
                     {
                         _repositiry.GetSingleMessage(message.Id).IsRead = true;
+                        //_repositiry.Save();
+
                     }
                     else if (Request.RouteValues["opt"].ToString() == "delete")
                     {
@@ -50,6 +53,7 @@ namespace _17bang.Pages.Message
                     }
                 }
             }
+
             return Redirect("/Message/Mine");
         }
     }

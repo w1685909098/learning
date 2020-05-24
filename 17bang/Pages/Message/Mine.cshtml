@@ -14,18 +14,18 @@
 
     @for (int i = 0; i < Model.Messages.Count; i++)
     {
-        string fontweight = Model.Messages[i].Selected ? "font-weight:500" : string.Empty;
-        string styles = "border:hidden;width:500px";
+        string fontweight = Model.Messages[i].IsRead ? "font-weight: 200" : "font-weight: 1000";
+        string styles = "border:hidden;width:500px;/*font-weight:500*/";
         {<div>
                 <label style="@fontweight">@Model.Messages[i].Id</label>
                 <input type="checkbox" asp-for="@Model.Messages[i].Selected" />
                 <input type="hidden" asp-for="@Model.Messages[i].Id" />
                 <input style="@fontweight" asp-for="@Model.Messages[i].DateTime@*.ToString("yyyy年mm月dd日  hh时mm分")*@" />
-                <input type="hidden" asp-for="@Model.Messages[i].Id" />
+                @*<input type="hidden" asp-for="@Model.Messages[i].Id" />*@
                 <input style="@fontweight;@styles" asp-for="@Model.Messages[i].Content" />
-                <input type="hidden" asp-for="@Model.Messages[i].Id" />
+                @*<input type="hidden" asp-for="@Model.Messages[i].Id" />*@
                 @*<input asp-for="@Model.Messages[i].Selected" />*@
-                <input type="hidden" asp-for="@Model.Messages[i].Id" />
+                @*<input type="hidden" asp-for="@Model.Messages[i].Id" />*@
             </div>
 
         }

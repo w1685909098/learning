@@ -27,6 +27,7 @@ namespace _17bang.Pages.Log
         public bool RememberMe { get; set; }
         public PageResult OnGet()
         {
+
             ViewData["UserName"] = HttpContext.Request.Cookies["UserName"];
             if (ViewData["UserName"] == null)
             {
@@ -48,6 +49,12 @@ namespace _17bang.Pages.Log
             //}
             //ViewData["name"] = HttpContext.Session.GetString("name");
             return Page();
+            //string prepage = HttpContext.Request.Query["prepage"];
+            //if (string.IsNullOrEmpty(prepage))
+            //{
+            //    prepage = HttpContext.Request.Path + HttpContext.Request.QueryString;
+            //}
+            //return Redirect(Request.Query[prepage]);
         }
         public ActionResult OnPost()
         {   
@@ -72,6 +79,12 @@ namespace _17bang.Pages.Log
             HttpContext.Session.SetString("UserName", LogOnModel.Name);
             return Redirect(Request.Query["prepage"]);
             //return Redirect(Request.Headers["Referer"]);
+            //string prepage = HttpContext.Request.Query["prepage"];
+            //if (string.IsNullOrEmpty(prepage))
+            //{
+            //    prepage = HttpContext.Request.Path + HttpContext.Request.QueryString;
+            //}
+            //return Redirect(Request.Query[prepage]);
         }
     }
 }
