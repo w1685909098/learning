@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -57,7 +59,8 @@ namespace _17bang.Pages.Log
             //return Redirect(Request.Query[prepage]);
         }
         public ActionResult OnPost()
-        {   
+        {
+           
             UserModel user = _userRepository.GetUserByName(LogOnModel.Name);
             if (user==null)
             {

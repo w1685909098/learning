@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - _17bang</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"] -17bang首页</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />*@
+    <link rel="stylesheet" href="~/Image/一起帮logo.jpg" />
     @{string Prepage = Context.Request.Query["prepage"]; }
     @if (string.IsNullOrEmpty(Prepage))
     {
@@ -18,36 +19,74 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">_17bang</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        
+        <a href="/" target="_blank" style="display:block;float:left">
+            <img src="~/Image/一起帮logo.jpg" alt="一起帮logo" title="一起帮网络互助" />
+        </a>
+        <span style="display:block;float:left">一起帮 · 网络互助平台</span>
+        <div style="float:right">
+            <a href="/FAQ#">求助</a>
+            <ul>
+                <li><a href="/Course/Confusion/New">督导班</a></li>
+                <li><a href="Problem">列表</a></li>
+                <li><a href="/Course/Confusion/New">疑问发布</a></li>
+                <li><a href="/Course/Confusion">疑问列表</a></li>
+                <li><a href="/Problem">列表</a></li>
+                <li><a href="Problem/New">发布</a></li>
+            </ul>
+        </div>
+        <div style="float:right">
+            <a href="/FAQ#">督促</a>
+            <ul>
+                <li><a href="/Plan/New">求督促</a></li>
+                <li><a href="/Plan">督促别人</a></li>
+                <li><a href="/Plan?my=">我的目标</a></li>
+                <li><a href="/Plan?my=">我的督促</a></li>
+                <li><a href="/none">未交作业</a></li>
+            </ul>
+        </div>
+        <div style="float:right">
+            <a href="/Article">文章</a>
+            <ul>
+                <li><a href="/Article">列表</a></li>
+                <li><a href="/Article/_Apply">开通</a></li>
+            </ul>
+        </div>
+        <div style="float:right">
+            <a href="/FAQ#">未登录</a>
+            <ul>
+                <li><a href="/Log/On">登录</a></li>
+                <li><a href="/Register/ ">注册</a></li>
+                <li><a href="/Password/Forget">忘记密码</a></li>
+            </ul>
+        </div>
     </header>
+    <hr style="clear:both" />
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @*<main role="main" class="pb-3">
+                @RenderBody()
+            </main>*@
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - _17bang - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    @RenderBody()
+    <aside style="float:left;width:25%">aside</aside>
+    <div style="@*float:left;*@width:2%">
+        <div style="background-color:deepskyblue;width:50px;height:50px;position:fixed;left:96%;top:500px">帮助</div>
+        <div style="background-color:deepskyblue;width:50px;height:50px;position:fixed;left:96%;top:550px">反馈</div>
+    </div>
+    <hr style="clear:both" />
+    <footer>
+        <span style="color:blue"><a href="/About/Us">关于我们</a></span>
+        <span style="color:blue"><a href="/FAQ">常见问题</a></span>
+        <span style="color:blue"><a href="/Suggest ">意见建议</a></span>
+        <span style="color:blue"><a href="/Notice">历史通知</a></span>
+        <span style="color:green"><a href="/Donate">友情捐赠</a></span>
+        <span style="color:blue"><a href="/About/Partner">诚邀合伙人</a></span>
+        <div>
+            <div style="color:black;float:left">友情链接：</div>
+            <div style="color:blue;text-align:right;float:right">
+                <a href="http://www.miitbeian.gov.com">渝ICP备18007191号（备案）</a>
+                © 2020 - 首顾科技
+            </div>
+            <div style="clear:both"></div>
         </div>
     </footer>
 

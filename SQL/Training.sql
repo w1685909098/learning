@@ -514,3 +514,246 @@ GO
 --SELECT * FROM ASD
 DROP TABLE ASD
 DROP VIEW V_ASD_SCHEMA
+
+--SELECT * FROM [User]
+--SELECT * FROM PROFILE
+----SELECT * FROM Problem
+
+--SELECT *  FROM [User] U  JOIN Profile P
+--ON U.ProfileId=P.Id 
+--ON
+--WHERE U.Id=12
+
+SELECT *  FROM [User] U  JOIN Profile P
+ON U.ProfileId=P.Id 
+AND U.Id=12
+--SELECT *  FROM [User] U LEFT JOIN Profile P
+--ON U.ProfileId=P.Id 
+
+--SELECT *  FROM [User] U RIGHT JOIN Profile P
+--ON U.ProfileId=P.Id 
+
+--SELECT *  FROM [User] U FULL JOIN Profile P
+--ON U.ProfileId=P.Id 
+DBCC USEROPTIONS
+ SELECT * FROM TSCORE
+ 
+ --BEGIN TRY
+ --   BEGIN TRANSACTION
+ --   --SAVE TRAN SAD
+ --   UPDATE TSCORE SET Score=92
+ --   WHERE Name=N'飞哥' AND Subject=N'Javascript'
+ --   COMMIT 
+ -- END TRY
+ -- BEGIN CATCH
+ --   ROLLBACK 
+ -- END CATCH
+
+ -- SET IMPLICIT_TRANSACTIONS ON
+ --SET IMPLICIT_TRANSACTIONS OFF
+
+ --DBCC USEROPTIONS
+ --SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+ --BEGIN TRANSACTION
+ -- SELECT * FROM TSCORE
+ -- UPDATE TSCORE SET Score=92
+ --   WHERE Name=N'飞哥' AND Subject=N'Javascript' 
+ -- PRINT @@TRANCOUNT
+
+  --ROLLBACK
+  GO
+--创建求助的应答表 Response(Id, Content, AuthorId, ProblemId, CreateTime)
+SELECT * FROM Problem;
+SELECT * FROM [User];
+CREATE TABLE Response(
+    Id INT  IDENTITY NOT NULL
+    CONSTRAINT PK_Response_Id PRIMARY KEY(Id) ,
+    Content NVARCHAR(MAX) NOT NULL,
+    AuthorId INT NOT NULL
+    --CONSTRAINT UQ_Profile_Id UNIQUE(AuthorId)
+    CONSTRAINT FK_Response_User_AuthorId FOREIGN KEY(AuthorId) REFERENCES [User](Id),
+    ProblemId INT NOT NULL
+    --CONSTRAINT UQ_Response_ProblemId UNIQUE(ProblemId)
+    CONSTRAINT FK_Response_Problem_PorblemId FOREIGN KEY(ProblemId) REFERENCES Problem(Id),
+    CreateTime DATETIME NOT NULL,
+)
+--然后生成一个视图 VResponse(ResponseId, Content, ResponseAuthorId，ReponseAuthorName,
+--ProblemId, ProblemAuthorName, ProblemTitle, CreateTime)，要求该视图：
+--能展示应答作者的用户名、应答对应求助的标题和作者用户名 （JOIN）
+SELECT * FROM Response;
+GO
+ALTER VIEW VResponse(ResponseId, Content,ResponseAuthorId,ReponseAuthorName,
+ProblemId, ProblemAuthorName, ProblemTitle, CreateTime,ProblemReward) 
+WITH SCHEMABINDING , ENCRYPTION
+AS 
+(SELECT R.Id,R.Content,U.Id,U.[Name],P.Id,UU.Name,P.Title,R.CreateTime,P.Reward 
+FROM dbo.Response R JOIN dbo.[User] U
+ON R.AuthorId=U.Id  JOIN dbo.Problem P ON R.ProblemId=P.Id  JOIN dbo.[User] UU ON P.UserId=UU.Id
+WHERE P.Reward>5)
+--WITH CHECK OPTION
+GO
+SELECT * FROM dbo.VResponse
+SELECT * FROM Response;
+SELECT * FROM [User]
+SELECT * FROM Response R JOIN [User] U
+ON R.AuthorId=U.Id  JOIN Problem P ON R.ProblemId=P.Id  JOIN [User] UU ON P.UserId=UU.Id
+ 
+  SELECT * FROM Problem P JOIN [User] U ON P.UserId=U.Id 
+--只显示求助悬赏值大于5的数据 （JOIN）
+--WHERE P.Reward>5
+
+--已被加密
+--WITH ENCRYPTION
+--保证其使用的基表结构无法更改
+ --WITH SCHEMABINDING
+-- GO
+--ALTER VIEW V_Response_Schema(ResponseId, Content,ResponseAuthorId,ReponseAuthorName,
+--ProblemId, ProblemAuthorName, ProblemTitle, CreateTime) 
+--WITH SCHEMABINDING , ENCRYPTION
+--AS 
+--(SELECT R.Id,R.Content,U.Id,U.[Name],P.Id,UU.Name,P.Title,R.CreateTime
+--FROM dbo.Response R JOIN dbo.[User] U
+--ON R.AuthorId=U.Id  JOIN dbo.Problem P ON R.ProblemId=P.Id  JOIN dbo.[User] UU ON P.UserId=UU.Id
+--WHERE P.Reward>5)
+
+--演示：在VResponse中插入一条数据，却不能在视图中显示
+--SELECT * FROM VResponse
+--select * from Response
+INSERT VResponse(Content,ResponseAuthorId,ReponseAuthorName,ProblemId,ProblemAuthorName,ProblemTitle,CreateTime)
+VALUES(N'123',12,2,1,6,N'testssdd','2020/5/27',4);
+--修改VResponse，让其能避免上述情形
+--WITH CHECK OPTION
+--创建视图VProblemKeyword(ProblemId, ProblemTitle, ProblemReward, KeywordAmount)，
+--要求该视图：
+--能反映求助的标题、使用关键字数量和悬赏
+
+--在ProblemId上有一个唯一聚集索引
+
+--在ProblemReward上有一个非聚集索引
+
+--试一下，能不能在KeywordAmount上建索引
+
+--在基表中插入/删除数据，观察VProblemKeyword是否相应的发生变化
+
+
+--联表查出求助的标题和作者用户名
+SELECT * FROM Problem;
+SELECT * FROM [User];
+
+SELECT P.Id,P.Content,P.Reward,P.PublishDateTime,P.Title,U.Id,
+U.Name FROM Problem P JOIN [User] U ON P.UserId=U.Id
+--查找并删除从未发布过求助的用户
+--WITH SelfJoin AS
+--(SELECT * FROM Problem  P RIGHT JOIN [User] U ON P.UserId=U.Id)
+--SELECT * FROM SelfJoin  
+--WHERE P.UserId NOT IN (SELECT U.Id FROM SelfJoin)
+SELECT * FROM Problem  P RIGHT JOIN [User] U ON P.UserId=U.Id
+WHERE P.UserId IS NULL
+--WHERE 
+--用一句SELECT显示出用户和他的邀请人用户名
+SELECT * FROM [User];
+SELECT  * FROM [User] U JOIN [User] UU ON U.Id=UU.InvitedBy
+SELECT U.Id UserId,U.Name UserName,U.InvitedBy Inviter,UU.Name  InviterName
+FROM [User] U JOIN [User] UU ON U.InvitedBy=UU.Id
+--17bang的关键字有“一级”“二级”和其他“普通（三）级”的区别：
+--请在表Keyword中添加一个字段，记录这种关系
+SELECT * FROM Keyword;
+ALTER TABLE Keyword
+ADD KeywordLevel INT 
+CONSTRAINT FK_Keyword_Keyword_KeywordLevel
+FOREIGN KEY(KeywordLevel) REFERENCES Keyword(Id);
+--然后用一个SELECT语句查出所有普通关键字的上一级、以及上上一级的关键字名称，比如：
+SELECT * FROM Keyword;
+SELECT * FROM Keyword K LEFT JOIN Keyword KK ON K.KeywordLevel=KK.Id 
+LEFT JOIN Keyword KKK ON KK.KeywordLevel=KKK.Id
+--WHERE K.KeywordLevel IS NULL 
+--17bang中除了求助（Problem），还有意见建议（Suggest）和文章（Article），
+--他们都包含Title、Content、PublishTime和Auhthor四个字段，但是：
+--建议和文章没有悬赏（Reward）
+--建议多一个类型：Kind NVARCHAR(20)）
+--文章多一个分类：Category INT）
+--请按上述描述建表。然后，用一个SQL语句
+--显示某用户发表的求助、建议和文章的Title、Content，并按PublishTime降序排列
+CREATE TABLE Suggest(
+    Id INT IDENTITY NOT NULL
+    CONSTRAINT PK_Suggest_Id PRIMARY KEY(Id),
+    Title  NVARCHAR(MAX) NOT NULL,
+    Content NVARCHAR(MAX) NOT NULL,
+    PublishTime DATETIME NOT NULL,
+    Author NVARCHAR(10) NOT NULL,
+    Kind NVARCHAR(20) ,
+    UserId INT  NOT NULL
+    CONSTRAINT FK_Suggest_User_UserId FOREIGN KEY(UserId) REFERENCES [User](Id)
+);
+CREATE TABLE Article(
+    Id INT IDENTITY NOT NULL
+    CONSTRAINT PK_Article_Id PRIMARY KEY(Id),
+    Title  NVARCHAR(MAX) NOT NULL,
+    Content NVARCHAR(MAX) NOT NULL,
+    PublishTime DATETIME NOT NULL,
+    Author NVARCHAR(10) NOT NULL,
+    Category INT ,
+    UserId INT  NOT NULL
+    CONSTRAINT FK_Article_User_UserId FOREIGN KEY(UserId) REFERENCES [User](Id)
+);
+
+SELECT * FROM [User];
+SELECT * FROM Problem;
+SELECT * FROM Suggest;
+SELECT * FROM Article;
+
+SELECT N'Problem',P.Title Title,P.Content Content,P.PublishDateTime PublishTime,U.[Name] [Name]
+FROM Problem P JOIN [User] U ON P.UserId=U.Id
+UNION
+SELECT N'Suggest',S.Title Title,S.Content Content,S.PublishTime PublishTime,U.[Name] [Name]
+FROM Suggest S JOIN [User] U ON S.UserId=U.Id
+UNION
+SELECT N'Article',A.Title Title,A.Content Content,A.PublishTime PublishTime,U.[Name] [Name]
+FROM Article A JOIN [User] U ON A.UserId=U.Id
+ORDER BY Name,PublishTime DESC
+--SELECT * FROM [User] U JOIN Problem P ON U.Id=P.UserId
+--JOIN Suggest S ON U.Id=S.UserId     JOIN  Article A ON U.Id=A.UserId
+--ORDER BY U.Id ASC,P.PublishDateTime DESC,
+--S.PublishTime DESC,A.PublishTime DESC
+
+--用户（Reigister）发布一篇悬赏币若干的求助（Problem），他的帮帮币（BMoney）也会相应减少，
+--但他的帮帮币总额不能少于0分：请综合使用TRY...CATCH和事务完成上述需求。
+SELECT * FROM [User]
+ALTER TABLE [USER]
+ADD BMoney INT  
+CONSTRAINT CK_User_BMoney CHECK (BMoney>0)
+UPDATE [User] SET BMoney =88 
+SELECT * FROM Problem
+BEGIN TRY
+    BEGIN TRANSACTION
+    --INSERT Problem VALUES()
+    UPDATE [User] SET BMoney-=22 WHERE Id=12
+    UPDATE [User] SET BMoney-=100 
+    COMMIT TRANSACTION
+END TRY
+BEGIN CATCH
+    ROLLBACK TRANSACTION
+END CATCH
+PRINT @@TRANCOUNT
+--存储过程理解
+SELECT * FROM COPY;
+ALTER TABLE COPY
+ADD Reward INT;
+GO
+ALTER PROCEDURE ZXC
+@INT INT,
+@Out INT OUTPUT
+AS
+SET NOCOUNT ON
+    UPDATE COPY SET Reward -=@INT;
+    SELECT COUNT(*) FROM COPY WHERE Reward>10;
+    SET @Out=(SELECT COUNT(*) FROM COPY WHERE Reward>10);
+SET NOCOUNT OFF
+
+DECLARE @RES INT
+--EXECUTE ZXC 2,@RES OUTPUT
+EXECUTE ZXC  @Out=@RES OUTPUT,@INT=2
+
+EXECUTE sp_rename'COPY.Name','UserName','COLUMN'
+
+

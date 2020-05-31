@@ -256,3 +256,265 @@ SELECT AVG(ROUND(CONVERT(smallmoney,Reward),2)),Author  FROM Problem GROUP BY Au
 --有一些标题以test、[test]后者Test-开头的求助，找到他们并把这些前缀都换成大写
 UPDATE Problem SET  Title=UPPER(N'TEST')+SUBSTRING(Title,LEN(N'TEST')+1,100)
 WHERE Title LIKE N'test%'
+
+--用户资料，新建用户资料（Profile）表，和User形成1:1关联（有无约束？）。用SQL语句演示：
+--新建一个填写了用户资料的注册用户
+CREATE TABLE [Profile](
+    Id INT IDENTITY NOT NULL 
+    CONSTRAINT PK_Profile_User PRIMARY KEY(Id),
+    IsMale BIT NOT NULL,
+    Birthday DATETIME ,
+    SelfDescription NVARCHAR(MAX) ,
+    [UserId] INT NOT NULL
+    CONSTRAINT FK_Profile_User_UserId FOREIGN KEY([UserId]) REFERENCES [User](Id)
+);
+ALTER TABLE PROFILE
+ADD CONSTRAINT UQ_Profile_UserId UNIQUE(UserId)
+SELECT * FROM Profile;
+SELECT * FROM [User];
+--INSERT Profile(IsMale,Birthday,SelfDescription,UserId)
+--        VALUES(1,'2020/2/2',N'11',1);
+--INSERT Profile(IsMale,Birthday,SelfDescription,UserId)
+--        VALUES(1,'2020/3/3',N'33',3);
+--INSERT Profile(IsMale,Birthday,SelfDescription,UserId)
+--        VALUES(1,'2020/4/4',N'44',4);
+--INSERT Profile(IsMale,Birthday,SelfDescription,UserId)
+--        VALUES(1,'2020/5/5',N'55',5);
+--INSERT Profile(IsMale,Birthday,SelfDescription,UserId)
+--        VALUES(1,'2020/6/6',N'66',6);
+--INSERT Profile(IsMale,Birthday,SelfDescription,UserId)
+--        VALUES(1,'2020/7/7',N'77',7);
+--INSERT Profile(IsMale,Birthday,SelfDescription,UserId)
+--        VALUES(1,'2020/2/2',N'22',2);
+GO
+--通过Id查找获得某注册用户及其用户资料
+SELECT * FROM Profile WHERE UserId=2;
+--删除某个Id的注册用户
+--user表的ID为  profile表 userID列的外键约束  无法直接删除
+--先删除profile的外键约束  或者将userID更改为其他值
+DELETE Profile WHERE UserId=2;
+DELETE [User] WHERE Id=2;
+--帮帮点说明：新建Credit表，可以记录用户的每一次积分获得过程，
+--即：某个用户，在某个时间，因为某某原因，获得若干积分
+CREATE TABLE Credit(
+    Id INT IDENTITY NOT NULL 
+    CONSTRAINT PK_Credit_Id PRIMARY KEY(Id),
+    UserId INT NOT NULL
+    CONSTRAINT UQ_Credit_UserId UNIQUE(UserId)
+    CONSTRAINT FK_Credit_User_UserId FOREIGN KEY(UserId) REFERENCES [User](Id),
+    DateTime DATETIME NOT NULL,
+    Reason NVARCHAR(MAX) NOT NULL,
+    Gain INT NOT NULL 
+);
+--发布求助，在Problem和User之间建立1:n关联（含约束）。用SQL语句演示：
+--某用户发布一篇求助，
+--1:n关联   主外键约束   n为主键  1为外键约束
+ALTER TABLE PROBLEM
+ADD UserId INT
+CONSTRAINT FK_Problem_User_UserId FOREIGN KEY(UserId) REFERENCES [User](Id);
+ALTER TABLE PROBLEM
+ALTER COLUMN UserId INT NOT NULL;
+SELECT * FROM Problem;
+SELECT * FROM [User];
+--将该求助的作者改成另外一个用户
+UPDATE Problem SET UserId=8
+WHERE Id=14;
+--删除该用户
+INSERT [User](UserName,Password) VALUES(N'8',N'8');
+--先修改被引用的外键约束
+UPDATE Problem SET UserId=5 WHERE Id=14;
+DELETE [User] WHERE Id=8;
+--求助列表：新建Keyword表，和Problem形成n:n关联（含约束）。用SQL语句演示：
+--查询获得：某求助使用了多少关键字，某关键字被多少求助使用
+CREATE TABLE KeywordToProblem(
+    KeywordId INT NOT NULL CONSTRAINT FK_KeywordToProblem_Keyword_KeywordId
+        FOREIGN KEY(KeywordId) REFERENCES Keyword(Id),
+    ProblemId INT NOT NULL CONSTRAINT FK_KeywordToProblem_Problem_ProblemId
+        FOREIGN KEY(ProblemId) REFERENCES Problem(Id),
+)
+SELECT * FROM  Keyword;
+SELECT * FROM KeywordToProblem;
+SELECT * FROM Problem;
+--INSERT Keyword(Name) VALUES(N'C#');
+--INSERT Keyword(Name) VALUES(N'SQL');
+--INSERT Keyword(Name) VALUES(N'Javascript');
+--INSERT Keyword(Name) VALUES(N'ASP.NET');
+--INSERT Keyword(Name) VALUES(N'HTML');
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(40,8);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(45,8);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(50,8);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(60,8);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(40,9);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(40,10);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(40,11);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(40,12);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(50,13);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(60,13);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(45,14);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(50,14);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(55,8);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(55,11);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(55,13);
+--INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(45,12);
+SELECT COUNT(*) FROM KeywordToProblem GROUP BY KeywordId;
+SELECT COUNT(*) FROM KeywordToProblem GROUP BY ProblemId;
+
+GO
+--发布了一个使用了若干个关键字的求助
+INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(55,13);
+INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(45,13);
+INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(50,13);
+INSERT KeywordToProblem(KeywordId,ProblemId) VALUES(60,13);
+
+--该求助不再使用某个关键字
+DELETE KeywordToProblem WHERE KeywordId=45 AND ProblemId=13;
+--删除该求助
+SELECT * FROM Problem;
+SELECT * FROM KeywordToProblem;
+BEGIN TRAN
+DELETE KeywordToProblem WHERE KeywordId=40 AND ProblemId=9;
+--UPDATE KeywordToProblem SET KeywordId = 45 WHERE ProblemId=9
+DELETE Problem WHERE ID=9;
+PRINT @@TRANCOUNT
+ROLLBACK
+--删除某关键字
+BEGIN TRAN
+DELETE KeywordToProblem WHERE KeywordId=60 AND ProblemId=8;
+--UPDATE KeywordToProblem SET KeywordId = 45 WHERE ProblemId=9
+DELETE Keyword WHERE ID=60;
+ROLLBACK
+--以Problem中的数据为基础，使用SELECT INTO，新建一个Author和Reward都没有NULL值的新表：
+--NewProblem （把原Problem里Author或Reward为NULL值的数据删掉）
+SELECT * FROM Problem;
+SELECT * FROM NewProblem;
+SELECT * INTO NewProblem FROM Problem
+WHERE Content IS NOT NULL AND Reward IS NOT NULL;
+--使用INSERT SELECT, 将Problem中Reward为NULL的行再次插入到NewProblem中
+INSERT NewProblem  SELECT Content,NeedRemoteHelp,Reward,PublishDateTime,
+Title,Author,UserId FROM Problem WHERE Reward IS NULL OR Content IS NULL;
+
+--使用OVER，统计出求助里每个Author悬赏值的平均值、最大值和最小值，
+--然后用新表ProblemStatus存放上述数据
+SELECT * FROM Problem;
+SELECT Author,AVG(Reward) AVG,MAX(Reward) MAX,
+MIN(Reward) MIN FROM Problem GROUP BY Author
+--使用CASE.WHEN，颠倒Problem中的NeedRemote（以前是1的，现在变成0；以前是0的，现在变成1）
+SELECT * FROM Problem;
+UPDATE Problem SET NeedRemoteHelp=CASE NeedRemoteHelp
+WHEN 1 THEN 0  ELSE 1 END;
+
+--使用CASE...WHEN，用一条SQL语句，完成SQL入门-7：函数中第4题第3小题
+
+--找到从未成为邀请人的用户（当心NULL值）
+SELECT * FROM [User];
+ALTER TABLE [User]  
+--ADD InvitedBy INT 
+ ALTER COLUMN InvitedBy INT  NOT NULL
+ --DROP COLUMN UserId
+ --DROP CONSTRAINT FK_User_User_UserId
+--CONSTRAINT FK_User_User_UserId FOREIGN KEY(InvitedBy) REFERENCES [User](Id);
+SELECT * FROM [User] WHERE Id  NOT IN (
+SELECT InvitedBy FROM [User]);
+--查出这些文章：其作者总共只发布过这一篇文章
+SELECT * FROM Problem;
+SELECT * FROM Problem WHERE Author NOT IN (
+SELECT Author FROM Problem GROUP BY Author
+HAVING COUNT(Title)>1)
+--为求助添加一个发布时间（PublishTime），查找每个作者最近发布的一篇求助
+SELECT * FROM Problem OP WHERE PublishDateTime=(
+SELECT MAX(PublishDateTime) FROM Problem  IP
+WHERE OP.Author=IP.Author);
+SELECT * FROM Problem ORDER BY Author,PublishDateTime;
+--查出每个作者悬赏最多的3篇求助
+SELECT  * FROM Problem WHERE  Id IN(
+SELECT TOP 3 Reward,Id FROM Problem OP WHERE Reward=(
+SELECT Reward FROM Problem IP
+WHERE OP.Author=IP.Author) )
+
+
+SELECT * FROM (
+SELECT ROW_NUMBER() OVER(PARTITION BY Author ORDER BY Reward DESC) GID,
+* FROM Problem) PP
+WHERE PP.GID BETWEEN 1 AND 3
+
+--SELECT * FROM Problem OP WHERE  Reward IN (
+--SELECT TOP 3 Reward FROM Problem  IP
+--WHERE OP.Author=IP.Author ORDER BY Reward DESC
+--)
+
+--删除悬赏相同的求助（只要相同的全部删除一个不留）
+DELETE Problem WHERE Id=(
+SELECT Id FROM Problem WHERE Id NOT IN(
+SELECT MAX(Id)  Reward FROM Problem GROUP BY Reward)   )
+--删除每个作者悬赏最低的求助
+
+BEGIN TRANSACTION
+DELETE Problem WHERE Id  IN (
+SELECT Id FROM Problem OP WHERE Reward=
+(SELECT MIN(Reward) FROM Problem IP
+WHERE OP.Author=IP.Author))
+ROLLBACK
+
+--查出每一篇求助的悬赏都大于5个帮帮币的作者
+SELECT  MIN(Reward),Author FROM Problem GROUP BY Author HAVING MIN(Reward)>5
+ 
+--分别使用派生表和CTE，查询求助表（表中只有一列整体的发布时间，没有年月的列），以获得：
+SELECT * FROM Problem
+--一起帮每月各发布了求助多少篇
+SELECT YearPublish,MonthPublish,COUNT(*) FROM (
+SELECT YEAR(PublishDateTime) YearPublish,MONTH(PublishDateTime) MonthPublish,
+*  FROM Problem 
+) AS DP
+GROUP BY YearPublish,MonthPublish;
+
+WITH MonthPublished  AS(
+SELECT  YEAR(PublishDateTime) YearPublish,MONTH(PublishDateTime) MonthPublish,
+* FROM Problem
+)
+SELECT YearPublish,MonthPublish,COUNT(*) FROM MonthPublished
+GROUP BY YearPublish,MonthPublish;
+
+SELECT  YearPublish,MonthPublish,COUNT(GID) FROM (
+SELECT ROW_NUMBER() OVER(PARTITION BY YEAR(PublishDateTime)
+,MONTH(PublishDateTime)) AS GID,YEAR(PublishDateTime) YearPublish,
+MONTH(PublishDateTime) MonthPublish,* FROM Problem)TP
+GROUP BY TP.YearPublish,TP.MonthPublish
+--每月发布的求助中，悬赏最多的3篇
+SELECT   * FROM ( SELECT ROW_NUMBER() OVER(PARTITION BY YEAR(PublishDateTime),
+MONTH(PublishDateTime)ORDER BY Reward DESC) AS GID,YEAR(PublishDateTime) YearPublish,
+MONTH(PublishDateTime) MonthPublish,* FROM Problem)TP
+WHERE TP.GID BETWEEN 1 AND 3;
+
+
+--每个作者，每月发布的，悬赏最多的3篇
+SELECT * FROM (
+SELECT ROW_NUMBER() OVER(PARTITION BY YEAR(PublishDateTime),MONTH(PublishDateTime),
+Author ORDER BY Reward DESC) AS GID,YEAR(PublishDateTime) YearPublish,
+MONTH(PublishDateTime) MonthPublish ,* FROM Problem) TP
+WHERE GID BETWEEN 1 AND 3;
+
+--分别按发布时间和悬赏数量进行分页查询的结果
+SELECT TOP 3 * FROM Problem  WHERE Id NOT IN (
+SELECT TOP 3 Id  FROM Problem ORDER BY PublishDateTime DESC)
+ORDER BY PublishDateTime DESC
+
+SELECT * FROM (
+SELECT ROW_NUMBER() OVER(ORDER BY PublishDateTime DESC) AS GID,* FROM Problem) AS TP
+WHERE GID BETWEEN 4 AND 6;
+
+SELECT * FROM Problem ORDER BY PublishDateTime DESC
+OFFSET 3 ROWS FETCH NEXT 3 ROWS ONLY;
+
+SELECT TOP 3* FROM Problem WHERE Id NOT IN (
+SELECT TOP 3 Id FROM Problem ORDER BY Reward DESC)
+ORDER BY Reward DESC;
+
+SELECT * FROM (
+SELECT ROW_NUMBER() OVER(ORDER BY Reward DESC) AS GID ,* FROM Problem ) TP
+WHERE GID BETWEEN 4 AND 6
+
+SELECT * FROM Problem ORDER BY  Reward DESC
+OFFSET 3 ROWS FETCH NEXT 3 ROWS ONLY;
+
+
+
