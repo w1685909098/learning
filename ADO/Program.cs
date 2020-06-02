@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADO.DataSetTrainTableAdapters;
+using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -95,13 +96,13 @@ namespace ADO
                 {
                     try
                     {
+                        dbCommand.Connection = dbConnection;
                         dbCommand.Transaction = transaction;
                         dbCommand.CommandText="UPDATE TSCORE SET SCORE -=0";
-                        dbCommand.Connection = dbConnection;
                         dbCommand.ExecuteNonQuery();
 
                         dbCommand.CommandText = "UPDATE TSCORE SET SCORE -=0";
-                        dbCommand.Connection = dbConnection;
+                        //dbCommand.Connection = dbConnection;
                         dbCommand.ExecuteNonQuery();
                         transaction.Commit();
                     }
@@ -126,6 +127,23 @@ namespace ADO
             dt17bang.Tables.Add(dtRegister);
             dt17bang.Tables.Add(new DataTable("Problem"));
 
+
+            #region DataAdapter
+            string QueryString = "SELECT * FROM [User]";
+            DbDataAdapter adapter = new SqlDataAdapter(QueryString, DatabasePath);
+            DataSet dataSet = new DataSet();
+            adapter.Fill(dataSet,"User");
+            var ss= dataSet.Tables["User"].AsEnumerable();
+            foreach (var item in ss)
+            {
+                Console.WriteLine(item[0]);
+            }
+            #endregion
+
+            //DataSetTrain dataSetTrain = new DataSetTrain();
+            //Object obj= dataSetTrain.Problem.Rows.Find(1)[""];
+            //ProblemTableAdapter problemTableAdapter = new ProblemTableAdapter();
+            //problemTableAdapter.GetData();
         }
     }
 }

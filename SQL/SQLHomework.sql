@@ -516,5 +516,209 @@ WHERE GID BETWEEN 4 AND 6
 SELECT * FROM Problem ORDER BY  Reward DESC
 OFFSET 3 ROWS FETCH NEXT 3 ROWS ONLY;
 
+ 
+--创建求助的应答表 Response(Id, Content, AuthorId, ProblemId, CreateTime)
+CREATE TABLE Response(
+Id INT IDENTITY  CONSTRAINT PK_Response_Id PRIMARY KEY(Id),
+Content NVARCHAR(MAX),-- NOT NULL,
+AuthorId INT NOT NULL 
+CONSTRAINT FK_Response_User_AuthorId FOREIGN KEY REFERENCES [User](Id),
+ProblemId INT NOT NULL
+CONSTRAINT FK_Response_Prolem_ProblemId FOREIGN KEY REFERENCES Problem(Id),
+CreateTime DATETIME
+)
+--然后生成一个视图 VResponse(ResponseId, Content, ResponseAuthorId，
+--ReponseAuthorName,ProblemId, ProblemAuthorName, ProblemTitle, CreateTime)，要求该视图：
+--能展示应答作者的用户名、应答对应求助的标题和作者用户名 （JOIN）
+ GO
+-- CREATE VIEW  VResponse(ResponseId, Content, ResponseAuthorId,
+--ReponseAuthorName,ProblemId, ProblemAuthorName, ProblemTitle, CreateTime)
+--WITH ENCRYPTION,SCHEMABINDING
+--AS
+--SELECT R.Id,R.Content,U.Id,U.UserName,P.Id,PU.UserName,P.Title,R.CreateTime
+--FROM dbo.Response R JOIN dbo.[User] U ON R.AuthorId=U.Id
+--JOIN dbo.Problem P ON R.ProblemId=P.Id
+--JOIN dbo.[User] PU ON P.UserId=PU.Id
+--WHERE R.CreateTime>'2020/5/27'
+--WITH CHECK OPTION
+SELECT * FROM VResponse
+--只显示应答时间在2020年5月27日之后的数据 （JOIN）
+--where column>
+--已被加密
+--with encryption
+--保证其使用的基表结构无法更改
+--with schemabinding
+--演示：在VResponse中插入一条数据（注意业务逻辑正确性），却不能在视图中显示
 
+--修改VResponse，让其能避免上述情形
+--with check option
+--创建视图VProblemKeyword(ProblemId, ProblemTitle, 
+--ProblemReward, KeywordAmount)，要求该视图：
+SELECT * FROM Problem
+SELECT * FROM KeywordToProblem;
+SELECT * FROM Keyword;
+GO
+--ALTER VIEW VProblemKeyword(ProblemId, ProblemTitle, 
+--ProblemReward, KeywordAmount)
+--WITH SCHEMABINDING
+--AS 
+--SELECT P.Id,P.Title,P.Reward,COUNT_BIG(*)
+--FROM dbo.KeywordToProblem KP 
+--JOIN dbo.Problem P ON KP.ProblemId=P.Id
+--JOIN dbo.Keyword K ON KP.KeywordId=K.Id
+--GROUP BY P.Id,P.Title,P.Reward
+SELECT * FROM VProblemKeyword
+--能反映求助的标题、使用关键字数量和悬赏
 
+--在ProblemId上有一个唯一聚集索引
+CREATE UNIQUE CLUSTERED INDEX IX_VProblemKeyword_ProblemId ON VProblemKeyword(ProblemId)
+--在ProblemReward上有一个非聚集索引
+CREATE    INDEX IX_VProblemKeyword_ProblemReward ON VProblemKeyword(ProblemReward)
+--在基表中插入/删除数据，观察VProblemKeyword是否相应的发生变化
+
+--联表查出求助的标题和作者用户名
+SELECT P.Id,P.Title,U.UserName  FROM Problem P JOIN [User] U ON P.UserId=U.Id
+
+--查找并删除从未发布过求助的用户
+SELECT * FROM [User] U LEFT JOIN Problem P ON U.Id=P.UserId WHERE P.Title IS NULL
+
+--用一句SELECT显示出用户和他的邀请人用户名
+SELECT U.UserName,U2.UserName FROM [User] U LEFT JOIN [User] U2 ON U.InvitedBy=U2.Id
+
+--17bang的关键字有“一级”“二级”和其他“普通（三）级”的区别：
+--请在表Keyword中添加一个字段，记录这种关系
+SELECT * FROM Keyword;
+EXECUTE sp_rename 'dbo.Keyword.Used','Upper','column'
+
+--然后用一个SELECT语句查出所有普通关键字的上一级、以及上上一级的关键字名称，比如：
+SELECT L1.Name   ,L2.Name 上一级,L3.Name 上上一级
+FROM Keyword L1 LEFT JOIN Keyword L2 ON L1.Upper=L2.ID
+LEFT JOIN Keyword L3 ON L2.Upper=L3.ID
+
+--17bang中除了求助（Problem），还有意见建议（Suggest）和文章（Article），
+--他们都包含Title、Content、PublishTime和Auhthor四个字段，但是：
+--建议和文章没有悬赏（Reward）
+--建议多一个类型：Kind NVARCHAR(20)）
+--文章多一个分类：Category INT）
+--请按上述描述建表。
+CREATE TABLE Suggset(
+Id INT IDENTITY CONSTRAINT PK_Suggest_Id PRIMARY KEY(Id),
+Title NVARCHAR(MAX),
+Content NVARCHAR(MAX),
+Author NVARCHAR(MAX) NOT NULL,
+AuthorId INT  NOT NULL 
+CONSTRAINT FK_Suggest_User_AuthorId FOREIGN KEY REFERENCES [User](Id),
+PublishTime DATETIME,
+Kind NVARCHAR(20) ,
+)
+CREATE TABLE Article(
+Id INT IDENTITY CONSTRAINT PK_Article_Id PRIMARY KEY(Id),
+Title NVARCHAR(MAX),
+Content NVARCHAR(MAX),
+Author NVARCHAR(MAX) NOT NULL,
+AuthorId INT  NOT NULL 
+CONSTRAINT FK_Article_User_AuthorId FOREIGN KEY REFERENCES [User](Id),
+PublishTime DATETIME,
+Category INT,
+)
+--用一个SQL语句显示某用户发表的求助、建议和文章的Title、Content，并按PublishTime降序排列
+SELECT N'Problem',Author,Title,Content,PublishDateTime
+FROM Problem  UNION SELECT N'Suggest',Author,Title,Content,PublishTime FROM Suggset UNION
+SELECT N'Article',Author,Title,Content,PublishTime FROM Article
+ORDER BY Author,PublishDateTime
+--用户（Reigister）发布一篇悬赏币若干的求助（Problem），他的帮帮币（BMoney）也会相应减少，
+--但他的帮帮币总额不能少于0分：请综合使用TRY...CATCH和事务完成上述需求。
+SELECT * FROM Problem
+SELECT * FROM [User]
+ALTER TABLE [User]
+--ADD BMoney INT
+ADD CONSTRAINT CK_User_BMoney CHECK(BMoney>0)
+BEGIN TRY
+    BEGIN TRANSACTION
+    INSERT Problem VALUES(N'TRANSACTION',1,23,'2020/6/2',N'11',N'11',1)
+    UPDATE [User] SET BMoney -=23 WHERE Id=1;
+    COMMIT
+END TRY
+BEGIN CATCH
+    ROLLBACK
+END CATCH
+
+--编写存储过程模拟“一起帮用户注册”的过程，包含以下逻辑：
+--检查用户名是否重复。如果重复，返回错误代码：1
+--检查用户名密码是否符合“长度不小于4位”的要求。如果不符合，返回错误代码：2
+--如果有邀请人：
+--检查邀请人是否存在，如果不存在，返回错误代码：10
+--检查邀请码是否正确，如果邀请码不正确，返回错误代码：11
+--将用户名、密码和邀请人存入数据库（Register）
+--给邀请人增加10个帮帮点积分
+--通知邀请人（在Message表中生成一条数据）某人使用了他作为邀请人。
+GO
+CREATE PROCEDURE Register
+@UserName NVARCHAR(10),
+@Password NVARCHAR(10),
+@InviterName NVARCHAR(10),
+@InviterCode NVARCHAR(10),
+@ErrorTip INT OUTPUT
+AS
+SET NOCOUNT ON
+    IF LEN(@Password)<=4 OR LEN(@UserName)<=4 BEGIN SET @ErrorTip=2  END
+    ELSE IF ( EXISTS  (SELECT * FROM [User] WHERE UserName=@UserName)) BEGIN SET @ErrorTip=1 END
+    ELSE IF (EXISTS (SELECT @InviterName FROM [User])) BEGIN SET @ErrorTip=10 END
+    ELSE  
+    BEGIN
+    DECLARE @Code INT =(SELECT Id FROM [User] WHERE UserName=@InviterName)
+    END
+    IF @Code IS NULL SET @ErrorTip=10
+    ELSE IF @InviterCode<>@Code SET @ErrorTip=11
+    ELSE
+    BEGIN TRY
+        BEGIN TRANSACTION
+        INSERT [User] (UserName,Password,InvitedBy) 
+                VALUES(@UserName,@Password,@InviterCode)
+        UPDATE [User] SET BMoney +=10 WHERE UserName=@UserName;
+        INSERT Message(FromUser,ToUser,Content)
+     VALUES (@UserName,@InviterName,@UserName+N'某人使用了'+@InviterName+N'作为邀请人')
+        COMMIT
+    END TRY
+    BEGIN CATCH
+        ROLLBACK
+    END CATCH
+SET NOCOUNT OFF 
+
+CREATE TABLE Message(
+Id INT IDENTITY CONSTRAINT PK_Message_Id PRIMARY KEY(Id), 
+FromUser NVARCHAR(MAX),
+ToUser NVARCHAR(MAX), 
+UrgentLevel INT,
+Kind NVARCHAR(MAX), 
+HasRead BIT, 
+IsDelete BIT,
+Content NVARCHAR(MAX)
+)
+
+--确保Problem有“发布时间（PublishTime）”和
+--“最后更新时间（LatestUpdateTime）”两列，创建触发器实现：
+--更新一条数据，自动将当前时间计入该行数据的LatestUpdateTime
+--插入一条数据，自动将当前时间计入该行数据的PublishTime（提示：INSERTED伪表）
+
+SELECT * FROM Problem
+ALTER TABLE Problem
+ADD LatestUpdateTime DATETIME 
+UPDATE Problem SET   LatestUpdateTime=GETDATE()
+
+GO
+CREATE TRIGGER  UpdateTime ON Problem
+AFTER INSERT
+AS  
+UPDATE Problem SET PublishDateTime=GETDATE() WHERE Id=@@IDENTITY
+
+INSERT Problem (Content,NeedRemoteHelp,Reward,Title,Author,UserId)
+        VALUES(N'INSERT',N'1',11,N'INSERT',N'1',1)
+
+GO
+CREATE TRIGGER  UpdateLastedTime ON Problem
+AFTER UPDATE
+AS  
+UPDATE Problem SET LatestUpdateTime=GETDATE() WHERE Id=@@IDENTITY
+
+UPDATE Problem SET Reward =111 WHERE Id=20
