@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "17bang", "17bang\17bang.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADO", "ADO\ADO.csproj", "{437DBBC8-7DFF-4B8D-9865-4C0DA2BAC1A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReBuild17bang", "ReBuild17bang\ReBuild17bang.csproj", "{6A5CAD14-691A-48BD-B2C0-277D9C8C0DB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{437DBBC8-7DFF-4B8D-9865-4C0DA2BAC1A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{437DBBC8-7DFF-4B8D-9865-4C0DA2BAC1A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{437DBBC8-7DFF-4B8D-9865-4C0DA2BAC1A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A5CAD14-691A-48BD-B2C0-277D9C8C0DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A5CAD14-691A-48BD-B2C0-277D9C8C0DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A5CAD14-691A-48BD-B2C0-277D9C8C0DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A5CAD14-691A-48BD-B2C0-277D9C8C0DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
