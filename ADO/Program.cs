@@ -147,7 +147,7 @@ namespace CSharp
                 ////ProblemTableAdapter problemTableAdapter = new ProblemTableAdapter();
                 ////problemTableAdapter.GetData();
                 //new StudentRepository().GetStudentById(2);
-                new StudentRepository().Database.EnsureCreated();
+                //new StudentRepository().Database.EnsureCreated();
                 //new StudentRepository().Database.EnsureDeleted();
 
             }
