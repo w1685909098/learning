@@ -1,5 +1,7 @@
 ﻿using CSharp.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,13 @@ namespace CSharp.Repositories
             string connectString = @"Data Source=(localdb)\MSSQLLocalDB;
                                     Initial Catalog=222;Integrated Security=True;";
             optionsBuilder.UseSqlServer(connectString);
+//#if DEBUG
+//            .EnableSensitiveDataLogging(true)
+//#endif
+//            .UseLoggerFactory(new LoggerFactory(new ILoggerProvider[]
+//            {
+//                new DebugLoggerProvider()
+//            }));
         }
         public void SaveStudent(Student student)
         {

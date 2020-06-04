@@ -57,6 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Migrations\202006041046086_StudentAddColumns.cs" />
+    <Compile Include="Migrations\202006041046086_StudentAddColumns.designer.cs">
+      <DependentUpon>202006041046086_StudentAddColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
@@ -64,6 +69,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006041046086_StudentAddColumns.resx">
+      <DependentUpon>202006041046086_StudentAddColumns.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
