@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace ADO {
+namespace CSharp {
     
     
     /// <summary>
@@ -844,7 +844,7 @@ namespace ADO {
         }
     }
 }
-namespace ADO.DataSetTrainTableAdapters {
+namespace CSharp.DataSetTrainTableAdapters {
     
     
     /// <summary>

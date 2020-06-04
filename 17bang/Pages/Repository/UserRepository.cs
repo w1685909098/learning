@@ -56,20 +56,43 @@ namespace _17bang.Pages.Repository
             {
                 connection.Open();
                 DbCommand command = new SqlCommand(
-                    $"SELECT * FROM [USER] WHERE USERNAME=@name"
+                    //$"SELECT * FROM [USER] WHERE USERNAME=@name"
+                    $"SELECT * FROM [USER] "
+
                     );
-                DbParameter pName = new SqlParameter("@name", name);
-                command.Parameters.Add(pName);
+                //DbParameter pName = new SqlParameter("@name", name);
+                //command.Parameters.Add(pName);
                 command.Connection = connection;
                 DbDataReader reader = command.ExecuteReader();
-                UserModel userModel = new UserModel();
                 while (reader.Read())
                 {
-                    userModel.Name = (string)reader["UserName"];
-                    userModel.Password = (string)reader["Password"];
+                    UserModel userModel = new UserModel();
+                    if (reader["UserName"]==DBNull.Value)
+                    {
+                        userModel.Name = null;
+                    }
+                    else if(reader["Password"]==DBNull.Value)
+                    {
+                        userModel.Password = null;
+                    }
+                    else
+                    {
+                        userModel.Name = (string)reader["UserName"];
+                        userModel.Password = (string)reader["Password"];
+                    }
+                        _users.Add(userModel);
+
                 };
-                return userModel;
+
+                return _users.Where(u => u.Name ==name).SingleOrDefault();
+
+
+                //return userModel;
+
+
             }
+
+
         }
     }
 }
