@@ -1,4 +1,5 @@
 ﻿using CSharp.DataSetTrainTableAdapters;
+using CSharp.Entities;
 using CSharp.Repositories;
 using System;
 using System.Data;
@@ -149,7 +150,29 @@ namespace CSharp
                 //new StudentRepository().GetStudentById(2);
                 //new StudentRepository().Database.EnsureCreated();
                 //new StudentRepository().Database.EnsureDeleted();
-
+                //new StudentRepository().GetStudentById(1);
+                Student xx = new Student { Name="xx",};
+                StudentRepository repository = new StudentRepository();
+                //repository.Students.Add(xx);
+                //repository.Students.AddRange(
+                //    new Student { },
+                //    new Student { },
+                //    new Student { }
+                //    );
+                Student studentRemove = new Student() { Id=16,Name="zzA"};
+                //studentRemove = repository.Students.Find(7);
+                //repository.Students.Remove(repository.Find<Student>(3));
+                //repository.Remove<Student>(repository.Students.Find(6));
+                //repository.Remove<Student>(studentRemove);
+                //Student studentUpdate = new Student { Id = 14, Name ="tt"};
+                ////studentRemove = repository.Students.Find(9); 
+                //studentUpdate.BirthDay = new DateTime(2020/6/5);
+                repository.Attach<Student>(studentRemove);
+                studentRemove.Age = 23;
+                //repository.Update(studentRemove);
+                //repository.Students.Update(studentUpdate/*repository.Find<Student>(3)*/);
+                //repository.Remove<Student>(studentRemove);
+                repository.SaveChanges();
             }
         }
     }
