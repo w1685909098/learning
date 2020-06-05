@@ -2,9 +2,11 @@
 using CSharp.Entities;
 using CSharp.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace CSharp
@@ -159,20 +161,24 @@ namespace CSharp
                 //    new Student { },
                 //    new Student { }
                 //    );
-                Student studentRemove = new Student() { Id=16,Name="zzA"};
-                //studentRemove = repository.Students.Find(7);
-                //repository.Students.Remove(repository.Find<Student>(3));
-                //repository.Remove<Student>(repository.Students.Find(6));
-                //repository.Remove<Student>(studentRemove);
-                //Student studentUpdate = new Student { Id = 14, Name ="tt"};
-                ////studentRemove = repository.Students.Find(9); 
-                //studentUpdate.BirthDay = new DateTime(2020/6/5);
-                repository.Attach<Student>(studentRemove);
-                studentRemove.Age = 23;
-                //repository.Update(studentRemove);
-                //repository.Students.Update(studentUpdate/*repository.Find<Student>(3)*/);
-                //repository.Remove<Student>(studentRemove);
-                repository.SaveChanges();
+                //Student studentRemove = new Student() { Id=16,Name="zzA"};
+                ////studentRemove = repository.Students.Find(7);
+                ////repository.Students.Remove(repository.Find<Student>(3));
+                ////repository.Remove<Student>(repository.Students.Find(6));
+                ////repository.Remove<Student>(studentRemove);
+                ////Student studentUpdate = new Student { Id = 14, Name ="tt"};
+                //////studentRemove = repository.Students.Find(9); 
+                ////studentUpdate.BirthDay = new DateTime(2020/6/5);
+                //repository.Attach<Student>(studentRemove);
+                //studentRemove.Age = 23;
+                ////repository.Update(studentRemove);
+                ////repository.Students.Update(studentUpdate/*repository.Find<Student>(3)*/);
+                ////repository.Remove<Student>(studentRemove);
+                //repository.SaveChanges();
+                //IQueryable<Student> students=repository.Students.Where(s => s.Name == "0");
+                //IEnumerable<Student> students1 = repository.Students.Where(s => s.Name == "0").AsEnumerable();
+                //Student student = repository.Students.Where(s => s.Name == "0").SingleOrDefault();
+
             }
         }
     }
