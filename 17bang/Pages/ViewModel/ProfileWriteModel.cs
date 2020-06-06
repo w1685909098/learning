@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace _17bang.Pages.ViewModel
     public class ProfileWriteModel
     {
         public bool? IsMale { get; set; }
+        [Required(AllowEmptyStrings =false,ErrorMessage ="* 年份不能为空")]
         public string BirthYear { get; set; }
         public IList<SelectListItem> BirthYears { get; set; } /*= new List<SelectListItem>*/
         //    {
@@ -20,6 +22,7 @@ namespace _17bang.Pages.ViewModel
         //        new SelectListItem{Text="2020",Value="2020"},
         //    };
         public string BirthMonth { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* 生日月份不能为空")]
         public IList<SelectListItem> BirthMonths { get; set; } /*= new List<SelectListItem>*/
         //   {
         //        new SelectListItem("1","1"),

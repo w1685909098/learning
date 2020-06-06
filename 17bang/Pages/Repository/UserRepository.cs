@@ -54,6 +54,7 @@ namespace _17bang.Pages.Repository
                                     Initial Catalog=17bang;Integrated Security=True;";
             using (DbConnection connection = new SqlConnection(connectionString))
             {
+                IList<UserModel> _usersFromDataBase = new List<UserModel>();
                 connection.Open();
                 DbCommand command = new SqlCommand(
                     //$"SELECT * FROM [USER] WHERE USERNAME=@name"
@@ -77,22 +78,91 @@ namespace _17bang.Pages.Repository
                     }
                     else
                     {
+                        userModel.Id=(int)reader["Id"];
                         userModel.Name = (string)reader["UserName"];
                         userModel.Password = (string)reader["Password"];
                     }
-                        _users.Add(userModel);
-
+                    _usersFromDataBase.Add(userModel);
+                    _users = _usersFromDataBase;
                 };
-
-                return _users.Where(u => u.Name ==name).SingleOrDefault();
-
-
+                return _users.Where(u => u.Name == name).SingleOrDefault();
                 //return userModel;
-
-
             }
+            #region 简单登录  只有连接一次只返回一个对象
+            //using (DbConnection connection = new SqlConnection(connectionString))
+            //{
+            //    UserModel userModel = new UserModel();
+            //    IList<UserModel> _usersFromDataBase = new List<UserModel>();
+            //    connection.Open();
+            //    DbCommand command = new SqlCommand(
+            //        $"SELECT * FROM [USER] WHERE USERNAME=@name"
+            //        //$"SELECT * FROM [USER] "
 
+            //        );
+            //    DbParameter pName = new SqlParameter("@name", name);
+            //    command.Parameters.Add(pName);
+            //    command.Connection = connection;
+            //    DbDataReader reader = command.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        //UserModel userModel = new UserModel();
+            //        if (reader["UserName"] == DBNull.Value)
+            //        {
+            //            userModel.Name = null;
+            //        }
+            //        else if (reader["Password"] == DBNull.Value)
+            //        {
+            //            userModel.Password = null;
+            //        }
+            //        else
+            //        {
+            //            userModel.Id = (int)reader["Id"];
+            //            userModel.Name = (string)reader["UserName"];
+            //            userModel.Password = (string)reader["Password"];
+            //        }
+            //        //_usersFromDataBase.Add(userModel);
+            //        //_users = _usersFromDataBase;
+            //    };
+            //    //return _users.Where(u => u.Name == name).SingleOrDefault();
+            //    return userModel;
+            //}
+            #endregion
+            #region MyRegion   _user.Add  打开一次连接就会添加一次找到数据库的对象  导致single失效
+            //using (DbConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+            //    DbCommand command = new SqlCommand(
+            //        //$"SELECT * FROM [USER] WHERE USERNAME=@name"
+            //        $"SELECT * FROM [USER] "
 
+            //        );
+            //    //DbParameter pName = new SqlParameter("@name", name);
+            //    //command.Parameters.Add(pName);
+            //    command.Connection = connection;
+            //    DbDataReader reader = command.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        UserModel userModel = new UserModel();
+            //        if (reader["UserName"] == DBNull.Value)
+            //        {
+            //            userModel.Name = null;
+            //        }
+            //        else if (reader["Password"] == DBNull.Value)
+            //        {
+            //            userModel.Password = null;
+            //        }
+            //        else
+            //        {
+            //            userModel.Id = (int)reader["Id"];
+            //            userModel.Name = (string)reader["UserName"];
+            //            userModel.Password = (string)reader["Password"];
+            //        }
+            //        _users.Add(userModel);
+            //    };
+            //    return _users.Where(u => u.Name == name).SingleOrDefault();
+            //    //return userModel;
+            //}
+            #endregion
         }
     }
 }

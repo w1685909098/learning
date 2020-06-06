@@ -178,6 +178,9 @@ namespace CSharp
                 //IQueryable<Student> students=repository.Students.Where(s => s.Name == "0");
                 //IEnumerable<Student> students1 = repository.Students.Where(s => s.Name == "0").AsEnumerable();
                 //Student student = repository.Students.Where(s => s.Name == "0").SingleOrDefault();
+                IList<Student> students=repository.Students
+                    .Where(s => s.Age==6).OrderBy(s=>s.BirthDay)
+                   /* .AsEnumerable<Student>().Reverse()*/.ToList();
 
             }
         }

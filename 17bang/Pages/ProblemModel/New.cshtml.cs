@@ -26,22 +26,31 @@ namespace _17bang.Pages.Problem
      
         public void OnGet()
         {
+            Model = new ViewModel.ProblemModel
+            {
+                ProblemTypeSelects = new List<SelectListItem>
+                {
+                new SelectListItem(" 编程开发语言"," 编程开发语言"),
+                new SelectListItem{Text="工具软件",Value="工具软件"},
+                new SelectListItem{Text="顾问咨询",Value="顾问咨询"},
+                new SelectListItem{Text="操作系统",Value="操作系统"},
+                }
+            };
 
         }
         public void OnPost()
         {
-            //if (string.IsNullOrWhiteSpace(Model.ProblemType) )
-            //{
-            //    ModelState.AddModelError("Model.ProblemType",  "* 关键字不能为空");
-            //}
-            //if (string.IsNullOrWhiteSpace(Model.LanguageType) )
-            //{
-            //    ModelState.AddModelError("Model.LanguageType", "* 关键字不能为空");
-            //}
-            if (string.IsNullOrWhiteSpace(Model.RewardHelpMoneyCount) )
+            if (string.IsNullOrWhiteSpace(Model.ProblemType))
             {
-                ModelState.AddModelError("odel.RewardHelpMoneyCount", "* 悬赏帮帮币不能为空");
-
+                ModelState.AddModelError("Model.ProblemType", "* 关键字不能为空");
+            }
+            if (string.IsNullOrWhiteSpace(Model.LanguageType))
+            {
+                ModelState.AddModelError("Model.LanguageType", "* 关键字不能为空");
+            }
+            if (string.IsNullOrWhiteSpace(Model.RewardHelpMoneyCount))
+            {
+                ModelState.AddModelError("Model.RewardHelpMoneyCount", "* 悬赏帮帮币不能为空");
             }
             if (!ModelState.IsValid)
             {

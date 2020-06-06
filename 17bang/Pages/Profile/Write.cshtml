@@ -18,12 +18,14 @@
     <div>
         <div>生日：</div>
         <select asp-for="@Model.Model.BirthYear" asp-items="@Model.Model.BirthYears">
-        <option value="null">-------</option>
+            <option value="">-------</option>
         </select>
+        <span asp-validation-for="@Model.Model.BirthYear"></span>
         <label>年</label>
         <select asp-for="@Model.Model.BirthMonth" asp-items="@Model.Model.BirthMonths">
-        <option value="null">-------</option>
+            <option value="null">-------</option>
         </select>
+        <span asp-validation-for="@Model.Model.BirthMonth"></span>
         <label>月</label>
     </div>
     <div>

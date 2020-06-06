@@ -19,7 +19,7 @@
         <span asp-validation-for="@Model.Model.Description"></span>
     </div>
     <div>
-        @*<div><label>关键字：（* 使用空格分隔）</label></div>
+        <div><label>关键字：（* 使用空格分隔）</label></div>
         <label>---一级---</label>
         <select asp-for="@Model.Model.ProblemType" asp-items="@Model.Model.ProblemTypeSelects">
             <option value="null"> </option>
@@ -29,7 +29,7 @@
         <select asp-for="@Model.Model.LanguageType" asp-items="Html.GetEnumSelectList<LanguageTypeSelects>()">
             <option value="null"> </option>
         </select>
-        <span asp-validation-for="@Model.Model.LanguageType"></span>*@
+        <span asp-validation-for="@Model.Model.LanguageType"></span>
         <input asp-for="@Model.Model.SelfDescription" placeholder="自定义关键字，使用空格分隔" />
     </div>
     <div>
@@ -39,8 +39,8 @@
     <div>
         <div><label>悬赏  帮帮币 ：（现有 枚  ）</label></div>
         <input asp-for="@Model.Model.RewardHelpMoneyCount" />
+        <span asp-validation-for="@Model.Model.RewardHelpMoneyCount"></span>
     </div>
-    <span asp-validation-for="@Model.Model.RewardHelpMoneyCount"></span>
     <button type="submit">发布</button>
     <button type="submit">保存基本文稿</button>
 </form>

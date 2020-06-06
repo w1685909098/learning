@@ -25,19 +25,19 @@ namespace _17bang.Pages.ViewModel
      
         public string SelfDescription { get; set; }
         public string UserName { get; set; }
-        //[Required(AllowEmptyStrings = false, ErrorMessageResourceName = "* 悬赏帮帮币不能为空")]
+        [Required(AllowEmptyStrings = false, ErrorMessage  = "* 悬赏帮帮币不能为空")]
         public string RewardHelpMoneyCount { get; set; }
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "* 关键字1不能为空")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* 关键字1不能为空")]
         public string ProblemType { get; set; }
-        public IList<SelectListItem> ProblemTypeSelects { get; set; } =
-            new List<SelectListItem>
-            {
-                new SelectListItem(" 编程开发语言"," 编程开发语言"),
-                new SelectListItem{Text="工具软件",Value="工具软件"},
-                new SelectListItem{Text="顾问咨询",Value="顾问咨询"},
-                new SelectListItem{Text="操作系统",Value="操作系统"},
-            };
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "* 关键字2不能为空")]
+        public IList<SelectListItem> ProblemTypeSelects { get; set; } 
+        //    new List<SelectListItem>
+        //    {
+        //        new SelectListItem(" 编程开发语言"," 编程开发语言"),
+        //        new SelectListItem{Text="工具软件",Value="工具软件"},
+        //        new SelectListItem{Text="顾问咨询",Value="顾问咨询"},
+        //        new SelectListItem{Text="操作系统",Value="操作系统"},
+        //    };
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* 关键字2不能为空")]
         public string LanguageType { get; set; }
         //public ProblemModel Update(ProblemModel model)
         //{
