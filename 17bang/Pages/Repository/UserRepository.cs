@@ -31,9 +31,9 @@ namespace _17bang.Pages.Repository
             //_users.Add(model);
             //return _LastedId;
             #endregion
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;
-                                    Initial Catalog=17bang;Integrated Security=True;";
-            using (DbConnection connection = new SqlConnection(connectionString))
+            string connectionStringUser = @"Data Source=(localdb)\MSSQLLocalDB;
+                   Initial Catalog=17bang;Integrated Security=True;";
+            using (DbConnection connection = new SqlConnection(connectionStringUser))
             {
                 connection.Open();
                 DbCommand command = new SqlCommand(
@@ -50,9 +50,9 @@ namespace _17bang.Pages.Repository
             #region 无真实SQL数据
             //return _users.Where(u => u.Name == name).SingleOrDefault();
             #endregion
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;
+            string connectionStringUser = @"Data Source=(localdb)\MSSQLLocalDB;
                                     Initial Catalog=17bang;Integrated Security=True;";
-            using (DbConnection connection = new SqlConnection(connectionString))
+            using (DbConnection connection = new SqlConnection(connectionStringUser))
             {
                 IList<UserModel> _usersFromDataBase = new List<UserModel>();
                 connection.Open();
@@ -65,26 +65,32 @@ namespace _17bang.Pages.Repository
                 //command.Parameters.Add(pName);
                 command.Connection = connection;
                 DbDataReader reader = command.ExecuteReader();
+                if (!reader.HasRows)
+                {
+                    return null; ;
+                } 
                 while (reader.Read())
                 {
                     UserModel userModel = new UserModel();
                     if (reader["UserName"]==DBNull.Value)
                     {
-                        userModel.Name = null;
+                        userModel.Name = "";
                     }
-                    else if(reader["Password"]==DBNull.Value)
+                    else if(reader["Password"] == DBNull.Value)
                     {
-                        userModel.Password = null;
+                        userModel.Password = "";
                     }
                     else
                     {
                         userModel.Id=(int)reader["Id"];
                         userModel.Name = (string)reader["UserName"];
                         userModel.Password = (string)reader["Password"];
+                        _usersFromDataBase.Add(userModel);
                     }
-                    _usersFromDataBase.Add(userModel);
-                    _users = _usersFromDataBase;
+                    //_usersFromDataBase.Add(userModel);
+                    //_users = _usersFromDataBase;
                 };
+                _users = _usersFromDataBase;
                 return _users.Where(u => u.Name == name).SingleOrDefault();
                 //return userModel;
             }

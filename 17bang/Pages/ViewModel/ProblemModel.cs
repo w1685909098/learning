@@ -24,7 +24,7 @@ namespace _17bang.Pages.ViewModel
         [Required(AllowEmptyStrings = false, ErrorMessage = "* 正文不能为空")]
         public string Description { get; set; }
      
-        public string SelfDescription { get; set; }
+        public string SelfDescriptionKeyword { get; set; }
         public string UserName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage  = "* 悬赏帮帮币不能为空")]
         public string RewardHelpMoneyCount { get; set; }
