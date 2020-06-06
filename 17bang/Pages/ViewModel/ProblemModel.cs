@@ -13,6 +13,7 @@ namespace _17bang.Pages.ViewModel
     public class ProblemModel
     {
         public DateTime PublishTime { get; set; } /*= DateTime.Now;*/
+        [Required(AllowEmptyStrings =false,ErrorMessage ="* 求助作者不能为空")]
         public User Author { get; set; }/* = new User { Name = "1", Id = 1 };*/
         public int Id { get; set; }
         public string Abstact { get; set; }

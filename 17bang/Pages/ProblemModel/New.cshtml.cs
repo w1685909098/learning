@@ -24,7 +24,7 @@ namespace _17bang.Pages.Problem
 
        public ViewModel.ProblemModel  Model { get; set; }
      
-        public void OnGet()
+        public IActionResult OnGet()
         {
             Model = new ViewModel.ProblemModel
             {
@@ -36,9 +36,9 @@ namespace _17bang.Pages.Problem
                 new SelectListItem{Text="操作系统",Value="操作系统"},
                 }
             };
-
+            return Page();
         }
-        public void OnPost()
+        public IActionResult OnPost()
         {
             if (string.IsNullOrWhiteSpace(Model.ProblemType))
             {
@@ -54,9 +54,11 @@ namespace _17bang.Pages.Problem
             }
             if (!ModelState.IsValid)
             {
-                return;
+                return Page();
             }
             _problemrepository.ProblemSave(Model);
+            return Redirect($"/ProblemModel/{Model.Id}");
+            //return RedirectToPage("/ProblemModel/Single");
         }
     }
 }

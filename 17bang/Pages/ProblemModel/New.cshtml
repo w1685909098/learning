@@ -14,6 +14,15 @@
         <span asp-validation-for="@Model.Model.Title"></span>
     </div>
     <div>
+        <label>作者Name</label>
+        <input asp-for="@Model.Model.Author.Name" />
+        <label>作者Id</label>
+        <input asp-for="@Model.Model.Author.Id" />
+
+    </div>
+    <span asp-validation-for="@Model.Model.Author.Name"></span>
+    <span asp-validation-for="@Model.Model.Author.Id"></span>
+    <div>
         <label>说明：（* 必填）</label>
         <textarea asp-for="@Model.Model.Description"></textarea>
         <span asp-validation-for="@Model.Model.Description"></span>
