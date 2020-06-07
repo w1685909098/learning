@@ -169,7 +169,7 @@ namespace _17bang.Pages.Repository
                     problem.Title = (string)reader["Title"];
                     problem.Author.Id = (int)reader["UserId"];
                     problem.Author.Name = (string)reader["UserName"];
-                    
+
                     //problem.Id = (int)reader[0];
                     //problem.Description = (string)reader[1];
                     //problem.RewardHelpMoneyCount = reader[2].ToString();
@@ -182,7 +182,6 @@ namespace _17bang.Pages.Repository
                 _problems = _problemsFromDatabase;
             }
             return _problems;
-
         }
         public IList<ViewModel.ProblemModel> GetExclude(ProblemStatus status)
         {
@@ -199,7 +198,7 @@ namespace _17bang.Pages.Repository
         public ViewModel.ProblemModel GetSingle(int Id)
         {
             _problems = new ProblemRepository().GetProblems();
-            return _problems.SingleOrDefault(p => p.Id == Id);
+            return _problems.Where(p => p.Id == Id).SingleOrDefault();
         }
         public int ProblemNew(ViewModel.ProblemModel model)
         {
@@ -236,13 +235,37 @@ namespace _17bang.Pages.Repository
                 });
                 command.Connection = connection;
                 command.ExecuteNonQuery();
-                model.Id =(int)insertId.Value  ;
+                model.Id = (int)insertId.Value;
                 return model.Id;
             }
         }
-        //public IList<ViewModel.ProblemModel> SaveChanges()
-        //{
-        //    return _problems;
-        //}
+        public int Update(ViewModel.ProblemModel model)
+        {
+            string connectionStringProblem = @"Data Source = (localdb)\MSSQLLocalDB;
+                   Initial Catalog = 17bang;Integrated Security = True;";
+            using (DbConnection connection = new SqlConnection(connectionStringProblem))
+            {
+                connection.Open();
+                DbCommand command = new SqlCommand(
+                    @"
+                     UPDATE Problem SET Content = @Content WHERE Id=@Id;
+                     UPDATE Problem SET Reward = @Reward WHERE Id=@Id;
+                     UPDATE Problem SET PublishDateTime =@PublishDateTime WHERE Id=@Id;
+                     UPDATE Problem SET Title = @Title WHERE Id=@Id;
+                    "
+                    );
+                command.Parameters.AddRange(new SqlParameter[]
+                {
+                  new SqlParameter("@Content",model.Description),
+                  new SqlParameter("@Reward",model.RewardHelpMoneyCount),
+                  new SqlParameter("@PublishDateTime",model.PublishTime=DateTime.Now),
+                  new SqlParameter("@Title",model.Title),
+                  new SqlParameter("@Id",model.Id),
+                });
+                command.Connection = connection;
+                command.ExecuteNonQuery();
+            }
+            return model.Id;
+        }
     }
 }

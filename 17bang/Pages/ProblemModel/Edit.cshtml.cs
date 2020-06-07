@@ -19,14 +19,13 @@ namespace _17bang.Pages.ProblemModel
         {
             _repository = new ProblemRepository();
         }
-        public ViewModel.ProblemModel problem { get; set; }
+        public ViewModel.ProblemModel Problem { get; set; }
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
         public ActionResult OnGet()
         {
-
             Id = Convert.ToInt32(Request.RouteValues["Id"]);
-            problem = _repository.GetSingle(Id);
+            Problem = _repository.GetSingle(Id);
             //if (HttpContext.Request.Cookies["UserName"] != problem.Author.Name)
             //{
             //    throw new Exception("用户权限不正确，您不是当前文章的发布者或者管理员，无权修改该文章");
@@ -35,16 +34,20 @@ namespace _17bang.Pages.ProblemModel
         }
         public ActionResult OnPost()
         {
-            
+            Id = Convert.ToInt32(Request.RouteValues["Id"]);
             if (ModelState.IsValid)
             {
                 return Page();
             }
-            _repository.GetSingle(Id).PublishTime = problem.PublishTime;
-            _repository.GetSingle(Id).Title = problem.Title;
-            _repository.GetSingle(Id).Abstact = problem.Abstact;
+            #region 没有SQL操作修改
+            //_repository.GetSingle(Id).PublishTime = problem.PublishTime;
+            //_repository.GetSingle(Id).Title = problem.Title;
+            //_repository.GetSingle(Id).Abstact = problem.Abstact;
+            #endregion
             //_repository.GetSingle(Id).Update(problem);
             //_repository.SaveChanges();
+            Problem.Id = Id;
+            _repository.Update(Problem);
             return RedirectToPage("/ProblemModel/Single",new {Id=Id});
         }
        

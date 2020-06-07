@@ -8,26 +8,32 @@
 
 <form method="post">
     @*<div>
-        <small>@Model.problem.PublishTime</small>
-        <small><a href="/ProblemModel/@Model.problem.Author.Id">@Model.problem.Author.Name</a></small>
-    </div>
-    <h3><a href="/ProblemModel/@Model.problem.Id">@Model.problem.Title</a></h3>
-    <p>@Model.problem.Abstact</p>*@
+            <small>@Model.problem.PublishTime</small>
+            <small><a href="/ProblemModel/@Model.problem.Author.Id">@Model.problem.Author.Name</a></small>
+        </div>
+        <h3><a href="/ProblemModel/@Model.problem.Id">@Model.problem.Title</a></h3>
+        <p>@Model.problem.Abstact</p>*@
     <div>
         <small>
-            <input asp-for="@Model.problem.PublishTime@*.ToString("yyyy年mm月dd日 hh时mm分")*@" />
-            <span asp-validation-for="@Model.problem.PublishTime "></span>
-            <input asp-for="@Model.problem.Author.Name" />
-            <span asp-validation-for="@Model.problem.Author.Name"></span>
+            <input asp-for="@Model.Problem.PublishTime@*.ToString("yyyy年mm月dd日 hh时mm分")*@" />
+            <span asp-validation-for="@Model.Problem.PublishTime "></span>
+            <input asp-for="@Model.Problem.Author.Name" />
+            <span asp-validation-for="@Model.Problem.Author.Name"></span>
         </small>
     </div>
     <h3>
-        <input asp-for="@Model.problem.Title" />
-        <span asp-validation-for="@Model.problem.Title"></span>
+        <input asp-for="@Model.Problem.Title" />
+        <span asp-validation-for="@Model.Problem.Title"></span>
     </h3>
     <p>
-        <input asp-for="@Model.problem.Abstact" />
-        <span asp-validation-for="@Model.problem.Abstact"></span>
+        <input asp-for="@Model.Problem.Description" />
+        <span asp-validation-for="@Model.Problem.Description"></span>
     </p>
-    <button>提交</button>
+    <div>
+        <div><label>悬赏  帮帮币 ：（现有 枚  ）</label></div>
+        <input asp-for="@Model.Problem.RewardHelpMoneyCount" />
+        <span asp-validation-for="@Model.Problem.RewardHelpMoneyCount"></span>
+    </div>
+    <button type="submit">发布</button>
+    <button type="submit">保存基本文稿</button>
 </form>
