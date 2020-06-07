@@ -42,11 +42,11 @@ namespace _17bang.Pages.Problem
         {
             if (string.IsNullOrWhiteSpace(Model.ProblemType))
             {
-                ModelState.AddModelError("Model.ProblemType", "* 关键字不能为空");
+                ModelState.AddModelError("Model.ProblemType", "* 关键字1不能为空");
             }
             if (string.IsNullOrWhiteSpace(Model.LanguageType))
             {
-                ModelState.AddModelError("Model.LanguageType", "* 关键字不能为空");
+                ModelState.AddModelError("Model.LanguageType", "* 关键字2不能为空");
             }
             if (string.IsNullOrWhiteSpace(Model.RewardHelpMoneyCount))
             {
@@ -56,7 +56,7 @@ namespace _17bang.Pages.Problem
             {
                 return Page();
             }
-            _problemrepository.ProblemSave(Model);
+            _problemrepository.ProblemNew(Model);
             return Redirect($"/ProblemModel/{Model.Id}");
             //return RedirectToPage("/ProblemModel/Single");
         }

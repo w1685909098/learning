@@ -21,7 +21,6 @@ namespace _17bang.Pages.ProblemModel
         {
             int Id = Convert.ToInt32(Request.RouteValues["id"]);
             Problem = _repository.GetSingle(Id);
-
         }
     }
 }
