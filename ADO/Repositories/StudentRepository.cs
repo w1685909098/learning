@@ -33,10 +33,12 @@ namespace CSharp.Repositories
             modelBuilder.Entity<Teacher>().Property(t => t.Name).HasMaxLength(10);
             modelBuilder.Entity<Teacher>().HasIndex(t => t.Name).IsUnique(true);
             modelBuilder.Entity<Student>()
-                .HasOne<Bedroom>()
+                .HasOne<Bedroom>(s=>s.Bed)
                 .WithOne(b => b.Student)
-                //.HasForeignKey<Student>(b=>b.Id);
-                .HasForeignKey("Bedroom", "StudentsId");
+                .HasForeignKey<Student>(s=>s.BedId);
+            modelBuilder.Entity<StudentAndTeacher>()
+                .HasKey(st => new { sId = st.StudentId, tId = st.TeacherId });
+            //.HasForeignKey("Bedroom", "StudentsId");
             //modelBuilder.Entity<Student>().
             //    HasOne<Classroom>()
             //    .WithOne(c => c.Student)

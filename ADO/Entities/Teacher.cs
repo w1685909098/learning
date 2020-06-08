@@ -9,6 +9,6 @@ namespace CSharp.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public int? age { get; set; }
-        //public IList<Student> Students { get; set; }
+        public IList<StudentAndTeacher> Students { get; set; }
     }
 }

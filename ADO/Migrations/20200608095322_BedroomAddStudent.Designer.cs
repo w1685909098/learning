@@ -4,14 +4,16 @@ using CSharp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharp.Migrations
 {
     [DbContext(typeof(StudentRepository))]
-    partial class StudentRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200608095322_BedroomAddStudent")]
+    partial class BedroomAddStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,6 +64,9 @@ namespace CSharp.Migrations
                     b.Property<int>("BedId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BedId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime2");
 
@@ -79,24 +84,11 @@ namespace CSharp.Migrations
                     b.HasIndex("BedId")
                         .IsUnique();
 
+                    b.HasIndex("BedId1");
+
                     b.HasIndex("ClassroomId");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("CSharp.Entities.StudentAndTeacher", b =>
-                {
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentId", "TeacherId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("StudentAndTeacher");
                 });
 
             modelBuilder.Entity("CSharp.Entities.Teacher", b =>
@@ -124,30 +116,19 @@ namespace CSharp.Migrations
 
             modelBuilder.Entity("CSharp.Entities.Student", b =>
                 {
-                    b.HasOne("CSharp.Entities.Bedroom", "Bed")
+                    b.HasOne("CSharp.Entities.Bedroom", null)
                         .WithOne("Student")
                         .HasForeignKey("CSharp.Entities.Student", "BedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CSharp.Entities.Bedroom", "Bed")
+                        .WithMany()
+                        .HasForeignKey("BedId1");
+
                     b.HasOne("CSharp.Entities.Classroom", "Classroom")
                         .WithMany()
                         .HasForeignKey("ClassroomId");
-                });
-
-            modelBuilder.Entity("CSharp.Entities.StudentAndTeacher", b =>
-                {
-                    b.HasOne("CSharp.Entities.Student", "Student")
-                        .WithMany("Teachers")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CSharp.Entities.Teacher", "Teacher")
-                        .WithMany("Students")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -20,6 +20,8 @@
     <Compile Remove="Migrations\20200608090812_StudentAndClassroomOneByOne.Designer.cs" />
     <Compile Remove="Migrations\20200608090935_StudentAndClassroomOneByOne.cs" />
     <Compile Remove="Migrations\20200608090935_StudentAndClassroomOneByOne.Designer.cs" />
+    <Compile Remove="Migrations\20200608092414_BedroomAddStudent.cs" />
+    <Compile Remove="Migrations\20200608092414_BedroomAddStudent.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
