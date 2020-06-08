@@ -4,14 +4,16 @@ using CSharp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharp.Migrations
 {
     [DbContext(typeof(StudentRepository))]
-    partial class StudentRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200608090512_StudentDeleteClassroom")]
+    partial class StudentDeleteClassroom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,21 +43,6 @@ namespace CSharp.Migrations
                     b.ToTable("Bedroom");
                 });
 
-            modelBuilder.Entity("CSharp.Entities.Classroom", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Classroom");
-                });
-
             modelBuilder.Entity("CSharp.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -72,9 +59,6 @@ namespace CSharp.Migrations
                     b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ClassroomId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsMale")
                         .HasColumnType("bit");
 
@@ -84,8 +68,6 @@ namespace CSharp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BedId");
-
-                    b.HasIndex("ClassroomId");
 
                     b.ToTable("Students");
                 });
@@ -125,10 +107,6 @@ namespace CSharp.Migrations
                     b.HasOne("CSharp.Entities.Bedroom", "Bed")
                         .WithMany()
                         .HasForeignKey("BedId");
-
-                    b.HasOne("CSharp.Entities.Classroom", "Classroom")
-                        .WithMany()
-                        .HasForeignKey("ClassroomId");
                 });
 #pragma warning restore 612, 618
         }

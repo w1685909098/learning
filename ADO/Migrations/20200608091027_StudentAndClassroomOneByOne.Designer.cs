@@ -4,14 +4,16 @@ using CSharp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharp.Migrations
 {
     [DbContext(typeof(StudentRepository))]
-    partial class StudentRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200608091027_StudentAndClassroomOneByOne")]
+    partial class StudentAndClassroomOneByOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,14 @@ namespace CSharp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SId")
+                        .IsUnique()
+                        .HasFilter("[SId] IS NOT NULL");
 
                     b.ToTable("Classroom");
                 });
@@ -118,6 +127,13 @@ namespace CSharp.Migrations
                     b.HasOne("CSharp.Entities.Student", "Student")
                         .WithOne()
                         .HasForeignKey("CSharp.Entities.Bedroom", "StudentsId");
+                });
+
+            modelBuilder.Entity("CSharp.Entities.Classroom", b =>
+                {
+                    b.HasOne("CSharp.Entities.Student", "Student")
+                        .WithOne()
+                        .HasForeignKey("CSharp.Entities.Classroom", "SId");
                 });
 
             modelBuilder.Entity("CSharp.Entities.Student", b =>

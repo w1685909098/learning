@@ -6,8 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200604035348_StudentAddColumnIsMale.cs" />
-    <Compile Remove="Migrations\20200604035348_StudentAddColumnIsMale.Designer.cs" />
+    <Compile Remove="Migrations\20200608083830_StudentToBedroomOneByOne111.cs" />
+    <Compile Remove="Migrations\20200608083830_StudentToBedroomOneByOne111.Designer.cs" />
+    <Compile Remove="Migrations\20200608084536_StudentToBedroomOneByOne111.cs" />
+    <Compile Remove="Migrations\20200608084536_StudentToBedroomOneByOne111.Designer.cs" />
+    <Compile Remove="Migrations\20200608084657_StudentToBedroomOneByOne111.cs" />
+    <Compile Remove="Migrations\20200608084657_StudentToBedroomOneByOne111.Designer.cs" />
+    <Compile Remove="Migrations\20200608084755_StudentToBedroomOneByOne111.cs" />
+    <Compile Remove="Migrations\20200608084755_StudentToBedroomOneByOne111.Designer.cs" />
+    <Compile Remove="Migrations\20200608084858_StudentToBedroomOneByOne.cs" />
+    <Compile Remove="Migrations\20200608084858_StudentToBedroomOneByOne.Designer.cs" />
+    <Compile Remove="Migrations\20200608090812_StudentAndClassroomOneByOne.cs" />
+    <Compile Remove="Migrations\20200608090812_StudentAndClassroomOneByOne.Designer.cs" />
+    <Compile Remove="Migrations\20200608090935_StudentAndClassroomOneByOne.cs" />
+    <Compile Remove="Migrations\20200608090935_StudentAndClassroomOneByOne.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

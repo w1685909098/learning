@@ -4,14 +4,16 @@ using CSharp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharp.Migrations
 {
     [DbContext(typeof(StudentRepository))]
-    partial class StudentRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200608083549_NewDatabase")]
+    partial class NewDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,14 +31,7 @@ namespace CSharp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentsId")
-                        .IsUnique()
-                        .HasFilter("[StudentsId] IS NOT NULL");
 
                     b.ToTable("Bedroom");
                 });
@@ -113,13 +108,6 @@ namespace CSharp.Migrations
                     b.ToTable("Teacher");
                 });
 
-            modelBuilder.Entity("CSharp.Entities.Bedroom", b =>
-                {
-                    b.HasOne("CSharp.Entities.Student", "Student")
-                        .WithOne()
-                        .HasForeignKey("CSharp.Entities.Bedroom", "StudentsId");
-                });
-
             modelBuilder.Entity("CSharp.Entities.Student", b =>
                 {
                     b.HasOne("CSharp.Entities.Bedroom", "Bed")
@@ -127,7 +115,7 @@ namespace CSharp.Migrations
                         .HasForeignKey("BedId");
 
                     b.HasOne("CSharp.Entities.Classroom", "Classroom")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("ClassroomId");
                 });
 #pragma warning restore 612, 618

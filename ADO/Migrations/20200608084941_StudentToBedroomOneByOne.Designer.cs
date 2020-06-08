@@ -4,14 +4,16 @@ using CSharp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharp.Migrations
 {
     [DbContext(typeof(StudentRepository))]
-    partial class StudentRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200608084941_StudentToBedroomOneByOne")]
+    partial class StudentToBedroomOneByOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,7 +129,7 @@ namespace CSharp.Migrations
                         .HasForeignKey("BedId");
 
                     b.HasOne("CSharp.Entities.Classroom", "Classroom")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("ClassroomId");
                 });
 #pragma warning restore 612, 618

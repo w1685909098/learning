@@ -25,6 +25,22 @@ namespace CSharp.Repositories
             {
                 new DebugLoggerProvider()
             }));
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Teacher>().Property(t => t.Name).HasMaxLength(10);
+            modelBuilder.Entity<Teacher>().HasIndex(t => t.Name).IsUnique(true);
+            modelBuilder.Entity<Student>()
+                .HasOne<Bedroom>()
+                .WithOne(b => b.Student)
+                //.HasForeignKey<Student>(b=>b.Id);
+                .HasForeignKey("Bedroom", "StudentsId");
+            //modelBuilder.Entity<Student>().
+            //    HasOne<Classroom>()
+            //    .WithOne(c => c.Student)
+            //    .HasForeignKey("Classroom", "SId");
         }
         public void SaveStudent(Student student)
         {
