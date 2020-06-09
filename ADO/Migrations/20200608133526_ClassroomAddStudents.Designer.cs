@@ -4,14 +4,16 @@ using CSharp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharp.Migrations
 {
     [DbContext(typeof(StudentRepository))]
-    partial class StudentRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200608133526_ClassroomAddStudents")]
+    partial class ClassroomAddStudents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace CSharp.Migrations
                     b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ClassroomId")
+                    b.Property<int?>("ClassroomId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsMale")
@@ -132,9 +134,7 @@ namespace CSharp.Migrations
 
                     b.HasOne("CSharp.Entities.Classroom", "Classroom")
                         .WithMany("Students")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClassroomId");
                 });
 
             modelBuilder.Entity("CSharp.Entities.StudentAndTeacher", b =>

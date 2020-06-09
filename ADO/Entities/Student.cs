@@ -14,6 +14,7 @@ namespace CSharp.Entities
         public IList<StudentAndTeacher> Teachers { get; set; }
         public Bedroom Bed { get; set; }
         public int BedId { get; set; }
+        public int ClassroomId { get; set; }
         public Classroom Classroom { get; set; }
     }
 

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+//using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -153,8 +155,8 @@ namespace CSharp
                 //new StudentRepository().Database.EnsureCreated();
                 //new StudentRepository().Database.EnsureDeleted();
                 //new StudentRepository().GetStudentById(1);
-                Student xx = new Student { Name="xx",};
-                StudentRepository repository = new StudentRepository();
+                //Student xx = new Student { Name="xx",};
+                //StudentRepository repository = new StudentRepository();
                 //repository.Students.Add(xx);
                 //repository.Students.AddRange(
                 //    new Student { },
@@ -178,9 +180,38 @@ namespace CSharp
                 //IQueryable<Student> students=repository.Students.Where(s => s.Name == "0");
                 //IEnumerable<Student> students1 = repository.Students.Where(s => s.Name == "0").AsEnumerable();
                 //Student student = repository.Students.Where(s => s.Name == "0").SingleOrDefault();
-                IList<Student> students=repository.Students
-                    .Where(s => s.Age==6).OrderBy(s=>s.BirthDay)
-                   /* .AsEnumerable<Student>().Reverse()*/.ToList();
+                //IList<Student> students=repository.Students
+                //    .Where(s => s.Age==6).OrderBy(s=>s.BirthDay)
+                //   /* .AsEnumerable<Student>().Reverse()*/.ToList();
+                StudentRepository repository = new StudentRepository();
+                //Student student = new Student { Name = "xx2" };
+                //Bedroom bedroom = new Bedroom { Name = "3022" };
+                ////student.Bed = bedroom;
+                //bedroom.Student = student;
+                //repository.Add<Bedroom>(bedroom);
+                //Classroom classroom = new Classroom { Name = "2302" };
+                //student.Classroom = classroom;
+                //repository.Add<Classroom>(classroom);
+                //Teacher teacher = new Teacher { Name = "self" };
+                //student.Teachers = new List<StudentAndTeacher>();
+                //student.Teachers.Add(new StudentAndTeacher {Student=student,Teacher=teacher });
+                //repository.SaveChanges();
+
+                //Student last = new Student();
+                //Classroom  classroom= new Classroom();
+                #region Eger加载
+                //Student last = repository.Students.
+                //    Include(s => s.Teachers)
+                //.ThenInclude(t=>t.Teacher)
+                //.AsEnumerable().Last();
+                //Console.WriteLine(last.Teachers.FirstOrDefault().Teacher.Name);
+                #endregion
+                #region 显式加载
+                //Student last = repository.Students.First ();
+                //repository.Entry<Student>(last).Reference<Classroom>(s=>s.Classroom).Load();
+                //Console.WriteLine(last.Classroom.Id);
+                //Console.WriteLine(last.Teachers.FirstOrDefault().Teacher.Name);
+                #endregion
 
             }
         }

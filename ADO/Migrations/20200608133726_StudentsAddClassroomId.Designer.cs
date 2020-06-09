@@ -4,14 +4,16 @@ using CSharp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharp.Migrations
 {
     [DbContext(typeof(StudentRepository))]
-    partial class StudentRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200608133726_StudentsAddClassroomId")]
+    partial class StudentsAddClassroomId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
