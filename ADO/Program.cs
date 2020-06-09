@@ -212,6 +212,8 @@ namespace CSharp
                 //Console.WriteLine(last.Classroom.Id);
                 //Console.WriteLine(last.Teachers.FirstOrDefault().Teacher.Name);
                 #endregion
+                Student last = repository.Students.First();
+                Console.WriteLine(last.Classroom.Name);
 
             }
         }
