@@ -4,14 +4,16 @@ using EntityFrameworkCoreSQL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameworkCoreSQL.Migrations
 {
     [DbContext(typeof(UserRepository))]
-    partial class UserRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200610135631_UserSetConstraintOneByOne")]
+    partial class UserSetConstraintOneByOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

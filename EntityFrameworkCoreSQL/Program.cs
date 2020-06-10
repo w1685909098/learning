@@ -28,17 +28,20 @@ namespace EntityFrameworkCoreSQL
             //Console.WriteLine(userRepository.Find<User>(5).Name);
             #endregion
             #region 通过id找到user并修改其name,保存
-            userRepository.Find<User>(6).Name = "zz";
+            Register user1 = new Register();
+            user1 = userRepository.Find<Register>(6);
+            userRepository.Find<Register>(6).UserName = "zz";
+            user1.UserName = "qwe";
             userRepository.SaveChanges();
             #endregion
             #region 不加载User对象，仅凭其Id用一句Update SQL语句完成上题
-            User user = new User { Id = 5 };
-             userRepository.Attach<User>( user);
-            user.Name = "tt";
+            Register user = new Register { Id = 5 };
+             userRepository.Attach<Register>( user );
+            user.UserName = "tt";
             userRepository.SaveChanges();
             #endregion
             #region 删除该Id用户
-            userRepository.Remove<User>(userRepository.Find<User>(1));
+            //userRepository.Remove<User>(userRepository.Find<User>(1));
             userRepository.SaveChanges();
             #endregion
             #region 事务的开启

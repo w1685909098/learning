@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CSharp.Entities
+namespace CSharp.Entities 
 {
-   public  class Teacher
+   public  class Teacher :BaseEntity
     {//与学生对应多对多
         public int Id { get; set; }
         public string Name { get; set; }

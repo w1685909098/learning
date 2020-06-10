@@ -7,7 +7,7 @@ namespace Entities
 {
   public   class Comment
     {
-        public User user { get; set; }
+        public Register user { get; set; }
         public string Word { get; set; }
         public Article Article { get; set; }
         public Appraise Appraise { get; set; }

@@ -4,14 +4,16 @@ using EntityFrameworkCoreSQL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameworkCoreSQL.Migrations
 {
     [DbContext(typeof(UserRepository))]
-    partial class UserRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20200610134417_UserSetConstraint")]
+    partial class UserSetConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace EntityFrameworkCoreSQL.Migrations
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("EmailId")
-                        .HasColumnType("int");
 
                     b.Property<int>("HelpBean")
                         .HasColumnType("int");
@@ -61,34 +60,7 @@ namespace EntityFrameworkCoreSQL.Migrations
 
                     b.HasIndex("CreateTime");
 
-                    b.HasIndex("EmailId")
-                        .IsUnique();
-
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("EntityFrameworkCoreSQL.Entities.Email", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("RegisterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Email");
-                });
-
-            modelBuilder.Entity("Entities.Register", b =>
-                {
-                    b.HasOne("EntityFrameworkCoreSQL.Entities.Email", "Email")
-                        .WithOne("Register")
-                        .HasForeignKey("Entities.Register", "EmailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -17,7 +17,7 @@ namespace Entities
             this.kind = kind;
         }
        /* public*/ protected internal string kind { get; set; }
-        public User Author { get; set; }
+        public Register Author { get; set; }
         public DateTime CreatTime { get; }
         public DateTime PublishTime {  get; }
          

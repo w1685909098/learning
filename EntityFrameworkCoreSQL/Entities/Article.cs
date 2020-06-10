@@ -15,7 +15,7 @@ namespace Entities
         public Appraise Appraise { get; set; }
         public List<Keyword> Keywords { get; set; }
         public DateTime PublishTime { get; set; }
-        public User Author { get; set; }
+        public Register Author { get; set; }
         private string _title;
         public string Title
         {
@@ -38,12 +38,12 @@ namespace Entities
             base.Publish();
             //Author.helpMoney--;
         }
-        public void Agree(User voter)
+        public void Agree(Register voter)
         {
             Author.HelpCredit++;
             voter.HelpBean--;
         }
-        public void Disagree(User user)
+        public void Disagree(Register user)
         {
             Author.HelpCredit++;
             user.HelpBean--;

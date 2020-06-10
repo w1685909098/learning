@@ -1,42 +1,43 @@
 ﻿using Entities;
+using EntityFrameworkCoreSQL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities
 {
-     public sealed class User : BaseEntity<User>
+     public sealed class Register : BaseEntity<Register>
     {
-        //public int FailedTry { get; set; }
+        public int FailedTry { get; set; }
 
-        public User()
+        public Register()
         {
 
         }
-        public User(string name,string password )
+        public Register(string name,string password )
         {
-            Name = name;
+            UserName = name;
             Password = password;
         }
         public string InvitedBy { get; set; }
         public int InvitationCode { get; set; }
 
-        private string _name;
+        private string _userName;
 
         private string[] Blackist = new string[] { "admin", "17bang", "管理员" };
 
-        public string Name
+        public string UserName
         {
             get
             {
                 for (int i = 0; i < Blackist.Length; i++)
                 {
-                    if (_name.Contains(Blackist[i]))
+                    if (_userName.Contains(Blackist[i]))
                     {
                         throw new ArgumentOutOfRangeException("用户（User）的昵称（Name）不能含有admin、17bang、管理员等敏感词");
                     }
                 }
-                return _name;
+                return _userName;
             }
             set
             {
@@ -44,7 +45,7 @@ namespace Entities
                 {
                     value = "系统管理员";
                 }
-                _name = value;
+                _userName = value;
             }
         }
         private string WhiteList= "0123456789~!@#$%^&*()_+ABCDEFGabcdefg";
@@ -78,12 +79,15 @@ namespace Entities
         public int helpMoney { get; set; }
         public int HelpBean { get; set; }
         public int HelpCredit { get; set; }
-        public IList<Appraise> Appraises { get; set; }
-        public IList<Article> Articles { get; set; }
-        public IList<Comment> Comments { get; set; }
-        public IList<Problem> Problems { get; set; }
+        public DateTime CreateTime { get; set; }
+        public int EmailId { get; set; }
+        public Email Email { get; set; }
+        //public IList<Appraise> Appraises { get; set; }
+        //public IList<Article> Articles { get; set; }
+        //public IList<Comment> Comments { get; set; }
+        //public IList<Problem> Problems { get; set; }
 
-        public void Register()
+        public void Create()
         {
 
         }
