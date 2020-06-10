@@ -6,9 +6,9 @@ namespace CSharp.Entities
 {
    public  class Teacher
     {//与学生对应多对多
-        public virtual int Id { get; set; }
-        public virtual string Name { get; set; }
-        public virtual int? age { get; set; }
-        public virtual IList<StudentAndTeacher> Students { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int? age { get; set; }
+        public IList<StudentAndTeacher> Students { get; set; }
     }
 }

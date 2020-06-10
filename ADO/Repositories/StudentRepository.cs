@@ -18,7 +18,6 @@ namespace CSharp.Repositories
             string connectString = @"Data Source=(localdb)\MSSQLLocalDB;
                                     Initial Catalog=222;Integrated Security=True;";
             optionsBuilder.UseSqlServer(connectString)
-                .UseLazyLoadingProxies()
 #if DEBUG
             .EnableSensitiveDataLogging(true)
 #endif
