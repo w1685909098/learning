@@ -1,0 +1,39 @@
+﻿@model _17bangMVC.Models.Register.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+     @using (Html.BeginForm()) { 
+    <div>
+        <div>
+            <label>用户名：</label> <br />
+            @Html.TextBoxFor(m => m.UserName)
+            @Html.ValidationMessageFor(m=>m.UserName)
+            @*<input type="text" name="UserName" />*@
+        </div>
+        <div>
+            <label>密码：</label><br />
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password)
+            @*<input type="text" name="Password" />*@
+        </div>
+        <div>
+            @Html.LabelFor(m => m.ConfirmPassword)<span>：</span><br />
+            @Html.PasswordFor(m => m.ConfirmPassword)
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            @*<input type="text" name="Password" />*@
+        </div>
+        <button type="submit">提交</button>
+        <button type="reset">重置</button>
+    </div>
+     }
+</body>
+</html>
