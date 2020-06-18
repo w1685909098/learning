@@ -15,5 +15,9 @@ namespace Repository
         {
             return _user.Where(u => u.UserName == name).SingleOrDefault();
         }
+        public void Add(User user)
+        {
+            _user.Add(user);
+        }
     }
 }
