@@ -1,0 +1,48 @@
+﻿@model WebUI.Controllers.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div>
+            <label>邀请人：</label> <br />
+            @Html.TextBoxFor(m => m.Inviter.UserName)
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+        <div>
+            <label>邀请码：</label> <br />
+            @Html.TextBoxFor(m => m.Inviter.InvitingCode)
+            @Html.ValidationMessageFor(m => m.Inviter.InvitingCode)
+        </div>
+        <div>
+            <label>用户名：</label> <br />
+            @Html.TextBoxFor(m => m.UserName)
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+        <div>
+            <label>密码：</label> <br />
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <div>
+            <label>确认密码：</label> <br />
+            @Html.PasswordFor(m => m.ComfirmPassword)
+            @Html.ValidationMessageFor(m => m.ComfirmPassword)
+        </div>
+        <button type="submit">提交</button>
+        <button type="reset">重置</button>
+
+    }
+    <div>
+    </div>
+</body>
+</html>
