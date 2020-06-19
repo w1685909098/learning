@@ -1,0 +1,28 @@
+﻿@model ViewModel.Article.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @foreach (var item in Model.Items)
+    {
+        @item.PublishTime
+        @item.AuthorName
+        @item.AuthorId
+        @item.Title
+        @item.Body
+        @item.Keywords
+        @item.AgreeCount
+        @item.DisagreeCount
+    }
+    <div>
+    </div>
+</body>
+</html>

@@ -11,6 +11,10 @@ namespace Repository
     public class UserRepository
     {
         private IList<User> _user;
+        public UserRepository()
+        {
+            _user = new List<User>();
+        }
         public User GetUserByName(string name)
         {
             return _user.Where(u => u.UserName == name).SingleOrDefault();
