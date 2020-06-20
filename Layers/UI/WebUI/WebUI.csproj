@@ -189,6 +189,10 @@
       <Project>{CB5CA763-1DB9-4832-AF28-184932C46292}</Project>
       <Name>ProdService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SRV\ServiceInterface\ServiceInterface.csproj">
+      <Project>{311E2AAF-7307-4CA3-BA32-5ADB15182891}</Project>
+      <Name>ServiceInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SRV\ViewModel\ViewModel.csproj">
       <Project>{7E28E1AF-E0A1-4D83-81E2-972DDA04BF63}</Project>
       <Name>ViewModel</Name>

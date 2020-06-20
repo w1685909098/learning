@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using ViewModel.Register;
 using System.Web.Mvc;
 using ServiceInterface;
+using AutoMapper;
 
 namespace ProdService
 {
-    public class RegisterService:IRegisterService
+    public class RegisterService : BaseService, IRegisterService
     {
         public IndexModel GetByName(string name)
         {
@@ -33,18 +34,21 @@ namespace ProdService
                 return 0;
             }
 
-            if (inviter.InvitingCode!=model.Inviter.InvitingCode)
+            if (inviter.InvitingCode != model.Inviter.InvitingCode)
             {
                 //邀请人对应的邀请码不正确
                 return 0;
             }
-           
-            User register = new User
-            {
-                UserName = model.UserName,
-                Password = model.Password,
-                Inviter = inviter
-            };
+            User register = mapper.Map<User>(model);
+            //register = mapper.Map<IndexModel, User>(model, register);//全部替换  保留Id
+            #region 没有AutoMap  手动赋值
+            //User register = new User
+            //{
+            //    UserName = model.UserName,
+            //    Password = model.Password,
+            //    Inviter = inviter
+            //};
+            #endregion
             register.Register(register, inviter);
             userRepository.Add(register);
             return register.Id;

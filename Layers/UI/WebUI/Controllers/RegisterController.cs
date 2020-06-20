@@ -1,4 +1,5 @@
 ﻿using ProdService;
+using ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace WebUI.Controllers
 {
     public class RegisterController : Controller
     {
+        private IRegisterService _registerService;
+        public RegisterController()
+        {
+            _registerService = new RegisterService();
+        }
         // GET: Register
         public ActionResult Index()
         {
@@ -19,7 +25,7 @@ namespace WebUI.Controllers
         [HttpPost]
         public ActionResult Index(IndexModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) 
             {
                 return View();
             }

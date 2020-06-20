@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public  class Comment
+    public  class Comment :BaseEntity
     {
     }
 }
