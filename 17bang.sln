@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "Layers\SRV\Vie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "Layers\UI\WebUI\WebUI.csproj", "{4E215A45-1E68-45E9-9DE9-87F3A43FCFFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceInterface", "Layers\SRV\ServiceInterface\ServiceInterface.csproj", "{311E2AAF-7307-4CA3-BA32-5ADB15182891}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{4E215A45-1E68-45E9-9DE9-87F3A43FCFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E215A45-1E68-45E9-9DE9-87F3A43FCFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E215A45-1E68-45E9-9DE9-87F3A43FCFFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311E2AAF-7307-4CA3-BA32-5ADB15182891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311E2AAF-7307-4CA3-BA32-5ADB15182891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311E2AAF-7307-4CA3-BA32-5ADB15182891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311E2AAF-7307-4CA3-BA32-5ADB15182891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{CB5CA763-1DB9-4832-AF28-184932C46292} = {E5C28A57-7023-449D-9AB9-716FDB953C4E}
 		{7E28E1AF-E0A1-4D83-81E2-972DDA04BF63} = {E5C28A57-7023-449D-9AB9-716FDB953C4E}
 		{4E215A45-1E68-45E9-9DE9-87F3A43FCFFB} = {CA11A690-F87D-4BF0-ADDC-2548D4E7778F}
+		{311E2AAF-7307-4CA3-BA32-5ADB15182891} = {E5C28A57-7023-449D-9AB9-716FDB953C4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD243680-D489-48CA-B78A-12AF7FA18B77}

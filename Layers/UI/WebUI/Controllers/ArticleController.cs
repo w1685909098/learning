@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ViewModel.Article;
 
 namespace WebUI.Controllers
 {
@@ -13,9 +14,8 @@ namespace WebUI.Controllers
         public ActionResult Index(int PageIndex)
         {
             int PageSize = 10;
-            ArticleService articleService = new ArticleService();
-            articleService.GetBy(PageSize, PageIndex);
-            return View();
+           IndexModel model= new ArticleService().GetBy(PageSize, PageIndex);
+            return View(model);
         }
         public ActionResult Single(int Id)
         {

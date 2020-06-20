@@ -76,6 +76,10 @@
       <Project>{3FF9C3CB-BBAC-4229-8F72-D0FF8F00C9E6}</Project>
       <Name>Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceInterface\ServiceInterface.csproj">
+      <Project>{311E2AAF-7307-4CA3-BA32-5ADB15182891}</Project>
+      <Name>ServiceInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{7E28E1AF-E0A1-4D83-81E2-972DDA04BF63}</Project>
       <Name>ViewModel</Name>

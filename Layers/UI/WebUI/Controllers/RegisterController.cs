@@ -23,9 +23,8 @@ namespace WebUI.Controllers
             {
                 return View();
             }
-            RegisterService service = new RegisterService();
-            service.Register(model);
-            return View();
+            new RegisterService().GetRegisterId(model);
+            return View(model);
         }
     }
 

@@ -185,14 +185,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BLL\Entity\Entity.csproj">
-      <Project>{B0C15A7B-5138-4F60-879F-A632C0278157}</Project>
-      <Name>Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BLL\Repository\Repository.csproj">
-      <Project>{3FF9C3CB-BBAC-4229-8F72-D0FF8F00C9E6}</Project>
-      <Name>Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SRV\ProdService\ProdService.csproj">
       <Project>{CB5CA763-1DB9-4832-AF28-184932C46292}</Project>
       <Name>ProdService</Name>
