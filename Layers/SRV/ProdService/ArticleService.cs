@@ -1,5 +1,6 @@
 ﻿using Entity;
 using Repository;
+using ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using ViewModel.Article;
 
 namespace ProdService
 {
-    public class ArticleService
+    public class ArticleService :BaseService,IArticleService
     {
         public IndexModel GetBy(int PageSize,int PageIndex)
         {
@@ -22,18 +23,21 @@ namespace ProdService
             };
             foreach (var item in articles)
             {
-                model.Items.Add(new ArticleItemModel
-                {
-                    PublishTime = item.PublishTime,
-                    AuthorName = item.Author.UserName,
-                    Title = item.Title,
-                    Body = item.Body,
-                    Keywords=item.Keywords,
-                    CommnetCount = item.Commnets.Count,
-                    AgreeCount = item.AgreeCount,
-                    DisagreeCount=item.DisagreeCount
-
-                }) ;
+                #region 手动赋值
+                //model.Items.Add(new ArticleItemModel
+                //{
+                //    PublishTime = item.PublishTime,
+                //    AuthorName = item.Author.UserName,
+                //    Title = item.Title,
+                //    Body = item.Body,
+                //    Keywords=item.Keywords,
+                //    CommnetCount = item.Commnets.Count,
+                //    AgreeCount = item.AgreeCount,
+                //    DisagreeCount=item.DisagreeCount
+                //}) ;
+                #endregion
+                //model.Items.Add(mapper.Map<ArticleItemModel>(item));
+                model.Items = mapper.Map<IList<ArticleItemModel>>(articles);//集合自动映射
             }
             return model ;
         }

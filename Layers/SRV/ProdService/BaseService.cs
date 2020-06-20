@@ -22,6 +22,9 @@ namespace ProdService
                 .ForMember(i => i.ComfirmPassword, opt => opt.Ignore())   //忽略某一属性
                 .ReverseMap()
                 .ForMember(i => i.Id, opt => opt.NullSubstitute(0));   //null值处理
+
+                cfg.CreateMap<Article, ViewModel.Article.ArticleItemModel>()
+                .ForMember(i=>i.CommnetCount,opt=>opt.MapFrom(a=>a.Commnets.Count));
             });
 #if DEBUG
             _mapperConfiguration.AssertConfigurationIsValid();

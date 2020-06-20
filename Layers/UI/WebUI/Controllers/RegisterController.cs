@@ -12,9 +12,9 @@ namespace WebUI.Controllers
     public class RegisterController : Controller
     {
         private IRegisterService _registerService;
-        public RegisterController()
+        public RegisterController(IRegisterService registerService)
         {
-            _registerService = new RegisterService();
+            _registerService = registerService;
         }
         // GET: Register
         public ActionResult Index()
