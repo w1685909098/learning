@@ -15,13 +15,13 @@
     {
         <div>
             <label>邀请人：</label> <br />
-            @Html.TextBoxFor(m => m.Inviter.UserName)
-            @Html.ValidationMessageFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.InviterName)
+            @Html.ValidationMessageFor(m => m.InviterName)
         </div>
         <div>
             <label>邀请码：</label> <br />
-            @Html.TextBoxFor(m => m.Inviter.InvitingCode)
-            @Html.ValidationMessageFor(m => m.Inviter.InvitingCode)
+            @Html.TextBoxFor(m => m.InvitingCode)
+            @Html.ValidationMessageFor(m => m.InvitingCode)
         </div>
         <div>
             <label>用户名：</label> <br />

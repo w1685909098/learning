@@ -14,31 +14,17 @@ namespace ProdService
 {
     public class RegisterService : BaseService, IRegisterService
     {
+        UserRepository userRepository = new UserRepository();
+
         public IndexModel GetByName(string name)
         {
-            throw new NotImplementedException();
+            User user = userRepository.GetUserByName(name);
+            return mapper.Map<IndexModel>(user);
         }
 
         public int GetRegisterId(IndexModel model)
         {
-            UserRepository userRepository = new UserRepository();
-            if (userRepository.GetUserByName(model.UserName) != null)
-            {
-                //用户名已存在
-                return 0;
-            }
-            User inviter = userRepository.GetUserByName(model.Inviter.UserName);
-            if (inviter == null)
-            {
-                //邀请人不存在
-                return 0;
-            }
-
-            if (inviter.InvitingCode != model.Inviter.InvitingCode)
-            {
-                //邀请人对应的邀请码不正确
-                return 0;
-            }
+            User inviter = userRepository.GetUserByName(model.InviterName);
             User register = mapper.Map<User>(model);
             //register = mapper.Map<IndexModel, User>(model, register);//全部替换  保留Id
             #region 没有AutoMap  手动赋值
@@ -50,8 +36,8 @@ namespace ProdService
             //};
             #endregion
             register.Register(register, inviter);
-            userRepository.Add(register);
-            return register.Id;
+            return userRepository.Add(register);
+            //return register.Id;
         }
     }
 }

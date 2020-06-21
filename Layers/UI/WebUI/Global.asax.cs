@@ -24,12 +24,12 @@ namespace WebUI
             builder.RegisterControllers(typeof(MvcApplication).Assembly);  //注册controller
             builder.RegisterFilterProvider();                  //注册filter
 
-            builder.RegisterType<ProdService.RegisterService>().As<ServiceInterface.IRegisterService>();   //单个类注册
+            //builder.RegisterType<ProdService.RegisterService>().As<ServiceInterface.IRegisterService>();   //单个类注册
             builder.RegisterAssemblyTypes(typeof(ProdService.RegisterService).Assembly).AsImplementedInterfaces();   //项目集合注册
 
 
-            IContainer container= builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            IContainer container= builder.Build();  //生成container
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));   //获取接口对象
         }
     }
 }
