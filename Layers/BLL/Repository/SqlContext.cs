@@ -8,9 +8,22 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class SqlContext :DbContext
+    public class SqlContext : DbContext 
     {
-        public DbSet<BaseEntity> Entities { get; set; }
-        public DbSet<User> Users { get; set; }
+        public SqlContext() : base("unitPro")
+        {
+
+        }
+        //public DbSet<T> Entities { get; set; }
+        //public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .Property(u => u.UserName).HasColumnName("Name");
+            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
+
+        }
     }
 }
