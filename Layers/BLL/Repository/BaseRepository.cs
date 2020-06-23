@@ -11,6 +11,10 @@ namespace Repository
    public  class BaseRepository<T> where T:BaseEntity
     {
         protected DbContext context;
+        public BaseRepository()
+        {
+
+        }
         public BaseRepository(DbContext context )
         {
             this.context = context;

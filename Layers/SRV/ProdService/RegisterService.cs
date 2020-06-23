@@ -9,12 +9,13 @@ using ViewModel.Register;
 using System.Web.Mvc;
 using ServiceInterface;
 using AutoMapper;
+using System.Data.Entity;
 
 namespace ProdService
 {
     public class RegisterService : BaseService, IRegisterService
     {
-        UserRepository userRepository = new UserRepository();
+        UserRepository userRepository = new UserRepository ();
 
         public IndexModel GetByName(string name)
         {

@@ -12,6 +12,10 @@ namespace Repository
     public class UserRepository:BaseRepository<User>
     {
         //private IList<User> _user;
+        public UserRepository()
+        {
+
+        }
         public UserRepository(DbContext context):base(context)
         {
             //_user = new List<User>() 

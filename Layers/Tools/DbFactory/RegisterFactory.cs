@@ -2,6 +2,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,7 +27,7 @@ namespace DbFactory
                 UserName = "tt",
                 Password = password
             };
-            new UserRepository().Add(xx);
+            new UserRepository(  ).Add(xx);
         }
     }
 }

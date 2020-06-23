@@ -10,7 +10,17 @@ namespace WebUI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            //return View();
+            #region cookie理解
+            //HttpCookie cookie = new HttpCookie("user");
+            //cookie.Values.Add("Id", "11");
+            //cookie.Values.Add("Password", "1234");
+            //cookie.Expires = DateTime.Now.AddDays(14);
+            //cookie.Values.Clear();
+            //Response.Cookies.Add(cookie);
+            #endregion
+
+            return Redirect("/Register");
         }
 
         public ActionResult About()
