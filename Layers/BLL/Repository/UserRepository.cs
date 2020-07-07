@@ -12,10 +12,10 @@ namespace Repository
     public class UserRepository:BaseRepository<User>
     {
         //private IList<User> _user;
-        public UserRepository()
-        {
+        //public UserRepository()
+        //{
 
-        }
+        //}
         public UserRepository(DbContext context):base(context)
         {
             //_user = new List<User>() 
@@ -34,7 +34,7 @@ namespace Repository
         }
         public User GetUserByName(string name)
         {
-            return context.Set<User>().Where(u => u.UserName == name).SingleOrDefault();
+            return Entities.Where(u => u.Name == name).SingleOrDefault();
         }
         //public int Add(User user)
         //{
@@ -43,7 +43,7 @@ namespace Repository
         //}
         public int Add(User user)
         {
-            context.Set<User>().Add(user);
+            Entities.Add(user);
             context.SaveChanges();
             return user.Id;
         }

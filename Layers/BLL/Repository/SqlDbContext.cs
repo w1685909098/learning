@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class SqlContext : DbContext 
+    public class SqlDbContext : DbContext 
     {
-        public SqlContext() : base("unitPro")
+        public SqlDbContext() : base("unitPro")
         {
 
         }
@@ -20,9 +20,8 @@ namespace Repository
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>()
-                .Property(u => u.UserName).HasColumnName("Name");
-            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
+            modelBuilder.Entity<User>()/*.HasIndex(u => u.Name).IsUnique()*/;
+            modelBuilder.Entity<Article>();
 
         }
     }

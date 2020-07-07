@@ -11,23 +11,31 @@ using System.Xml.Serialization;
 
 namespace DbFactory
 {
-   internal class RegisterFactory
+    internal class RegisterFactory
     {
+        private static UserRepository userRepository;
+        static RegisterFactory()
+        {
+            userRepository = new UserRepository(Global.Context);
+        }
         internal static User xx, tt;
         public static string password = "1234";
         public static void Create()
         {
             xx = new User
             {
-                UserName = "xx",
+                //Id=1,
+                Name = "xx",
                 Password = password
             };
             tt = new User
             {
-                UserName = "tt",
+                //Id=2,
+                Name = "tt",
                 Password = password
             };
-            new UserRepository(  ).Add(xx);
+            userRepository.Add(xx);
+            userRepository.Add(tt);
         }
     }
 }

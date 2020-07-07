@@ -14,7 +14,7 @@ namespace ProdService
     {
         public IndexModel GetBy(int PageSize,int PageIndex)
         {
-            ArticleRepository articleRepository = new ArticleRepository();
+            ArticleRepository articleRepository = new ArticleRepository(context);
             //return articleRepository.GetArticles().Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
             IList<Article> articles = articleRepository.GetPaged(PageSize,PageIndex);
             IndexModel model = new IndexModel

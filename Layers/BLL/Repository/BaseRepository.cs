@@ -10,11 +10,19 @@ namespace Repository
 {
    public  class BaseRepository<T> where T:BaseEntity
     {
-        protected DbContext context;
-        public BaseRepository()
-        {
 
+        protected DbContext context;
+        protected DbSet<T> Entities
+        {
+            get
+            {
+                return context.Set<T>();
+            }
         }
+        //public BaseRepository()
+        //{
+
+        //}
         public BaseRepository(DbContext context )
         {
             this.context = context;
@@ -23,5 +31,9 @@ namespace Repository
         //{
         //    return SqlContext.Entities.Where(e=>e.na)
         //}
+        public T Find(int id)
+        {
+            return Entities.Find(id);
+        }
     }
 }
