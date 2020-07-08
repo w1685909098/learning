@@ -45,7 +45,7 @@ namespace WebUI.Controllers
             {
                 return View();
             }
-            new RegisterService().GetRegisterId(model);
+            _service.GetRegisterId(model);
             return View(model);
         }
     }

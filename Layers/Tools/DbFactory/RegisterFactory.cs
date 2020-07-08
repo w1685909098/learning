@@ -26,13 +26,15 @@ namespace DbFactory
             {
                 //Id=1,
                 Name = "xx",
-                Password = password
+                Password = password,
+                InvitingCode = "1"
             };
             tt = new User
             {
                 //Id=2,
                 Name = "tt",
-                Password = password
+                Password = password,
+                InvitingCode = "2"
             };
             userRepository.Add(xx);
             userRepository.Add(tt);

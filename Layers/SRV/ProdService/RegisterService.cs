@@ -39,7 +39,8 @@ namespace ProdService
             //    Inviter = inviter
             //};
             #endregion
-            register.Register(register, inviter);
+            register.Inviter = inviter;
+            register.Register(register);
             return userRepository.Add(register);
             //return register.Id;
         }

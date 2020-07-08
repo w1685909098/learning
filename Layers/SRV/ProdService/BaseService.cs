@@ -27,7 +27,8 @@ namespace ProdService
                 .ForMember(i => i.InvitingCode, opt => opt.MapFrom(u => u./*Inviter.*/InvitingCode))
                 .ForMember(i => i.ComfirmPassword, opt => opt.Ignore())   //忽略某一属性
                 .ReverseMap()
-                .ForMember(i => i.Id, opt => opt.NullSubstitute(0));   //null值处理
+                .ForMember(u => u.Id, opt => opt.NullSubstitute(0))   //null值处理
+                .ForMember(u=>u.InvitingCode,opt=>opt.Ignore());
 
                 cfg.CreateMap<Article, ViewModel.Article.ArticleItemModel>()
                 .ForMember(i=>i.AuthorName,opt=>opt.MapFrom(a=>a.Author.Name))
