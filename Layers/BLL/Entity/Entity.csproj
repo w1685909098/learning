@@ -47,17 +47,10 @@
     <Compile Include="BMoney.cs" />
     <Compile Include="BPoint.cs" />
     <Compile Include="Comment.cs" />
-    <Compile Include="InvitingCodeRandom.cs" />
     <Compile Include="Keyword.cs" />
     <Compile Include="Problem.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Extension\Extension.csproj">
-      <Project>{A850A357-8C29-4586-922A-8111C0E86045}</Project>
-      <Name>Extension</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
