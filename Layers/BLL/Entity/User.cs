@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extension;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace Entity
         {
             register.Credit += 10;
             register.Inviter.Credit += new Random().Next(3) + 2;
+            //register.InvitingCode = InvitingCodeExtension.GetInvitingCodeExtension();
+            register.InvitingCode = InvitingCodeRandom.GetInvitingCode();
         }
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0C15A7B-5138-4F60-879F-A632C0278157}</ProjectGuid>
+    <ProjectGuid>{A850A357-8C29-4586-922A-8111C0E86045}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entity</RootNamespace>
-    <AssemblyName>Entity</AssemblyName>
+    <RootNamespace>Extension</RootNamespace>
+    <AssemblyName>Extension</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,22 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Article.cs" />
-    <Compile Include="BaseEntity.cs" />
-    <Compile Include="BMoney.cs" />
-    <Compile Include="BPoint.cs" />
-    <Compile Include="Comment.cs" />
-    <Compile Include="InvitingCodeRandom.cs" />
-    <Compile Include="Keyword.cs" />
-    <Compile Include="Problem.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="InvitingCodeExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Extension\Extension.csproj">
-      <Project>{A850A357-8C29-4586-922A-8111C0E86045}</Project>
-      <Name>Extension</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
