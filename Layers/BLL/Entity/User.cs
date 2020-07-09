@@ -20,6 +20,8 @@ namespace Entity
         {
             register.Credit += 10;
             register.Inviter.Credit += new Random().Next(3) + 2;
+            register.InvitingCode =  RandomString.GetRandomCode();
+            //register.InvitingCode = new Random().Next(9999).ToString(); //这样不能保证为四位数
         }
     }
 }
