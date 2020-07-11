@@ -13,16 +13,30 @@
 <body>
     @foreach (var item in Model.Items)
     {
-        @item.PublishTime
-        @item.AuthorName
-        @item.AuthorId
-        @item.Title
-        @item.Body
-        @item.Keywords
-        @item.AgreeCount
-        @item.DisagreeCount
-    }
-    <div>
-    </div>
+        <div>
+                @item.PublishTime.ToString("yyyy年mm月dd日 hh时mm分ss秒")
+                <a href="@item.AuthorId">@item.AuthorName</a>
+        </div>
+        <div>
+            <a href="@item.Id">@item.Title</a>
+        </div>
+        <textarea rows="5">
+             @item.Body
+        </textarea>
+        <div>
+            <div style="float:left">
+                @item.Keywords
+            </div>
+            <div style="float:right">
+                @item.AgreeCount
+            </div>
+            <div style="float:right">
+                @item.DisagreeCount
+            </div>
+        </div>
+        <hr style="clear:both" />
+      }
+            <div>
+            </div>
 </body>
 </html>

@@ -25,7 +25,8 @@ namespace Repository
         }
         public IList<Article> GetPaged(int PageSize, int PageIndex)
         {
-            return Entities.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
+            return Entities.OrderBy(e => e.PublishTime).
+                Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
         }
         public int AddArticle(Article article)
         {

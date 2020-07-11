@@ -27,17 +27,17 @@ namespace DbFactory
                 //Id=1,
                 Name = "xx",
                 Password = password,
-                InvitingCode = "1"
+                InvitingCode = RandomString.GetRandomCode()
             };
             tt = new User
             {
                 //Id=2,
                 Name = "tt",
                 Password = password,
-                InvitingCode = "2"
+                InvitingCode = RandomString.GetRandomCode()
             };
-            userRepository.Add(xx);
-            userRepository.Add(tt);
+            userRepository.AddUser(xx);
+            userRepository.AddUser(tt);
         }
     }
 }

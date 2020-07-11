@@ -20,7 +20,8 @@ namespace WebUI.Controllers
             //Response.Cookies.Add(cookie);
             #endregion
 
-            return Redirect("/Register");
+            //return Redirect("/Register");
+            return Redirect("/Article");
         }
 
         public ActionResult About()

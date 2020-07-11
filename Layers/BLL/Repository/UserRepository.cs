@@ -41,7 +41,7 @@ namespace Repository
         //    _user.Add(user);
         //    return user.Id;
         //}
-        public int Add(User user)
+        public int AddUser(User user)
         {
             Entities.Add(user);
             context.SaveChanges();

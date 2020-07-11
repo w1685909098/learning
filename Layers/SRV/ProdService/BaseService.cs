@@ -31,8 +31,17 @@ namespace ProdService
                 .ForMember(u=>u.InvitingCode,opt=>opt.Ignore());
 
                 cfg.CreateMap<Article, ViewModel.Article.ArticleItemModel>()
-                .ForMember(i=>i.AuthorName,opt=>opt.MapFrom(a=>a.Author.Name))
-                .ForMember(i => i.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count));
+                 .ForMember(i => i.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
+                 .ForMember(i => i.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
+                 .ForMember(i => i.AuthorId, opt => opt.MapFrom(a => a.Author.Id))
+                 .ForMember(i => i.Title, opt => opt.MapFrom(a => a.Title))
+                 .ForMember(i => i.Id, opt => opt.MapFrom(a => a.Id))
+                 .ForMember(i => i.Body, opt => opt.MapFrom(a => a.Body))
+                 .ForMember(i => i.Keywords, opt => opt.MapFrom(a => a.Keywords))
+                .ForMember(i => i.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count))
+               .ForMember(i => i.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
+               .ForMember(i => i.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount))
+               /* .ReverseMap()*/;
             });
 #if DEBUG
             _mapperConfiguration.AssertConfigurationIsValid();

@@ -35,5 +35,16 @@ namespace Repository
         {
             return Entities.Find(id);
         }
+        public int Add(T source)
+        {
+             Entities.Add(source);
+            context.SaveChanges();
+            return source.Id;
+        }
+        public void Delete(T source)
+        {
+            Entities.Remove(source);
+            context.SaveChanges();
+        }
     }
 }

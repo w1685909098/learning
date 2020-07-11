@@ -9,6 +9,7 @@ namespace Entity
     public class Article :BaseEntity
     {
         public DateTime PublishTime { get; set; }
+        public int UserId { get; set; }
         public User Author { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
