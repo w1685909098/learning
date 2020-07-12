@@ -24,14 +24,20 @@
              @item.Body
         </textarea>
         <div>
+            <span>关键字：</span>
             <div style="float:left">
-                @item.Keywords
+                @{ 
+                    foreach (var keyword in @item.Keywords)
+                    {
+                        <span>@keyword</span>
+                    }
+                }
             </div>
             <div style="float:right">
-                @item.AgreeCount
+                <span>点赞数量：</span>@item.AgreeCount
             </div>
             <div style="float:right">
-                @item.DisagreeCount
+                <span>点踩数量：</span>@item.DisagreeCount
             </div>
         </div>
         <hr style="clear:both" />
