@@ -20,13 +20,13 @@ namespace ProdService
             userRepository = new UserRepository(context);
         }
 
-        public IndexModel GetByName(string name)
+        public UserModel GetByName(string name)
         {
             User user = userRepository.GetUserByName(name);
-            return mapper.Map<IndexModel>(user);
+            return mapper.Map<UserModel>(user);
         }
 
-        public int GetRegisterId(IndexModel model)
+        public int GetRegisterId(UserModel model)
         {
             User inviter = userRepository.GetUserByName(model.InviterName);
             User register = mapper.Map<User>(model);

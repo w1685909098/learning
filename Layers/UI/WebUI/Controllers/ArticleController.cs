@@ -16,7 +16,7 @@ namespace WebUI.Controllers
         public ActionResult Index(int PageIndex = 1)
         {
             int PageSize = 10;
-            IndexModel model = new ArticleService().GetBy(PageSize, PageIndex);
+            ArticleModel model = new ArticleService().GetBy(PageSize, PageIndex);
             return View(model);
         }
         public ActionResult Single(int Id)

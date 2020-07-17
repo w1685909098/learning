@@ -22,6 +22,7 @@ namespace Repository
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>()/*.HasIndex(u => u.Name).IsUnique()*/;
             modelBuilder.Entity<Article>();
+            modelBuilder.Entity<Keyword>();
 
         }
     }

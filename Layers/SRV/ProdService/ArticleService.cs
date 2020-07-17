@@ -12,11 +12,16 @@ namespace ProdService
 {
     public class ArticleService : BaseService, IArticleService
     {
-        public IndexModel GetBy(int PageSize, int PageIndex)
+        private ArticleRepository _articleRepository;
+        public ArticleService()
         {
-            ArticleRepository articleRepository = new ArticleRepository(context);
+            _articleRepository = new ArticleRepository(context);
+        }
+        public ArticleModel GetBy(int PageSize, int PageIndex)
+        {
+            //ArticleRepository articleRepository = new ArticleRepository(context);
             //return articleRepository.GetArticles().Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
-            IList<Article> articles = articleRepository.GetPaged(PageSize, PageIndex);
+            IList<Article> articles = _articleRepository.GetPaged(PageSize, PageIndex);
             //IndexModel model = new IndexModel
             //{
             //    Items = new List<ArticleItemModel>()
@@ -39,7 +44,7 @@ namespace ProdService
             //    //#endregion
             //    model.Items.Add(mapper.Map<ArticleItemModel>(item));
             //}
-            IndexModel model = new IndexModel
+            ArticleModel model = new ArticleModel
             {
                 Items = new List<ArticleItemModel>()
             };

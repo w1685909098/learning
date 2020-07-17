@@ -24,6 +24,7 @@ namespace DbFactory
                 database.Create();
                 RegisterFactory.Create();
                 ArticleFactory.Create();
+                KeywordFactory.Create();
             }
 
         }

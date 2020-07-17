@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Register
 {
-    public class IndexModel
+    public class UserModel
     {
         [Required]
         public string InviterName { get; set; }

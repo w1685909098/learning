@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using ViewModel.Keyword;
 
 namespace ProdService
 {
@@ -21,7 +22,7 @@ namespace ProdService
             _mapperConfiguration = new MapperConfiguration(cfg =>
             {
                 //cfg.CreateMap<User, ViewModel.Register.IndexModel>().ReverseMap();
-                cfg.CreateMap<User, ViewModel.Register.IndexModel>()  //配置映射     TSource（左）映射到TDestition（右）
+                cfg.CreateMap<User, ViewModel.Register.UserModel>()  //配置映射     TSource（左）映射到TDestition（右）
                 .ForMember(i => i.UserName, opt => opt.MapFrom(u => u.Name))  //具体的映射   TDestition（左）   TSource（右）
                 .ForMember(i => i.InviterName, opt => opt.MapFrom(u => u.Inviter.Name))
                 .ForMember(i => i.InvitingCode, opt => opt.MapFrom(u => u./*Inviter.*/InvitingCode))
@@ -42,6 +43,7 @@ namespace ProdService
                .ForMember(i => i.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
                .ForMember(i => i.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount))
                /* .ReverseMap()*/;
+                cfg.CreateMap<Keyword, ViewModel.Keyword.KeywordModel>();
             });
 #if DEBUG
             _mapperConfiguration.AssertConfigurationIsValid();

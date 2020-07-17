@@ -42,9 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Article\IndexModel.cs" />
+    <Compile Include="Article\ArticleModel.cs" />
+    <Compile Include="Keyword\KeywordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Register\IndexModel.cs" />
+    <Compile Include="Register\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\Entity\Entity.csproj">
@@ -52,5 +53,6 @@
       <Name>Entity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

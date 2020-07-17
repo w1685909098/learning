@@ -23,14 +23,14 @@ namespace WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(IndexModel model)
+        public ActionResult Index(UserModel model)
         {
             if (_service.GetByName(model.UserName) != null)
             {
                 ModelState.AddModelError(nameof(model.UserName), "* 用户名已存在，请重新输入" );
                 return View(model);
             }
-            IndexModel inviter = _service.GetByName(model.InviterName);
+            UserModel inviter = _service.GetByName(model.InviterName);
             if (inviter == null)
             {
                 ModelState.AddModelError(nameof(model.InviterName), "* 邀请人不存在，请重新输入");

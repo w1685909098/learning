@@ -10,12 +10,12 @@ namespace MockService
 {
     public class RegisterService : IRegisterService
     {
-        public IndexModel GetByName(string name)
+        public UserModel GetByName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public int GetRegisterId(IndexModel model)
+        public int GetRegisterId(UserModel model)
         {
             throw new NotImplementedException();
         }

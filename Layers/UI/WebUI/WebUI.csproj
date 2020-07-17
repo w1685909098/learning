@@ -154,6 +154,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KeywordController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Filter\NeedLogOnFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -173,6 +174,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Views\Article\_Articles.cshtml" />
+    <Content Include="Views\Keyword\_Items.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

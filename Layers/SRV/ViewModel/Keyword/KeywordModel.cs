@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity
+namespace ViewModel.Keyword
 {
-   public  class Keyword :BaseEntity
+   public  class KeywordModel
     {
         public string Name { get; set; }
         public int Used { get; set; }
-        public DateTime CreateTime { get; set; }
+
     }
 }

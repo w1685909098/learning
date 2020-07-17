@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModel.Register;
+using ViewModel.Keyword;
 
 namespace ServiceInterface
 {
-    public interface IRegisterService
+   public  interface IKeywordService
     {
-        UserModel GetByName(string name);
-        int GetRegisterId(UserModel model);
+        IList<KeywordModel> GetRankedKeywordModels(int maxCount);
     }
 }

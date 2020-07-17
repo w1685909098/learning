@@ -1,4 +1,4 @@
-﻿@model ViewModel.Article.IndexModel
+﻿@model ViewModel.Article.ArticleModel
 @{
     Layout = null;
 }
@@ -16,8 +16,8 @@
         foreach (var item in Model.Items)
         {
                @Html.Partial("_Articles",item)
-
         }
+        @Html.Action("_Items","Keyword")
     }
     <div>
     </div>
