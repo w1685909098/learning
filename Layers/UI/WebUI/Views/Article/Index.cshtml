@@ -11,38 +11,15 @@
     <title>Index</title>
 </head>
 <body>
-    @foreach (var item in Model.Items)
+    @using (Html.BeginForm())
     {
-        <div>
-                @item.PublishTime.ToString("yyyy年mm月dd日 hh时mm分ss秒")
-                <a href="@item.AuthorId">@item.AuthorName</a>
-        </div>
-        <div>
-            <a href="@item.Id">@item.Title</a>
-        </div>
-        <textarea rows="5">
-             @item.Body
-        </textarea>
-        <div>
-            <span>关键字：</span>
-            <div style="float:left">
-                @{ 
-                    foreach (var keyword in @item.Keywords)
-                    {
-                        <span>@keyword</span>
-                    }
-                }
-            </div>
-            <div style="float:right">
-                <span>点赞数量：</span>@item.AgreeCount
-            </div>
-            <div style="float:right">
-                <span>点踩数量：</span>@item.DisagreeCount
-            </div>
-        </div>
-        <hr style="clear:both" />
-      }
-            <div>
-            </div>
+        foreach (var item in Model.Items)
+        {
+               @Html.Partial("_Articles",item)
+
+        }
+    }
+    <div>
+    </div>
 </body>
 </html>

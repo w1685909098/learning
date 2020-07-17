@@ -71,7 +71,7 @@ namespace ProdService
         {
             get
             {
-                HttpCookie cookie = HttpContext.Current.Response.Cookies[""];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["user"];
                 if (cookie==null)
                 {
                     return null;
