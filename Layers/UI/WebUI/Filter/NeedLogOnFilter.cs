@@ -11,6 +11,11 @@ namespace WebUI.Filter
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             base.OnAuthorization(filterContext);
+            HttpCookie cookie = filterContext.RequestContext.HttpContext.Request.Cookies["user"];
+            if (cookie==null)
+            {
+                filterContext.Result = new RedirectResult("/Log/On"); //重定向问题
+            }
         }
       
     }

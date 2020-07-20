@@ -19,7 +19,7 @@ namespace Entity
 
         public int ArticleId { get; set; }
         public IList<Article> Articles { get; set; }
-        public void Register(User register)
+        public static void Register(User register)  //考虑使用静态还是实例       应该使用静态由类进行调用，否则会出现xx注册tt
         {
             register.Credit += 10;
             register.Inviter.Credit += new Random().Next(3) + 2;

@@ -8,6 +8,7 @@ using ViewModel.Keyword;
 
 namespace WebUI.Controllers
 {
+    [ChildActionOnly]
     public class KeywordController : Controller
     {
         private IKeywordService _keywordService;

@@ -23,7 +23,7 @@ namespace ViewModel.Article
         public string Title { get; set; }
         public int Id { get; set; }
         public string Body { get; set; }
-        public IList<KeywordModel> Keywords { get; set; }
+        public IList<KeywordModel> KeywordModels { get; set; }
         public int CommnetCount { get; set; }
         public int AgreeCount { get; set; }
         public int DisagreeCount { get; set; }
