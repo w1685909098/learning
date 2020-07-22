@@ -9,7 +9,7 @@ using ViewModel.Article;
 
 namespace WebUI.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : BaseController
     {
         int PageIndex = 1;
         // GET: Article

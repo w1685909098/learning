@@ -1,4 +1,5 @@
 ﻿using ProdService;
+using ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace WebUI.Filter
 {
     public class ContextPerRequest:ActionFilterAttribute
     {
+        public IBaseService BaseService { get; set; }  //属性进行依赖注入
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
@@ -16,11 +18,11 @@ namespace WebUI.Filter
             {
                 if (filterContext.Exception==null)
                 {
-                    new BaseService().CommitTrans();
+                    BaseService.CommitTrans();
                 }
                 else
                 {
-                    new BaseService().RollbackTrans();
+                    BaseService.RollbackTrans();
                 }
             }
         }

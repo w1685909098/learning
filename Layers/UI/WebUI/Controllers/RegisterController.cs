@@ -2,6 +2,7 @@
 using ServiceInterface;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,7 +10,7 @@ using ViewModel.Register;
 
 namespace WebUI.Controllers
 {
-    public class RegisterController : Controller
+    public class RegisterController : BaseController
     {
         private IRegisterService _service;
         public RegisterController(IRegisterService registerService)
@@ -19,7 +20,8 @@ namespace WebUI.Controllers
         // GET: Register
         public ActionResult Index()
         {
-            
+            ViewBag.connectionString = ConfigurationManager.ConnectionStrings[0].Name;
+            throw new Exception();
             return View();
         }
         [HttpPost]

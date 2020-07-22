@@ -27,6 +27,7 @@ namespace ProdService
                 //cfg.CreateMap<User, ViewModel.Register.IndexModel>().ReverseMap();
                 cfg.CreateMap<User, ViewModel.Register.UserModel>()  //配置映射     TSource（左）映射到TDestition（右）
                 .ForMember(i => i.UserName, opt => opt.MapFrom(u => u.Name))  //具体的映射   TDestition（左）   TSource（右）
+                .ForMember(i=>i.Password,opt=>opt.MapFrom(u=>u.Password))
                 .ForMember(i => i.InviterName, opt => opt.MapFrom(u => u.Inviter.Name))
                 .ForMember(i => i.InvitingCode, opt => opt.MapFrom(u => u./*Inviter.*/InvitingCode))
                 .ForMember(i => i.ComfirmPassword, opt => opt.Ignore())   //忽略某一属性
@@ -102,7 +103,16 @@ namespace ProdService
         }
         public void RollbackTrans()
         {
-
+            using (SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"])
+            {
+                if (currentContext != null)
+                {
+                    using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
+                    {
+                            transaction.Rollback();
+                    }
+                } //else nothing
+            }
         }
         protected SqlDbContext context
         {

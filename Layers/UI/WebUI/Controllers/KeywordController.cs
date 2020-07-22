@@ -9,7 +9,7 @@ using ViewModel.Keyword;
 namespace WebUI.Controllers
 {
     [ChildActionOnly]
-    public class KeywordController : Controller
+    public class KeywordController : BaseController
     {
         private IKeywordService _keywordService;
         public KeywordController(IKeywordService keywordService)
