@@ -13,7 +13,7 @@
 <body>
     @using (Html.BeginForm())
     {
-    <h1>数据库连接:@ViewBag.connectionString</h1>
+        <h1>数据库连接:@ViewBag.connectionString</h1>
         <div>
             <label>邀请人：</label> <br />
             @Html.TextBoxFor(m => m.InviterName)
@@ -45,5 +45,8 @@
     }
     <div>
     </div>
-</body>
+    <a href="~/Image/一起帮logo.jpg">一起帮logo</a>   @*href的复习   链接图片*@
+    <a href="~/Image/源栈上课啦.jpg" download="源栈上课啦">源栈上课啦</a>   下@*载图片  download后面的为下载文件名字*@
+    <a href="~/Shared">shared文件</a>   @*绝对路径的controller 里面action  返回文件的下载*@
+</body> 
 </html>

@@ -157,6 +157,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KeywordController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Filter\ContextPerRequest.cs" />
     <Compile Include="Filter\NeedLogOnFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -173,8 +174,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\一起帮logo.jpg" />
+    <Content Include="Image\源栈上课啦.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="TrainUpFile.txt" />
     <Content Include="Views\Article\_Articles.cshtml" />
     <Content Include="Views\Keyword\_Items.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />

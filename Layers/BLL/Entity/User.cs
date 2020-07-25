@@ -19,12 +19,18 @@ namespace Entity
 
         public int ArticleId { get; set; }
         public IList<Article> Articles { get; set; }
-        public static void Register(User register)  //考虑使用静态还是实例       应该使用静态由类进行调用，否则会出现xx注册tt
+        //public static void Register(User register)  //考虑使用静态还是实例  应该使用静态由类进行调用，否则会出现xx注册tt
+        //{
+        //    register.Credit += 10;
+        //    register.Inviter.Credit += new Random().Next(3) + 2;
+        //    register.InvitingCode = RandomString.GetRandomCode();
+        //    //register.InvitingCode = new Random().Next(9999).ToString(); //这样不能保证为四位数
+        //}
+        public void Register()   //考虑到能实例就不要静态
         {
-            register.Credit += 10;
-            register.Inviter.Credit += new Random().Next(3) + 2;
-            register.InvitingCode = RandomString.GetRandomCode();
-            //register.InvitingCode = new Random().Next(9999).ToString(); //这样不能保证为四位数
+            Credit += 10;
+            InvitingCode = RandomString.GetRandomCode();
+            Inviter.BMoney += new Random().Next(2, 5);
         }
     }
 }

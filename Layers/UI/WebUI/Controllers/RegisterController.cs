@@ -21,7 +21,7 @@ namespace WebUI.Controllers
         public ActionResult Index()
         {
             ViewBag.connectionString = ConfigurationManager.ConnectionStrings[0].Name;
-            throw new Exception();
+            //throw new Exception();
             return View();
         }
         [HttpPost]

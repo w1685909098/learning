@@ -41,7 +41,8 @@ namespace ProdService
             #endregion
             register.Inviter = inviter;
             //register.Register(register);  //实例方法
-            User.Register(register);  //静态方法
+            //User.Register();  //静态方法
+            register.Register();  
             return userRepository.AddUser(register);
             //return register.Id;
         }
