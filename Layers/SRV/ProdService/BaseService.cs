@@ -16,7 +16,7 @@ using ViewModel.Register;
 
 namespace ProdService
 {
-    public class BaseService :IBaseService
+    public class BaseService : IBaseService
     {
         private static MapperConfiguration _mapperConfiguration;
         static BaseService()
@@ -26,11 +26,12 @@ namespace ProdService
             {
                 //cfg.CreateMap<User, ViewModel.Register.IndexModel>().ReverseMap();
                 cfg.CreateMap<User, ViewModel.Register.UserModel>()  //配置映射     TSource（左）映射到TDestition（右）
-                .ForMember(i => i.UserName, opt => opt.MapFrom(u => u.Name))  //具体的映射   TDestition（左）   TSource（右）
-                .ForMember(i=>i.Password,opt=>opt.MapFrom(u=>u.Password))
-                .ForMember(i => i.InviterName, opt => opt.MapFrom(u => u.Inviter.Name))
-                .ForMember(i => i.InvitingCode, opt => opt.MapFrom(u => u./*Inviter.*/InvitingCode))
-                .ForMember(i => i.ComfirmPassword, opt => opt.Ignore())   //忽略某一属性
+                .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))  //具体的映射   TDestition（左）   TSource（右）
+                .ForMember(m => m.Password, opt => opt.MapFrom(u => u.Password))
+                .ForMember(m => m.InviterName, opt => opt.MapFrom(u => u.Inviter.Name))
+                .ForMember(m => m.InvitingCode, opt => opt.MapFrom(u => u./*Inviter.*/InvitingCode))
+                .ForMember(m => m.ComfirmPassword, opt => opt.Ignore())   //忽略某一属性
+                .ForMember(m => m.Captcha, opt => opt.Ignore())   //忽略验证码
                 .ReverseMap()
                 .ForMember(u => u.Id, opt => opt.NullSubstitute(0))   //null值处理
                 .ForMember(u => u.InvitingCode, opt => opt.Ignore());
@@ -109,7 +110,7 @@ namespace ProdService
                 {
                     using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
                     {
-                            transaction.Rollback();
+                        transaction.Rollback();
                     }
                 } //else nothing
             }
@@ -121,8 +122,15 @@ namespace ProdService
                 SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"];
                 if (currentContext == null)
                 {
+                    #region 自己的理解  每次 HttpContext.Current.Items["context"]  都为null
+                    //currentContext = new SqlDbContext();
+                    //currentContext.Database.BeginTransaction();//开启事务
+                    //HttpContext.Current.Items["context"] = currentContext;
+                    #endregion
+
                     currentContext = new SqlDbContext();
                     currentContext.Database.BeginTransaction();//开启事务
+                    HttpContext.Current.Items["context"] = currentContext;
                 } //else nothing
                 return currentContext;
             }

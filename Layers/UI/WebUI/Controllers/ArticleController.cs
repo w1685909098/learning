@@ -1,4 +1,5 @@
 ﻿using ProdService;
+using ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,16 @@ namespace WebUI.Controllers
     public class ArticleController : BaseController
     {
         int PageIndex = 1;
+        private IArticleService _articleService;
+        public ArticleController(IArticleService articleService)
+        {
+            _articleService = articleService;
+        }
         // GET: Article
         public ActionResult Index(int PageIndex = 1)
         {
             int PageSize = 10;
-            ArticleModel model = new ArticleService().GetBy(PageSize, PageIndex);
+            ArticleModel model = _articleService.GetByPaged(PageSize, PageIndex);
             return View(model);
         }
         public ActionResult Single(int Id)

@@ -14,7 +14,7 @@ namespace ProdService
 {
     public class RegisterService : BaseService, IRegisterService
     {
-      private  UserRepository userRepository  ;
+        private UserRepository userRepository;
         public RegisterService()
         {
             userRepository = new UserRepository(context);
@@ -42,7 +42,7 @@ namespace ProdService
             register.Inviter = inviter;
             //register.Register(register);  //实例方法
             //User.Register();  //静态方法
-            register.Register();  
+            register.Register();
             return userRepository.AddUser(register);
             //return register.Id;
         }

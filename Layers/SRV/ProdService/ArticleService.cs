@@ -17,7 +17,7 @@ namespace ProdService
         {
             _articleRepository = new ArticleRepository(context);
         }
-        public ArticleModel GetBy(int PageSize, int PageIndex)
+        public ArticleModel GetByPaged(int PageSize, int PageIndex)
         {
             //ArticleRepository articleRepository = new ArticleRepository(context);
             //return articleRepository.GetArticles().Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();

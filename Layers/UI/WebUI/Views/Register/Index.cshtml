@@ -39,6 +39,12 @@
             @Html.PasswordFor(m => m.ComfirmPassword)
             @Html.ValidationMessageFor(m => m.ComfirmPassword)
         </div>
+        <div>
+            <label>验证码：</label><br />
+            @Html.TextBoxFor(m=>m.Captcha)
+            @Html.ValidationMessageFor(m=>m.Captcha)
+            <img src="~/Shared/Captcha" />   <a href="">看不清楚？</a>
+        </div>
         <button type="submit">提交</button>
         <button type="reset">重置</button>
 
@@ -46,7 +52,7 @@
     <div>
     </div>
     <a href="~/Image/一起帮logo.jpg">一起帮logo</a>   @*href的复习   链接图片*@
-    <a href="~/Image/源栈上课啦.jpg" download="源栈上课啦">源栈上课啦</a>   下@*载图片  download后面的为下载文件名字*@
-    <a href="~/Shared">shared文件</a>   @*绝对路径的controller 里面action  返回文件的下载*@
-</body> 
+    <a href="~/Image/源栈上课啦.jpg" download="源栈上课啦">源栈上课啦</a>   @*下载图片  download后面的为下载文件名字*@
+    <a href="~/Shared/Captcha">shared文件</a>   @*绝对路径的controller 里面action  返回文件的下载*@
+</body>
 </html>

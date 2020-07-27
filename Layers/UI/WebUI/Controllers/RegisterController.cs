@@ -43,6 +43,10 @@ namespace WebUI.Controllers
                 ModelState.AddModelError(nameof(model.InvitingCode), "* 邀请人对应的邀请码不正确，请重新输入");
                 return View(model);
             }
+            if (Session["captcha"].ToString() != model.Captcha)
+            {
+                ModelState.AddModelError(nameof(model.Captcha), "* 验证码不正确，请重新输入");
+            }
             if (!ModelState.IsValid) 
             {
                 return View();
