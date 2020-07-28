@@ -26,6 +26,7 @@ namespace ProdService
             {
                 //cfg.CreateMap<User, ViewModel.Register.IndexModel>().ReverseMap();
                 cfg.CreateMap<User, ViewModel.Register.UserModel>()  //配置映射     TSource（左）映射到TDestition（右）
+                .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))  //具体的映射   TDestition（左）   TSource（右）
                 .ForMember(m => m.Password, opt => opt.MapFrom(u => u.Password))
                 .ForMember(m => m.InviterName, opt => opt.MapFrom(u => u.Inviter.Name))
@@ -37,18 +38,25 @@ namespace ProdService
                 .ForMember(u => u.InvitingCode, opt => opt.Ignore());
 
                 cfg.CreateMap<Article, ViewModel.Article.ArticleItemModel>()
-                 .ForMember(i => i.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
-                 .ForMember(i => i.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
-                 .ForMember(i => i.AuthorId, opt => opt.MapFrom(a => a.Author.Id))
-                 .ForMember(i => i.Title, opt => opt.MapFrom(a => a.Title))
-                 .ForMember(i => i.Id, opt => opt.MapFrom(a => a.Id))
-                 .ForMember(i => i.Body, opt => opt.MapFrom(a => a.Body))
-                 .ForMember(i => i.KeywordModels, opt => opt.MapFrom(a => a.Keywords))
-                .ForMember(i => i.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count))
-               .ForMember(i => i.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
-               .ForMember(i => i.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount))
-               /* .ReverseMap()*/;
+                 .ForMember(m => m.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
+                 .ForMember(m => m.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
+                 .ForMember(m => m.AuthorId, opt => opt.MapFrom(a => a.Author.Id))
+                 .ForMember(m => m.Title, opt => opt.MapFrom(a => a.Title))
+                 .ForMember(m => m.Id, opt => opt.MapFrom(a => a.Id))
+                 .ForMember(m => m.Body, opt => opt.MapFrom(a => a.Body))
+                 .ForMember(m => m.KeywordModels, opt => opt.MapFrom(a => a.Keywords))
+                 .ForMember(m => m.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count))
+                 .ForMember(m => m.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
+                 .ForMember(m => m.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount))
+              /* .ReverseMap()*/;
                 cfg.CreateMap<Keyword, ViewModel.Keyword.KeywordModel>();
+                cfg.CreateMap<User, ViewModel.LogOn.LogOnModel>()
+                .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
+                .ForMember(m => m.UserName,opt=>opt.MapFrom(u=>u.Name))
+                .ForMember(m=>m.Password,opt=>opt.MapFrom(u=>u.Password))
+                .ForMember(m=>m.Captcha,opt=>opt.Ignore())
+                 .ReverseMap()
+                 ;
             });
 #if DEBUG
             _mapperConfiguration.AssertConfigurationIsValid();

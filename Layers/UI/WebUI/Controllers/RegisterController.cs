@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ViewModel.Register;
+using WebUI.Helper;
 
 namespace WebUI.Controllers
 {
@@ -49,9 +50,10 @@ namespace WebUI.Controllers
             }
             if (!ModelState.IsValid) 
             {
-                return View();
+                return View(model);
             }
             _service.GetRegisterId(model);
+            CookieHelper.AddCookie((int)model.UserId,model.Password);
             return View(model);
         }
     }

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Article\ArticleModel.cs" />
     <Compile Include="Keyword\KeywordModel.cs" />
+    <Compile Include="LogOn\LogOnModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\UserModel.cs" />
   </ItemGroup>

@@ -10,6 +10,7 @@ namespace ViewModel.Register
 {
     public class UserModel
     {
+        public int? UserId { get; set; }
         [Required]
         public string InviterName { get; set; }
         [Required]

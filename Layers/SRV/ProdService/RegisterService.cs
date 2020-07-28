@@ -43,7 +43,8 @@ namespace ProdService
             //register.Register(register);  //实例方法
             //User.Register();  //静态方法
             register.Register();
-            return userRepository.AddUser(register);
+            model.UserId= userRepository.AddUser(register);
+            return (int)model.UserId;
             //return register.Id;
         }
     }
