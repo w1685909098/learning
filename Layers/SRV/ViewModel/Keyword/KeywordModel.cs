@@ -8,6 +8,7 @@ namespace ViewModel.Keyword
 {
    public  class KeywordModel
     {
+        public int? Id { get; set; }
         public string Name { get; set; }
         public int Used { get; set; }
 

@@ -27,7 +27,7 @@ namespace DbFactory
                 //Id=1,
                 Name = "xx",
                 Password = password,
-                InvitingCode = RandomString.GetRandomCode()
+                InvitingCode = "1111"
             };
             tt = new User
             {

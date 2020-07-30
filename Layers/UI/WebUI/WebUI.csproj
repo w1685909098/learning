@@ -157,6 +157,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KeywordController.cs" />
     <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\PersonalInformationController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Filter\ContextPerRequest.cs" />
@@ -185,6 +186,7 @@
     <Content Include="Views\Keyword\_Items.cshtml" />
     <Content Include="Views\Log\On.cshtml" />
     <Content Include="Views\Log\Off.cshtml" />
+    <Content Include="Views\PersonalInformation\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

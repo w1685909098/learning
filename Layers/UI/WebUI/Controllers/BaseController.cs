@@ -10,6 +10,6 @@ namespace WebUI.Controllers
     [ContextPerRequest]
     public class BaseController : Controller
     {
-       
+       //public int? Id { get; set; }
     }
 }

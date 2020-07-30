@@ -72,41 +72,45 @@ namespace ProdService
 
         public void CommitTrans()
         {
-            using (SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"])
+            SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"];
             {
                 if (currentContext != null)
                 {
                     #region 手动释放资源
-                    //DbContextTransaction transaction = currentContext.Database.CurrentTransaction;
-                    //try
-                    //{
-                    //    transaction.Commit();
-                    //}
-                    //catch (Exception)
-                    //{
-                    //    transaction.Rollback();
-                    //    throw;
-                    //}
-                    //finally
-                    //{
-                    //    currentContext.Dispose();
-                    //    currentContext = null;
-                    //}
+                    DbContextTransaction transaction = currentContext.Database.CurrentTransaction;
+                    try
+                    {
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                    finally
+                    {
+                        //currentContext.Dispose();
+                        currentContext = null;
+                    }
                     #endregion
                     //currentContext.Database.CurrentTransaction.Commit();
-                    using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
-                    {
-                        try
-                        {
-                            currentContext.SaveChanges();
-                            transaction.Commit();
-                        }
-                        catch (Exception)
-                        {
-                            transaction.Rollback();
-                            throw;
-                        }
-                    }
+
+                    #region 自动释放资源
+                    //using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
+                    //{
+                    //    try
+                    //    {
+                    //        currentContext.SaveChanges();
+                    //        transaction.Commit();
+                    //    }
+                    //    catch (Exception)
+                    //    {
+                    //        transaction.Rollback();
+                    //        throw;
+                    //    }
+                    //}
+                    #endregion
+
                 } //else nothing
             }
         }
