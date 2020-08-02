@@ -92,6 +92,10 @@
       <Project>{3FF9C3CB-BBAC-4229-8F72-D0FF8F00C9E6}</Project>
       <Name>Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Global\Extension\Extension.csproj">
+      <Project>{e0e7c7d1-e022-499a-90fd-c0c3b44d3349}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceInterface\ServiceInterface.csproj">
       <Project>{311E2AAF-7307-4CA3-BA32-5ADB15182891}</Project>
       <Name>ServiceInterface</Name>

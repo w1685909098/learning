@@ -6,7 +6,7 @@ using ViewModel.Register;
 
 namespace WebUI.Helper
 {
-    public class CookieHelper
+    public static class CookieHelper
     {
         public static void AddCookie(int userId,string password/*, bool rememberMe = false*/)
         {

@@ -9,16 +9,17 @@ using ViewModel.Register;
 using System.Web.Mvc;
 using ServiceInterface;
 using AutoMapper;
+using Extension;
 
 namespace ProdService
 {
     public class RegisterService : BaseService, IRegisterService
     {
-        private UserRepository userRepository;
-        public RegisterService()
-        {
-            userRepository = new UserRepository(context);
-        }
+        //private UserRepository userRepository;
+        //public RegisterService()
+        //{
+        //    userRepository = new UserRepository(context);
+        //}
 
         public UserModel GetByName(string name)
         {
@@ -28,6 +29,7 @@ namespace ProdService
 
         public int GetRegisterId(UserModel model)
         {
+            model.Password = model.Password.MD5Encrypt();
             User inviter = userRepository.GetUserByName(model.InviterName);
             User register = mapper.Map<User>(model);
             //register = mapper.Map<IndexModel, User>(model, register);//全部替换  保留Id

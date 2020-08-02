@@ -252,6 +252,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Global\Extension\Extension.csproj">
+      <Project>{e0e7c7d1-e022-499a-90fd-c0c3b44d3349}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SRV\MockService\MockService.csproj">
       <Project>{561e2ddf-386d-4d24-82df-14ae4a5a8087}</Project>
       <Name>MockService</Name>

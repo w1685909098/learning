@@ -12,14 +12,14 @@ namespace ProdService
 {
    public  class LogOnService:BaseService,ILogOnService
     {
-        private UserRepository _userRepository;
-        public LogOnService()
-        {
-            _userRepository = new UserRepository(context);
-        }
+        //private UserRepository _userRepository;
+        //public LogOnService()
+        //{
+        //    _userRepository = new UserRepository(context);
+        //}
         public LogOnModel GetLogOnModelByName(string name)
         {
-            User user = _userRepository.GetUserByName(name);
+            User user = userRepository.GetUserByName(name);
             return mapper.Map<LogOnModel>(user);
         }
     }

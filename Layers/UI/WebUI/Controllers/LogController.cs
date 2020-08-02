@@ -1,4 +1,5 @@
-﻿using ServiceInterface;
+﻿using Extension;
+using ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace WebUI.Controllers
                 ModelState.AddModelError(nameof(model.UserName), "* 用户名不存在或输入错误，请检查用户名并重新输入");
                 return View(model);
             }
-            if (logger.Password != model.Password)
+            if (logger.Password != model.Password.MD5Encrypt())
             {
                 ModelState.AddModelError(nameof(model.Password), "* 密码输入错误，请检查密码并重新输入");
                 return View(model);

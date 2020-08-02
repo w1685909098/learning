@@ -8,7 +8,7 @@ namespace ViewModel.Personal
 {
     public class PersonalInformationModel
     {
-        //public httppostedfilebase Icon { get; set; }
+        //public string IconPath { get; set; }
         public bool? IsMale { get; set; }
         public int BirthYear { get; set; }
         public IList<int> BirthYears { get; set; }

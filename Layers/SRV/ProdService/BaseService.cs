@@ -19,6 +19,11 @@ namespace ProdService
     public class BaseService : IBaseService
     {
         private static MapperConfiguration _mapperConfiguration;
+        protected UserRepository userRepository;
+        public BaseService()
+        {
+            userRepository = new UserRepository(context);
+        }
         static BaseService()
         {
             //_mapperConfiguration = new MapperConfiguration(cfg => cfg.CreateMap(typeof(User),typeof(ViewModel.Register.IndexModel)));
@@ -52,9 +57,9 @@ namespace ProdService
                 cfg.CreateMap<Keyword, ViewModel.Keyword.KeywordModel>();
                 cfg.CreateMap<User, ViewModel.LogOn.LogOnModel>()
                 .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
-                .ForMember(m => m.UserName,opt=>opt.MapFrom(u=>u.Name))
-                .ForMember(m=>m.Password,opt=>opt.MapFrom(u=>u.Password))
-                .ForMember(m=>m.Captcha,opt=>opt.Ignore())
+                .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))
+                .ForMember(m => m.Password, opt => opt.MapFrom(u => u.Password))
+                .ForMember(m => m.Captcha, opt => opt.Ignore())
                  .ReverseMap()
                  ;
             });
@@ -159,7 +164,6 @@ namespace ProdService
                 //return Convert.ToInt32(HttpContext.Current.Response.Cookies[""].Values[""]);
                 string id = cookie.Values["id"];
                 string password = cookie.Values["password"];
-                UserRepository userRepository = new UserRepository(context);
                 User currentUser = userRepository.Find(Convert.ToInt32(id));
                 if (currentUser.Password != password)
                 {
