@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extension;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -23,7 +24,7 @@ namespace WebUI.Controllers
             Bitmap image = new Bitmap(100, 30);    //生成图片
             Graphics drawing = Graphics.FromImage(image);  //生成画板
             drawing.Clear(Color.White); //清空画板
-            string captcha = GetCaptcha();
+            string captcha = RandomString.GetRandomCode();
             drawing.DrawString(captcha, new Font("宋体", 14), 
                 new SolidBrush(Color.Black), new Point(25, 5));
             Session["captcha"] = captcha;
@@ -31,19 +32,19 @@ namespace WebUI.Controllers
             image.Save(stream,ImageFormat.Jpeg);
             return File(stream.ToArray(), "image/png");
         }
-        public static string GetCaptcha()
-        {
-            int length = 4;
-            string whiteList = "0123456789";
-            Random random = new Random();
-            string captcha = null;
-            for (int i = 0; i < length; i++)
-            {
-                int indexRandom = random.Next(whiteList.Length);
-                char singleChar = whiteList[indexRandom];
-                captcha += singleChar; 
-            }
-            return captcha;
-        }
+        //public static string GetCaptcha()
+        //{
+        //    int length = 4;
+        //    string whiteList = "0123456789";
+        //    Random random = new Random();
+        //    string captcha = null;
+        //    for (int i = 0; i < length; i++)
+        //    {
+        //        int indexRandom = random.Next(whiteList.Length);
+        //        char singleChar = whiteList[indexRandom];
+        //        captcha += singleChar; 
+        //    }
+        //    return captcha;
+        //}
     }
 }

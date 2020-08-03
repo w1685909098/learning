@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity
+namespace Extension
 {
-    public class  RandomString
+   public  class RandomString
     {
         public static int length = 4;
         public static string singleCode, invitingCode;

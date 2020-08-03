@@ -73,6 +73,10 @@
       <Project>{3ff9c3cb-bbac-4229-8f72-d0ff8f00c9e6}</Project>
       <Name>Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Global\Extension\Extension.csproj">
+      <Project>{E0E7C7D1-E022-499A-90FD-C0C3B44D3349}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

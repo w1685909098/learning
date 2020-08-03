@@ -46,9 +46,10 @@ namespace ProdService
             //}
             ArticleModel model = new ArticleModel
             {
-                Items = new List<ArticleItemModel>()
+                //Items = new List<ArticleItemModel>();
+                Items= mapper.Map<IList<ArticleItemModel>>(articles)
             };
-            model.Items = mapper.Map<IList<ArticleItemModel>>(articles);
+            //model.Items = mapper.Map<IList<ArticleItemModel>>(articles);
             return model;
         }
     }

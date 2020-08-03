@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extension;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,7 @@ namespace WebUI.Helper
         {
             HttpCookie cookie = new HttpCookie("user");
             cookie.Values.Add("id", userId.ToString());
-            cookie.Values.Add("password", password);
+            cookie.Values.Add("password", password.MD5Encrypt());
             //if (rememberMe==true)
             //{
             //    cookie.Expires = DateTime.Now.AddDays(14);

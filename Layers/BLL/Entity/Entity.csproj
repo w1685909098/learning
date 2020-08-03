@@ -46,12 +46,17 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BMoney.cs" />
     <Compile Include="BPoint.cs" />
-    <Compile Include="RandomString.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Keyword.cs" />
     <Compile Include="Problem.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Global\Extension\Extension.csproj">
+      <Project>{E0E7C7D1-E022-499A-90FD-C0C3B44D3349}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

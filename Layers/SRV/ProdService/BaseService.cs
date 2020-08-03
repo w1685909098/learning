@@ -45,7 +45,7 @@ namespace ProdService
                 cfg.CreateMap<Article, ViewModel.Article.ArticleItemModel>()
                  .ForMember(m => m.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
                  .ForMember(m => m.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
-                 .ForMember(m => m.AuthorId, opt => opt.MapFrom(a => a.Author.Id))
+                 .ForMember(m => m.AuthorId, opt => opt.MapFrom(a => a.Author.Id ))
                  .ForMember(m => m.Title, opt => opt.MapFrom(a => a.Title))
                  .ForMember(m => m.Id, opt => opt.MapFrom(a => a.Id))
                  .ForMember(m => m.Body, opt => opt.MapFrom(a => a.Body))
@@ -54,7 +54,13 @@ namespace ProdService
                  .ForMember(m => m.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
                  .ForMember(m => m.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount))
               /* .ReverseMap()*/;
+                //cfg.CreateMap<User,ViewModel.Article.ArticleItemModel>(MemberList.None)
+                //.ForMember(a=> a.AuthorName, opt => opt.MapFrom(u => u.Name));
+
+
+
                 cfg.CreateMap<Keyword, ViewModel.Keyword.KeywordModel>();
+
                 cfg.CreateMap<User, ViewModel.LogOn.LogOnModel>()
                 .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))
