@@ -11,14 +11,30 @@
     <title>Index</title>
 </head>
 <body>
-    <div> 
+    <div>
         @*头像的上传*@
-        <form method="post" enctype="multipart/form-data"> @*原生的html*@
-        <input type="file" name="icon" multiple accept="image/*" />
-        </form>
-        @using (Html.BeginForm("Index","PersonalInformation",FormMethod.Post,new {enctype="multipart/from-data" }))
+        @*<form method="post" action="~/PersonalInformation" enctype="multipart/form-data">*@ @*原生的html*@
+        @*<input type="file" name="icon" multiple accept="image/*" />*@
+        @*<button type="submit">提交</button>
+            </form>*@
+        @using (Html.BeginForm("Index", "PersonalInformation", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-
+            if (Model == null)
+            {
+                <div>
+                    <label>用户头像：</label><br />
+                    <input type="file" name="Icon" accept="image/*" />
+                </div>
+            }
+            else
+            {
+                <div>
+                    <label>用户头像：</label>
+                    <img src="@Model.IconPath" />
+                    <label>更改用户头像：</label><input type="file" name="Icon" accept="image/*" />
+                </div>
+            }
+            <button type="submit">提交</button>
         }
     </div>
 </body>

@@ -27,14 +27,14 @@ namespace DbFactory
             {
                 //Id=1,
                 Name = "xx",
-                Password = password,
+                Password = password.MD5Encrypt(),
                 InvitingCode = "1111"
             };
             tt = new User
             {
                 //Id=2,
                 Name = "tt",
-                Password = password,
+                Password = password.MD5Encrypt(),
                 InvitingCode = RandomString.GetRandomCode()
             };
             userRepository.AddUser(xx);

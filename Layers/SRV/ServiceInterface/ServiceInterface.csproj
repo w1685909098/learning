@@ -45,6 +45,7 @@
     <Compile Include="IBaseService.cs" />
     <Compile Include="IKeywordService.cs" />
     <Compile Include="ILogOnService.cs" />
+    <Compile Include="IPersonalInforService.cs" />
     <Compile Include="IRegisterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

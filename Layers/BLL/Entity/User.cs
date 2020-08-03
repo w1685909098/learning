@@ -10,11 +10,14 @@ namespace Entity
 {
     public class User : BaseEntity
     {
+        public string IconPath { get; set; }
+
         public User Inviter { get; set; }
         [MaxLength(10)]
         public string Name { get; set; }
         public string Password { get; set; }
         public string InvitingCode { get; set; }
+
         public int Credit { get; set; }
         public int BMoney { get; set; }
 

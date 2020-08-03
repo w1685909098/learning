@@ -12,25 +12,25 @@ namespace WebUI.Controllers
 {
     public class PersonalInformationController : BaseController
     {
-        //private IRegisterService _registerService;
-        //public PersonalInformationController(IRegisterService registerService)
-        //{
-        //    _registerService = registerService;
-        //}
+        private IPersonalInforService _personalInforService;
+        public PersonalInformationController(IPersonalInforService personalInforService)
+        {
+            _personalInforService = personalInforService;
+        }
         // GET: PersonalInformation
         public ActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Index(PersonalInformationModel model,HttpPostedFileBase icon)
+        public ActionResult Index( HttpPostedFileBase Icon)
         {
-            //PersonalInformationModel model=_registerService
-            //string urlPath = "/Images";
-            //string iconName = Guid.NewGuid().ToString() + Path.GetExtension(icon.FileName);
-            //icon.SaveAs(Server.MapPath(urlPath) + "\\" + iconName);
-            //model.IconPath = urlPath + "/" + iconName;
-            return View();
+            PersonalInformationModel model = _personalInforService.GetPersonalInforModelById((int)currentId);
+            string urlPath = "/Images";
+            string iconName = Guid.NewGuid().ToString() + Path.GetExtension(Icon.FileName);
+            Icon.SaveAs(Server.MapPath(urlPath) + "\\" + iconName);
+            model.IconPath = urlPath + "/" + iconName;
+            return View(model);
         }
     }
 }
