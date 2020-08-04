@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.IO.Pipes;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,12 @@ namespace Repository
             Entities.Add(user);
             context.SaveChanges();
             return user.Id;
+        }
+        public void SaveIconPath(User user)
+        {
+            //Entities.Attach(user);
+            Entities.AddOrUpdate(user);
+            context.SaveChanges();
         }
     }
 }

@@ -9,6 +9,12 @@ namespace ViewModel.Personal
     public class PersonalInformationModel
     {
         public string IconPath { get; set; }
+        public int? UserId { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string InvitingCode { get; set; }
+        public int InviterId { get; set; }
+        public int ArticleId { get; set; }
         //public bool? IsMale { get; set; }
         //public int BirthYear { get; set; }
         //public IList<int> BirthYears { get; set; }

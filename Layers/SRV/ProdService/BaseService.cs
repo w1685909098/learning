@@ -65,9 +65,17 @@ namespace ProdService
 
                 cfg.CreateMap<Keyword, ViewModel.Keyword.KeywordModel>();
 
+                #region 个人资料的映射
                 cfg.CreateMap<User, ViewModel.Personal.PersonalInformationModel>(MemberList.None)
                 .ForMember(m => m.IconPath, opt => opt.MapFrom(u => u.IconPath))
+                .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
+                .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))
+                .ForMember(m=>m.Password,opt=>opt.MapFrom(u=>u.Password))
+                .ForMember(m=>m.InvitingCode,opt=>opt.MapFrom(u=>u.InvitingCode))
+                .ForMember(m=>m.InviterId,opt=>opt.MapFrom(u=>u.Inviter.Id))
+                .ForMember(m => m.ArticleId, opt => opt.MapFrom(u => u.ArticleId))
                 .ReverseMap();
+                #endregion
 
                 cfg.CreateMap<User, ViewModel.LogOn.LogOnModel>()
                 .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))

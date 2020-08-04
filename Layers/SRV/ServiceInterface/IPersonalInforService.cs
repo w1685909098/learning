@@ -10,5 +10,6 @@ namespace ServiceInterface
    public interface IPersonalInforService
     {
         PersonalInformationModel GetPersonalInforModelById(int id);
+        void AddModelIcon(PersonalInformationModel model);
     }
 }

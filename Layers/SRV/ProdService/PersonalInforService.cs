@@ -16,5 +16,10 @@ namespace ProdService
             User user = userRepository.Find(id);
             return mapper.Map<PersonalInformationModel>(user);
         }
+        public void AddModelIcon(PersonalInformationModel model)
+        {
+            User user = mapper.Map<User>(model);
+            userRepository.SaveIconPath(user);
+        }
     }
 }

@@ -16,15 +16,15 @@
         @*<form method="post" action="~/PersonalInformation" enctype="multipart/form-data">*@ @*原生的html*@
         @*<input type="file" name="icon" multiple accept="image/*" />*@
         @*<button type="submit">提交</button>
-            </form>*@
+        </form>*@
         @using (Html.BeginForm("Index", "PersonalInformation", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            if (Model == null)
+            @*if (Model == null)
             {
-                <div>
-                    <label>用户头像：</label><br />
-                    <input type="file" name="Icon" accept="image/*" />
-                </div>
+        <div>
+            <label>用户头像：</label><br />
+            <input type="file" name="Icon" accept="image/*" />
+        </div>
             }
             else
             {
@@ -33,7 +33,29 @@
                     <img src="@Model.IconPath" />
                     <label>更改用户头像：</label><input type="file" name="Icon" accept="image/*" />
                 </div>
-            }
+            }*@
+
+            if (Model == null)
+            {
+                string s = "抛异常，或者通过添加特性 NeedLogOn来解决";
+                <label>用户头像：</label><br />
+                <img src="@Model.IconPath" />
+                <label>@s:</label><input type="file" name="Icon" multiple accept="image/*" />
+        }
+        string tips = null;
+        if (Model.IconPath == null)
+        {
+            tips = "上传头像";
+        }
+        else
+        {
+            tips = "更换头像";
+        }
+            <div>
+                <label>用户头像：</label><br />
+                <img src="@Model.IconPath" />
+                <label>@tips:</label><input type="file" name="Icon" multiple accept="image/*" />
+            </div>
             <button type="submit">提交</button>
         }
     </div>

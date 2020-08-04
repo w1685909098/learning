@@ -20,7 +20,8 @@ namespace WebUI.Controllers
         // GET: PersonalInformation
         public ActionResult Index()
         {
-            return View();
+            PersonalInformationModel model = _personalInforService.GetPersonalInforModelById((int)currentId);
+            return View(model);
         }
         [HttpPost]
         public ActionResult Index( HttpPostedFileBase Icon)
@@ -30,6 +31,7 @@ namespace WebUI.Controllers
             string iconName = Guid.NewGuid().ToString() + Path.GetExtension(Icon.FileName);
             Icon.SaveAs(Server.MapPath(urlPath) + "\\" + iconName);
             model.IconPath = urlPath + "/" + iconName;
+            _personalInforService.AddModelIcon(model);
             return View(model);
         }
     }

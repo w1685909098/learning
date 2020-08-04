@@ -178,8 +178,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Image\一起帮logo.jpg" />
-    <Content Include="Image\源栈上课啦.jpg" />
+    <Content Include="Images\46319db6-6218-4066-b78b-a35a5aec8bd1.png" />
+    <Content Include="Images\一起帮logo.jpg" />
+    <Content Include="Images\源栈上课啦.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="TrainUpFile.txt" />

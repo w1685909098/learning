@@ -36,5 +36,9 @@ namespace Entity
             InvitingCode = RandomString.GetRandomCode();
             Inviter.BMoney += new Random().Next(2, 5);
         }
+        //public void AddIcon(string iconPath)
+        //{
+        //    IconPath = iconPath;
+        //}
     }
 }
