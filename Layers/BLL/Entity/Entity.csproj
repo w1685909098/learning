@@ -47,6 +47,7 @@
     <Compile Include="BMoney.cs" />
     <Compile Include="BPoint.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="Keyword.cs" />
     <Compile Include="Problem.cs" />
     <Compile Include="User.cs" />

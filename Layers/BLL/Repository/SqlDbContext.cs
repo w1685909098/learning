@@ -23,6 +23,7 @@ namespace Repository
             modelBuilder.Entity<User>()/*.HasIndex(u => u.Name).IsUnique()*/;
             modelBuilder.Entity<Article>();
             modelBuilder.Entity<Keyword>();
+            //modelBuilder.ComplexType<Email>(); 
 
         }
     }

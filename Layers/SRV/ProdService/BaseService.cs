@@ -77,6 +77,7 @@ namespace ProdService
                 .ReverseMap();
                 #endregion
 
+               
                 cfg.CreateMap<User, ViewModel.LogOn.LogOnModel>()
                 .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))

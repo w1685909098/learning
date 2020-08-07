@@ -20,7 +20,7 @@ namespace DbFactory
             userRepository = new UserRepository(Global.Context);
         }
         internal static User xx, tt;
-        public static string password = "1234";
+        public static string password = "1111";
         public static void Create()
         {
             xx = new User
