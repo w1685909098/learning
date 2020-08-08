@@ -1,4 +1,4 @@
-﻿
+﻿@model ViewModel.Register.UserModel
 @{
     Layout = null;
 }
@@ -12,6 +12,19 @@
 </head>
 <body>
     <div> 
+        @using (Html.BeginForm())
+        {
+            <div>
+                <label>绑定邮箱：</label>
+                @Html.TextBoxFor(u=>u.EmailAddress)
+                @Html.ValidationMessageFor(u=>u.EmailAddress)
+            </div>
+            <div>
+                <label>验证码：</label>
+                @Html.TextBoxFor(u => u.EmailCode)
+                @Html.ValidationMessageFor(u => u.EmailCode)
+            </div>
+        }
     </div>
 </body>
 </html>

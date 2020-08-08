@@ -18,7 +18,7 @@ namespace Entity
         public string Password { get; set; }
         public string InvitingCode { get; set; }
 
-        //public Email BindingEmail { get; set; }
+        public Email BindingEmail { get; set; }
 
         public int Credit { get; set; }
         public int BMoney { get; set; }

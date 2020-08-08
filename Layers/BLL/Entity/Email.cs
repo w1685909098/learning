@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 namespace Entity
 {
     //[ComplexType]
-   //public class Email
-   // {
-   //     public string Address { get; set; }
-   //     public DateTime Expires { get; set; }
-   //     public string Code { get; set; }
-   //     //public int UserId { get; set; }
-   //     //public User Owner { get; set; }
-   // }
+    public class Email
+    {
+        public string Address { get; set; }
+        public DateTime? Expires { get; set; }
+        public string Code { get; set; }
+        public bool IsAvtivate { get; set; }
+        //public int UserId { get; set; }
+        //public User Owner { get; set; }
+    }
 }

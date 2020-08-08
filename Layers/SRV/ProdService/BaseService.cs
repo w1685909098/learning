@@ -39,11 +39,18 @@ namespace ProdService
                 .ForMember(m => m.InvitingCode, opt => opt.MapFrom(u => u./*Inviter.*/InvitingCode))
                 .ForMember(m => m.ComfirmPassword, opt => opt.Ignore())   //忽略某一属性
                 .ForMember(m => m.Captcha, opt => opt.Ignore())   //忽略验证码
+                .ForMember(m=>m.EmailAddress,opt=>opt.MapFrom(u=>u.BindingEmail.Address))
+                .ForMember(m => m.EmailCode, opt => opt.MapFrom(u => u.BindingEmail.Code))
+                .ForMember(m => m.ExprieTime, opt => opt.MapFrom(u => u.BindingEmail.Expires))
+                .ForMember(m=>m.EmailIsActivate,opt=>opt.MapFrom(u=>u.BindingEmail.IsAvtivate))
+                //.ForMember(m => m.InputTime, opt => opt.Ignore())    
                 .ReverseMap()
                 .ForMember(u => u.Id, opt => opt.NullSubstitute(0))   //null值处理
-                .ForMember(u => u.InvitingCode, opt => opt.Ignore());
+                .ForMember(u => u.InvitingCode, opt => opt.Ignore())
+                .ForMember(u=>u.BindingEmail,opt=>opt.MapFrom(m=>m));
                 #endregion
-
+                cfg.CreateMap<ViewModel.Register.UserModel, Email>()
+                ;
                 #region article的映射配置
                 cfg.CreateMap<Article, ViewModel.Article.ArticleItemModel>()
                  .ForMember(m => m.PublishTime, opt => opt.MapFrom(a => a.PublishTime))

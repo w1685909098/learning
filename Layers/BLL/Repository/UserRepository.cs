@@ -44,6 +44,7 @@ namespace Repository
         //}
         public int AddUser(User user)
         {
+            user.BindingEmail = new Email(); //没有则报空引用异常  email.属性
             Entities.Add(user);
             context.SaveChanges();
             return user.Id;
