@@ -10,7 +10,7 @@ namespace ServiceInterface
    public interface IEmailService
     {
         UserModel GetUserModelByName(string name);
-        void ValidEmail(string address);
+        void SendEmail(string address);
         bool BindEmail(int userId, string code);
     }
 }

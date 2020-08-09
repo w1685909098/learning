@@ -1,6 +1,9 @@
 ﻿@model ViewModel.Register.UserModel
 @{
-    Layout = null;
+    //Layout = "../Shared/_Layout.cshtml";  //使用相对路径找到_Layout
+    //Layout = null;  //没有Layout默认使用_Layout？？？
+    Layout = Layout;
+    //Layout = "~/Shared/_Layout";//如何使用绝对路径找到_Layout？？？
 }
 
 <!DOCTYPE html>
@@ -11,13 +14,13 @@
     <title>Activate</title>
 </head>
 <body>
-    <div> 
+    <div>
         @using (Html.BeginForm())
         {
             <div>
                 <label>绑定邮箱：</label>
-                @Html.TextBoxFor(u=>u.EmailAddress)
-                @Html.ValidationMessageFor(u=>u.EmailAddress)
+                @Html.TextBoxFor(u => u.EmailAddress)
+                @Html.ValidationMessageFor(u => u.EmailAddress)
             </div>
             <div>
                 <label>验证码：</label>

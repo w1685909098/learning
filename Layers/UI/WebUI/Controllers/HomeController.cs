@@ -21,7 +21,8 @@ namespace WebUI.Controllers
             #endregion
 
             //return Redirect("/Register");
-            return Redirect("/Article");
+            //return Redirect("/Article");
+            return View();
         }
 
         public ActionResult About()

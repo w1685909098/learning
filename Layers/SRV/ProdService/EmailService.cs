@@ -17,13 +17,12 @@ namespace ProdService
         string code = RandomString.GetRandomCode();
         public bool BindEmail(int userId, string code)
         {
-            //Email CurrentEmail = userRepository.Find(userId).BindingEmail;
-            //if (DateTime.Now > CurrentEmail.Expires)
-            //{
-            //    return false;
-            //}
-            //return code == CurrentEmail.Code;//判断code是否正确
-            return false;
+            User user = userRepository.Find(userId);
+            if (DateTime.Now>user.BindingEmail.Expires)
+            {
+                return false;
+            }
+            return code==user.BindingEmail.Code;
         }
 
         public UserModel GetUserModelByName(string name)
@@ -31,7 +30,7 @@ namespace ProdService
             return mapper.Map<UserModel>(userRepository.GetUserByName(name));
         }
 
-        public void SendEmail(string mailSubject, string address, string mailBody)
+        public void ValidEmail(string mailSubject, string address, string mailBody)
         {
             #region 设置邮箱内容
             MailMessage mail = new MailMessage();
@@ -51,11 +50,11 @@ namespace ProdService
             #endregion
         }
 
-        public void ValidEmail(string address)
+        public void SendEmail(string address)
         {
             string mailSubject = $"激活Email,邮箱验证码为{code}";
             string mailBody = $"感谢你的Email绑定......点击<a href='https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}'进行验证 >";
-            SendEmail(mailSubject, address, mailBody);
+            ValidEmail(mailSubject, address, mailBody);
         }
     }
 }

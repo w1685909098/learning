@@ -34,15 +34,15 @@ namespace ViewModel.Register
         public string Captcha { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "* 邮箱不能为空")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="* 输入格式正确，请检查输入内容并重新输入")]
         public string EmailAddress { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "* 验证码不能为空")]
         public string EmailCode { get; set; }
 
-        public DateTime ExprieTime { get; set; }
+        //public DateTime ExprieTime { get; set; }
 
-        public bool EmailIsActivate { get; set; }
+        //public bool EmailIsActivate { get; set; }
 
         //public DateTime InputTime { get; set; }
 
