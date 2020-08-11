@@ -49,7 +49,7 @@ namespace Repository
             context.SaveChanges();
             return user.Id;
         }
-        public void SaveIconPath(User user)
+        public void UserSaveChanges(User user)
         {
             //Entities.Attach(user);
             Entities.AddOrUpdate(user);

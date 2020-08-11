@@ -9,8 +9,10 @@ namespace ServiceInterface
 {
    public interface IEmailService
     {
+        UserModel GetUserModelById(int id);
         UserModel GetUserModelByName(string name);
-        void SendEmail(string address);
+        void SendEmail(UserModel model);
         bool BindEmail(int userId, string code);
+        void UIMapUserSaveChanges(UserModel model);
     }
 }

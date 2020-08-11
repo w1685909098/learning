@@ -29,7 +29,7 @@ namespace ProdService
         public void AddModelIcon(PersonalInformationModel model)
         {
             User user = mapper.Map<User>(model);
-            userRepository.SaveIconPath(user);
+            userRepository.UserSaveChanges(user);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace ProdService
                 .ForMember(m=>m.EmailAddress,opt=>opt.MapFrom(u=>u.BindingEmail.Address))
                 .ForMember(m => m.EmailCode, opt => opt.MapFrom(u => u.BindingEmail.Code))
                 //.ForMember(m => m.ExprieTime, opt => opt.MapFrom(u => u.BindingEmail.Expires))
-                //.ForMember(m=>m.EmailIsActivate,opt=>opt.MapFrom(u=>u.BindingEmail.IsAvtivate))
+                .ForMember(m => m.EmailIsActivate, opt => opt.MapFrom(u => u.BindingEmail.IsAvtivate))
                 //.ForMember(m => m.InputTime, opt => opt.Ignore())    
                 .ReverseMap()
                 .ForMember(u => u.Id, opt => opt.NullSubstitute(0))   //null值处理

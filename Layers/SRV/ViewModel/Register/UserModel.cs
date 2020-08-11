@@ -42,7 +42,7 @@ namespace ViewModel.Register
 
         //public DateTime ExprieTime { get; set; }
 
-        //public bool EmailIsActivate { get; set; }
+        public bool EmailIsActivate { get; set; }
 
         //public DateTime InputTime { get; set; }
 

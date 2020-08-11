@@ -16,9 +16,10 @@ namespace WebUI.Controllers
             _emailService = emailService;
         }
         // GET: Email
-        public ActionResult Activate()
+        public ActionResult Activate( )
         {
-            //_emailService.ValidEmail("1685909098@qq.com");
+            UserModel currentModel = _emailService.GetUserModelById((int)currentId);
+            _emailService.SendEmail(currentModel);
             return View();
         }
         //[HttpPost]
@@ -43,14 +44,22 @@ namespace WebUI.Controllers
         //}
 
         [HttpPost]
-        public ActionResult Activate(int id, string code)
+        public ActionResult Activate(UserModel model )
         {
-            bool success = _emailService.BindEmail(id, code);
+            UserModel currentModel = _emailService.GetUserModelById((int)currentId);
+            currentModel.EmailAddress = model.EmailAddress;
+            currentModel.EmailCode = model.EmailCode;
+            bool success = _emailService.BindEmail((int)currentModel.UserId, currentModel.EmailCode);
             if (success==false)
             {
-                return View();
-            }  //else保存至数据库
-            return View();
+                return View(model);
+            }
+            else
+            {
+                currentModel.EmailIsActivate = true;
+                _emailService.UIMapUserSaveChanges(currentModel);
+            }
+            return View(model);
         }
     }
 }

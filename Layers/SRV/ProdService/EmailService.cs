@@ -50,11 +50,28 @@ namespace ProdService
             #endregion
         }
 
-        public void SendEmail(string address)
+        public void SendEmail(UserModel model)
         {
+            model.EmailAddress = "1685909098@qq.com";
+            User currentUser = mapper.Map<User>(model);
+            currentUser.BindingEmail = new Email();
+            currentUser.BindingEmail.Code = code;
+            currentUser.BindingEmail.Expires = DateTime.Now.AddMinutes(5);
+            userRepository.UserSaveChanges(currentUser);
             string mailSubject = $"激活Email,邮箱验证码为{code}";
             string mailBody = $"感谢你的Email绑定......点击<a href='https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}'进行验证 >";
-            ValidEmail(mailSubject, address, mailBody);
+            ValidEmail(mailSubject, model.EmailAddress, mailBody);
+        }
+
+        public UserModel GetUserModelById(int id)
+        {
+            return mapper.Map<UserModel>(CurrentUser);
+        }
+
+        public void UIMapUserSaveChanges(UserModel model)
+        {
+            User currentUser = mapper.Map<User>(model);
+            userRepository.UserSaveChanges(currentUser);
         }
     }
 }

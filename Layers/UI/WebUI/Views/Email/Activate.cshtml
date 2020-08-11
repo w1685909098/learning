@@ -19,7 +19,7 @@
         {
             <div>
                 <label>绑定邮箱：</label>
-                @Html.TextBoxFor(u => u.EmailAddress)
+                @Html.TextBoxFor(u => u.EmailAddress)    <button type="button">发送</button>
                 @Html.ValidationMessageFor(u => u.EmailAddress)
             </div>
             <div>
@@ -27,6 +27,7 @@
                 @Html.TextBoxFor(u => u.EmailCode)
                 @Html.ValidationMessageFor(u => u.EmailCode)
             </div>
+            <button  type="submit">提交</button>
         }
     </div>
 </body>
