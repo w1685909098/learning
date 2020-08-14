@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,12 @@ namespace Repository
             Entities.Add(article);
             context.SaveChanges();
             return article.Id;
+        }
+        public void SaveArticleChanges(Article article)
+        {
+            article.PublishTime = DateTime.Now;
+            Entities.AddOrUpdate(article);
+            context.SaveChanges();
         }
     }
 }

@@ -31,17 +31,17 @@ namespace Repository
         //{
         //    return SqlContext.Entities.Where(e=>e.na)
         //}
-        public T Find(int id)
+        public T FindEntity(int id)
         {
             return Entities.Find(id);
         }
-        public int Add(T source)
+        public int AddEntity(T source)
         {
              Entities.Add(source);
             context.SaveChanges();
             return source.Id;
         }
-        public void Delete(T source)
+        public void DeleteEntity(T source)
         {
             Entities.Remove(source);
             context.SaveChanges();

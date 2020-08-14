@@ -17,7 +17,7 @@ namespace ProdService
         string code = RandomString.GetRandomCode();
         public bool BindEmail(int userId, string code)
         {
-            User user = userRepository.Find(userId);
+            User user = userRepository.FindEntity(userId);
             if (DateTime.Now>user.BindingEmail.Expires)
             {
                 return false;

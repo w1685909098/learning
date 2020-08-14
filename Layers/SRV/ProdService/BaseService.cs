@@ -4,6 +4,7 @@ using Microsoft.SqlServer.Server;
 using Repository;
 using ServiceInterface;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace ProdService
             _mapperConfiguration = new MapperConfiguration(cfg =>
             {
                 //cfg.CreateMap<User, ViewModel.Register.IndexModel>().ReverseMap();
-                #region 注册的映射配置
+                #region User-->Register 的双向映射配置
                 cfg.CreateMap<User, ViewModel.Register.UserModel>()  //配置映射     TSource（左）映射到TDestition（右）
                 .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))  //具体的映射   TDestition（左）   TSource（右）
@@ -39,7 +40,7 @@ namespace ProdService
                 .ForMember(m => m.InvitingCode, opt => opt.MapFrom(u => u./*Inviter.*/InvitingCode))
                 .ForMember(m => m.ComfirmPassword, opt => opt.Ignore())   //忽略某一属性
                 .ForMember(m => m.Captcha, opt => opt.Ignore())   //忽略验证码
-                .ForMember(m=>m.EmailAddress,opt=>opt.MapFrom(u=>u.BindingEmail.Address))
+                .ForMember(m => m.EmailAddress, opt => opt.MapFrom(u => u.BindingEmail.Address))
                 .ForMember(m => m.EmailCode, opt => opt.MapFrom(u => u.BindingEmail.Code))
                 //.ForMember(m => m.ExprieTime, opt => opt.MapFrom(u => u.BindingEmail.Expires))
                 .ForMember(m => m.EmailIsActivate, opt => opt.MapFrom(u => u.BindingEmail.IsAvtivate))
@@ -47,12 +48,14 @@ namespace ProdService
                 .ReverseMap()
                 .ForMember(u => u.Id, opt => opt.NullSubstitute(0))   //null值处理
                 .ForMember(u => u.InvitingCode, opt => opt.Ignore())
-                .ForMember(u=>u.BindingEmail,opt=>opt.MapFrom(m=>m));
+                .ForMember(u => u.BindingEmail, opt => opt.MapFrom(m => m));
                 #endregion
-                cfg.CreateMap<ViewModel.Register.UserModel, Email>(MemberList.None)
-                .ForMember(e=>e.Address,opt=>opt.MapFrom(m=>m.EmailAddress))
+
+                cfg.CreateMap<ViewModel.Register.UserModel, Email>(MemberList.None)  //不需要全部映射
+                .ForMember(e => e.Address, opt => opt.MapFrom(m => m.EmailAddress))
                 ;
-                #region article的映射配置
+
+                #region Article-->ArticleItemModel 的单向映射配置
                 cfg.CreateMap<Article, ViewModel.Article.ArticleItemModel>()
                  .ForMember(m => m.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
                  .ForMember(m => m.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
@@ -69,7 +72,55 @@ namespace ProdService
                 //.ForMember(a=> a.AuthorName, opt => opt.MapFrom(u => u.Name));
                 #endregion
 
+                #region Article-->ArticleSingleModel 的单向映射配置
+                cfg.CreateMap<Article, ViewModel.Article.ArticleSingleModel>()
+                 .ForMember(m => m.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
+                 .ForMember(m => m.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
+                 .ForMember(m => m.AuthorId, opt => opt.MapFrom(a => a.UserId))
+                 .ForMember(m => m.Title, opt => opt.MapFrom(a => a.Title))
+                 .ForMember(m => m.Id, opt => opt.MapFrom(a => a.Id))
+                 .ForMember(m => m.Body, opt => opt.MapFrom(a => a.Body))
+                 .ForMember(m => m.KeywordModels, opt => opt.MapFrom(a => a.Keywords))
+                 .ForMember(m => m.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count))
+                 .ForMember(m => m.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
+                 .ForMember(m => m.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount));
+                #endregion
 
+                #region Article-->ArticleEditModel 的双向映射配置
+                cfg.CreateMap<Article, ViewModel.Article.ArticleEditModel>(MemberList.None)
+                 .ForMember(m => m.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
+                 .ForMember(m => m.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
+                 .ForMember(m => m.AuthorId, opt => opt.MapFrom(a => a.UserId))
+                 .ForMember(m => m.Title, opt => opt.MapFrom(a => a.Title))
+                 .ForMember(m => m.Id, opt => opt.MapFrom(a => a.Id))
+                 .ForMember(m => m.Body, opt => opt.MapFrom(a => a.Body))
+                 //.ForMember(m => m.KeywordModels, opt => opt.MapFrom(a => a.Keywords))
+                 .ForMember(m => m.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count))
+                 .ForMember(m => m.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
+                 .ForMember(m => m.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount))
+                 .ReverseMap()
+                 .ForMember(a => a.PublishTime, opt => opt.MapFrom(m => m.PublishTime))
+                 .ForMember(a => a.Title, opt => opt.MapFrom(m => m.Title))
+                 .ForMember(a => a.AgreeCount, opt => opt.MapFrom(m => m.AgreeCount))
+                 .ForMember(a => a.DisagreeCount, opt => opt.MapFrom(m => m.DisagreeCount))
+                 .ForMember(a => a.Author, opt => opt.MapFrom(m => m))
+                 //.ForMember(a => a.Keywords, opt => opt.Ignore())
+
+                 ;
+
+                cfg.CreateMap<ViewModel.Article.ArticleEditModel, User>(MemberList.None)
+                 .ForMember(u => u.Name, opt => opt.MapFrom(m => m.AuthorName))
+                 .ForMember(u => u.Id, opt => opt.MapFrom(m => m.AuthorName));
+                #endregion
+
+                #region ArticleEditModel-->Article 的单向映射配置
+                cfg.CreateMap<ViewModel.Article.ArticleNewModel, Article>(MemberList.None)
+                .ForMember(a => a.Title, opt => opt.MapFrom(m => m.Title))
+                .ForMember(a => a.Body, opt => opt.MapFrom(m => m.Body))
+                .ForMember(a => a.PublishTime, opt => opt.MapFrom(m => m.PublishTime))
+                .ForMember(a => a.Id, opt => opt.NullSubstitute(0))
+                ;
+                #endregion
 
                 cfg.CreateMap<Keyword, ViewModel.Keyword.KeywordModel>();
 
@@ -78,14 +129,14 @@ namespace ProdService
                 .ForMember(m => m.IconPath, opt => opt.MapFrom(u => u.IconPath))
                 .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))
-                .ForMember(m=>m.Password,opt=>opt.MapFrom(u=>u.Password))
-                .ForMember(m=>m.InvitingCode,opt=>opt.MapFrom(u=>u.InvitingCode))
-                .ForMember(m=>m.InviterId,opt=>opt.MapFrom(u=>u.Inviter.Id))
+                .ForMember(m => m.Password, opt => opt.MapFrom(u => u.Password))
+                .ForMember(m => m.InvitingCode, opt => opt.MapFrom(u => u.InvitingCode))
+                .ForMember(m => m.InviterId, opt => opt.MapFrom(u => u.Inviter.Id))
                 .ForMember(m => m.ArticleId, opt => opt.MapFrom(u => u.ArticleId))
                 .ReverseMap();
                 #endregion
 
-               
+
                 cfg.CreateMap<User, ViewModel.LogOn.LogOnModel>()
                 .ForMember(m => m.UserId, opt => opt.MapFrom(u => u.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))
@@ -195,7 +246,7 @@ namespace ProdService
                 //return Convert.ToInt32(HttpContext.Current.Response.Cookies[""].Values[""]);
                 string id = cookie.Values["id"];
                 string password = cookie.Values["password"];
-                User currentUser = userRepository.Find(Convert.ToInt32(id));
+                User currentUser = userRepository.FindEntity(Convert.ToInt32(id));
                 if (currentUser.Password != password)
                 {
                     throw new Exception();
@@ -213,7 +264,7 @@ namespace ProdService
                 }
                 else
                 {
-                    return userRepository.Find((int)CurrentUserId);
+                    return userRepository.FindEntity((int)CurrentUserId);
                 }
             }
         }

@@ -1,0 +1,31 @@
+﻿@model ViewModel.Article.ArticleNewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>New</title>
+</head>
+<body>
+    <main>
+        @using (Html.BeginForm())
+        {
+
+            <div>
+                <label>标题：</label><br />
+                @Html.TextBoxFor(m => m.Title)
+                @Html.ValidationMessageFor(m => m.Title)
+            </div>
+                @Html.TextBoxFor(m => m.Body)
+                @Html.ValidationMessageFor(m => m.Body)
+            <button type="submit">提交</button>
+        }
+     </main>
+        <div>
+        </div>
+    </body>
+</html>

@@ -13,7 +13,7 @@ namespace ProdService
     {
         public PersonalInformationModel GetPersonalInforModelById(int id)
         {
-            User user = userRepository.Find(id);
+            User user = userRepository.FindEntity(id);
             return mapper.Map<PersonalInformationModel>(user);
         }
 

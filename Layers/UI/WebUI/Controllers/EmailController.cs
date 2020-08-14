@@ -52,6 +52,9 @@ namespace WebUI.Controllers
             bool success = _emailService.BindEmail((int)currentModel.UserId, currentModel.EmailCode);
             if (success==false)
             {
+                currentModel.EmailIsActivate = false;
+                currentModel.EmailAddress = null;
+                _emailService.UIMapUserSaveChanges(currentModel);
                 return View(model);
             }
             else

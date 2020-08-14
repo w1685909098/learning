@@ -1,0 +1,55 @@
+﻿@model ViewModel.Article.ArticleEditModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <main>
+        @using (Html.BeginForm())
+        {
+            <div>
+                @Model.PublishTime.ToString("yyyy年mm月dd日 hh时mm分ss秒")
+                <a href="@Model.AuthorId">@Model.AuthorName</a>
+            </div>
+            <div>
+                <label>标题：</label><br />
+                @Html.TextBoxFor(m => m.Title)
+                @Html.ValidationMessageFor(m => m.Title)
+            </div>
+
+            @Html.TextBoxFor(m => m.Body)
+            @Html.ValidationMessageFor(m => m.Body)
+            <div>
+                <span>关键字：</span>
+                <div style="float:left">
+                    @*@{
+                        foreach (var keyword in @Model.KeywordModels)
+                        {
+                            <span>@keyword</span>
+                        }
+                    }*@
+                </div>
+                <div style="float:right">
+                    <span>点赞数量：</span>@Model.AgreeCount
+                </div>
+                <div style="float:right">
+                    <span>点踩数量：</span>@Model.DisagreeCount
+                </div>
+            </div>
+            <hr style="clear:both" />
+            <button type="submit">提交</button>
+
+        }
+
+    </main>
+    <div>
+    </div>
+</body>
+</html>

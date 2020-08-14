@@ -40,10 +40,10 @@ namespace DbFactory
                 Used = 888,
                 CreateTime = Global.BaseTime.AddDays(-1)
             };
-            _keywordRepository.Add(CSharp);
-            _keywordRepository.Add(JavaScript);
-            _keywordRepository.Add(ASP);
-            _keywordRepository.Add(SQL);
+            _keywordRepository.AddEntity(CSharp);
+            _keywordRepository.AddEntity(JavaScript);
+            _keywordRepository.AddEntity(ASP);
+            _keywordRepository.AddEntity(SQL);
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿@model ViewModel.Article.ArticleSingleModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Single</title>
+</head>
+<body>
+    <main>
+        <div>
+            @Model.PublishTime.ToString("yyyy年mm月dd日 hh时mm分ss秒")
+            <a href="@Model.AuthorId">@Model.AuthorName</a>
+        </div>
+        <div>
+            <a href="@Model.Id">@Model.Title</a>
+        </div>
+        <textarea rows="5">
+             @Model.Body
+        </textarea>
+        <div>
+            <span>关键字：</span>
+            <div style="float:left">
+                @{
+                    foreach (var keyword in @Model.KeywordModels)
+                    {
+                        <span>@keyword</span>
+                    }
+                }
+            </div>
+            <div style="float:right">
+                <span>点赞数量：</span>@Model.AgreeCount
+            </div>
+            <div style="float:right">
+                <span>点踩数量：</span>@Model.DisagreeCount
+            </div>
+        </div>
+        <hr style="clear:both" />
+    </main>
+    <div>
+    </div>
+</body>
+</html>

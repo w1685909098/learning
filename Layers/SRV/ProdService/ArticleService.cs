@@ -17,6 +17,19 @@ namespace ProdService
         {
             _articleRepository = new ArticleRepository(context);
         }
+
+        public ArticleEditModel GetArticleEditModelById(int id)
+        {
+            Article article = _articleRepository.FindEntity(id);
+            return mapper.Map<ArticleEditModel>(article);
+        }
+
+        public ArticleSingleModel GetArticleSingelModelById(int id)
+        {
+            Article article = _articleRepository.FindEntity(id);
+            return mapper.Map<ArticleSingleModel>(article);
+        }
+
         public ArticleModel GetByPaged(int PageSize, int PageIndex)
         {
             //ArticleRepository articleRepository = new ArticleRepository(context);
@@ -51,6 +64,22 @@ namespace ProdService
             };
             //model.Items = mapper.Map<IList<ArticleItemModel>>(articles);
             return model;
+        }
+
+        public void SaveArticleEditModel(ArticleEditModel articleEditModel)
+        {
+            Article EditArticle = mapper.Map<Article>(articleEditModel);
+            _articleRepository.SaveArticleChanges(EditArticle);
+        }
+
+        public /*ArticleNewModel*/int UIAddArticleNewModel(ArticleNewModel articleNewModel)
+        {
+            Article article = mapper.Map<Article>(articleNewModel);
+            article.PublishTime = DateTime.Now;
+            article.Author = new User();
+            article.Author = CurrentUser;
+            return _articleRepository.AddArticle(article);
+            //articleNewModel mapperNew = mapper.Map<ArticleNewModel>(article);
         }
     }
 }

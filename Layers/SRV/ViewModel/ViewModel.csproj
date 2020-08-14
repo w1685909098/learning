@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Article\ArticleEditModel.cs" />
     <Compile Include="Article\ArticleModel.cs" />
+    <Compile Include="Article\ArticleNewModel.cs" />
+    <Compile Include="Article\ArticleSingleModel.cs" />
     <Compile Include="Keyword\KeywordModel.cs" />
     <Compile Include="LogOn\LogOnModel.cs" />
     <Compile Include="Personal\PersonalInformationModel.cs" />

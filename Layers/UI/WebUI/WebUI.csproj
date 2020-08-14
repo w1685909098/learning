@@ -190,6 +190,9 @@
     <Content Include="Views\Log\Off.cshtml" />
     <Content Include="Views\PersonalInformation\Index.cshtml" />
     <Content Include="Views\Email\Activate.cshtml" />
+    <Content Include="Views\Article\Single.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\Article\New.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

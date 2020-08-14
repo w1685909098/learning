@@ -18,5 +18,11 @@ namespace Entity
         public int AgreeCount { get; set; }
         public int DisagreeCount { get; set; }
 
+        public void ArticlePublish()
+        {
+            Author.BMoney -= 1;
+            Author.Credit += 10;
+        }
+
     }
 }

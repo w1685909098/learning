@@ -10,5 +10,14 @@ namespace ServiceInterface
     public interface IArticleService
     {
         ArticleModel GetByPaged(int PageSize, int PageIndex);
+
+        ArticleSingleModel GetArticleSingelModelById(int id);
+
+        ArticleEditModel GetArticleEditModelById(int id);
+
+
+        void SaveArticleEditModel(ArticleEditModel articleEditModel);
+
+        /*ArticleNewModel*/int UIAddArticleNewModel(ArticleNewModel articleNewModel);
     }
 }
