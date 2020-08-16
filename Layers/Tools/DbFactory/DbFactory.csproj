@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleAndKeywordFactory.cs" />
     <Compile Include="ArticleFactory.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="KeywordFactory.cs" />

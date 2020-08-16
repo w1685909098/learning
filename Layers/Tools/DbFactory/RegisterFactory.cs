@@ -25,20 +25,23 @@ namespace DbFactory
         {
             xx = new User
             {
-                //Id=1,
+                //Id = 1,
                 Name = "xx",
                 Password = password.MD5Encrypt(),
-                InvitingCode = "1111"
+                InvitingCode = "1111",
+                BindingEmail = new Email()
             };
             tt = new User
             {
                 //Id=2,
                 Name = "tt",
                 Password = password.MD5Encrypt(),
-                InvitingCode = RandomString.GetRandomCode()
+                InvitingCode = RandomString.GetRandomCode(),
+                BindingEmail=new Email()
             };
             userRepository.AddUser(xx);
             userRepository.AddUser(tt);
+            //userRepository.AddRangeEntities(new List<User> { xx, tt });
         }
     }
 }

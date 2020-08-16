@@ -46,5 +46,10 @@ namespace Repository
             Entities.Remove(source);
             context.SaveChanges();
         }
+        public void AddRangeEntities(IList<T> entities)
+        {
+            Entities.AddRange(entities);
+            context.SaveChanges();
+        }
     }
 }

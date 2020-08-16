@@ -55,12 +55,17 @@ namespace WebUI.Controllers
                 currentModel.EmailIsActivate = false;
                 currentModel.EmailAddress = null;
                 _emailService.UIMapUserSaveChanges(currentModel);
+                ModelState.AddModelError(nameof(model.EmailCode), "* 验证码输入错误，请检查重新输入，若输入无误，则可能验证码超过有效期，请重新发送验证码");
                 return View(model);
             }
             else
             {
                 currentModel.EmailIsActivate = true;
                 _emailService.UIMapUserSaveChanges(currentModel);
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(model);
             }
             return View(model);
         }

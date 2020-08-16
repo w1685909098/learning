@@ -25,7 +25,8 @@ namespace Repository
             modelBuilder.Entity<Keyword>();
             modelBuilder.ComplexType<Email>();
             modelBuilder.Entity<ArticleAndKeyword>()
-                .HasKey(ak => new { aId = ak.ArticleId, kId = ak.KeywordId });
+                .HasKey(ak => new { /*aId =*/ ak.ArticleId, /*sId =*/ ak.KeywordId });
+                
 
         }
     }
