@@ -13,7 +13,7 @@ namespace Entity
         public User Author { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
-        public IList<Keyword> Keywords { get; set; }
+        public IList<ArticleAndKeyword> Keywords { get; set; }
         public IList<Comment> Commnets { get; set; }
         public int AgreeCount { get; set; }
         public int DisagreeCount { get; set; }

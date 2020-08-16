@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Article.cs" />
+    <Compile Include="ArticleAndKeyword.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BMoney.cs" />
     <Compile Include="BPoint.cs" />
