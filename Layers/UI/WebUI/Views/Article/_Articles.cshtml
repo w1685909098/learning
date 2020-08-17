@@ -16,14 +16,14 @@
         @{
             foreach (var keyword in @Model.KeywordModels)
             {
-                <span>@keyword</span>
+                <span>@keyword.Name</span>
             }
         }
     </div>
-    <div style="float:right">
+    <div @*style="float:right"*@>
         <span>点赞数量：</span>@Model.AgreeCount
     </div>
-    <div style="float:right">
+    <div @*style="float:right"*@>
         <span>点踩数量：</span>@Model.DisagreeCount
     </div>
 </div>

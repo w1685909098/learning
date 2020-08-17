@@ -63,7 +63,7 @@ namespace ProdService
                  .ForMember(m => m.Title, opt => opt.MapFrom(a => a.Title))
                  .ForMember(m => m.Id, opt => opt.MapFrom(a => a.Id))
                  .ForMember(m => m.Body, opt => opt.MapFrom(a => a.Body))
-                 .ForMember(m => m.KeywordModels, opt => opt.MapFrom(a => a.Keywords))
+                 .ForMember(m => m.KeywordModels, opt => opt.MapFrom(a => a.Keywords.Select(k => k.Keyword)))
                  .ForMember(m => m.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count))
                  .ForMember(m => m.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
                  .ForMember(m => m.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount))
@@ -73,14 +73,14 @@ namespace ProdService
                 #endregion
 
                 #region Article-->ArticleSingleModel 的单向映射配置
-                cfg.CreateMap<Article, ViewModel.Article.ArticleSingleModel>()
+                cfg.CreateMap<Article, ViewModel.Article.ArticleSingleModel>(MemberList.None)
                  .ForMember(m => m.PublishTime, opt => opt.MapFrom(a => a.PublishTime))
                  .ForMember(m => m.AuthorName, opt => opt.MapFrom(a => a.Author.Name))
                  .ForMember(m => m.AuthorId, opt => opt.MapFrom(a => a.UserId))
                  .ForMember(m => m.Title, opt => opt.MapFrom(a => a.Title))
                  .ForMember(m => m.Id, opt => opt.MapFrom(a => a.Id))
                  .ForMember(m => m.Body, opt => opt.MapFrom(a => a.Body))
-                 .ForMember(m => m.KeywordModels, opt => opt.MapFrom(a => a.Keywords))
+                 .ForMember(m => m.KeywordModels, opt => opt.MapFrom(a => a.Keywords.Select(k => k.Keyword)))
                  .ForMember(m => m.CommnetCount, opt => opt.MapFrom(a => a.Commnets.Count))
                  .ForMember(m => m.AgreeCount, opt => opt.MapFrom(a => a.AgreeCount))
                  .ForMember(m => m.DisagreeCount, opt => opt.MapFrom(a => a.DisagreeCount));

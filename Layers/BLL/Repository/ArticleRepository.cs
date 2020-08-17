@@ -26,8 +26,10 @@ namespace Repository
         }
         public IList<Article> GetPaged(int PageSize, int PageIndex)
         {
-            return Entities.Include(e=>e.Author).OrderBy(e => e.PublishTime).
-                Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
+            return Entities.Include(e => e.Author)
+                .Include(e => e.Keywords.Select(k=>k.Keyword))
+                .OrderBy(e => e.PublishTime)
+                .Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
         }
         public int AddArticle(Article article)
         {
