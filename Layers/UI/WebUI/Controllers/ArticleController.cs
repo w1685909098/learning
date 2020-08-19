@@ -34,6 +34,7 @@ namespace WebUI.Controllers
             ArticleSingleModel articleSingleModel = _articleService.GetArticleSingelModelById(id);
             return View(articleSingleModel);
         }
+        //[ValidateInput(enableValidation:false)]
         public ActionResult Edit(int id )
         {
             ArticleEditModel ArticleEditModel = _articleService.GetArticleEditModelById(id);

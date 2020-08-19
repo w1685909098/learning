@@ -19,9 +19,9 @@
         <div>
             <a href="@Model.Id">@Model.Title</a>
         </div>
-        <textarea rows="5">
-             @Model.Body
-        </textarea>
+        <div>
+             @Html.TextAreaFor(m=>m.Body)
+        </div>
         <div>
             <span>关键字：</span>
             <div style="float:left">

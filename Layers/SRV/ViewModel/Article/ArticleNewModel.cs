@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using ViewModel.Keyword;
 
 namespace ViewModel.Article
@@ -18,6 +19,7 @@ namespace ViewModel.Article
 
         public int? Id { get; set; }
 
+        [AllowHtml]
         [Required(AllowEmptyStrings = false, ErrorMessage = "* 文章正文不能为空")]
         public string Body { get; set; }
 
