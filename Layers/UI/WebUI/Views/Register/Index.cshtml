@@ -14,6 +14,7 @@
     @using (Html.BeginForm())
     {
         <h1>数据库连接:@ViewBag.connectionString</h1>
+        @Html.AntiForgeryToken()
         <div>
             <label>邀请人：</label> <br />
             @Html.TextBoxFor(m => m.InviterName)

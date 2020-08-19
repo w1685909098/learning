@@ -11,6 +11,7 @@ using WebUI.Helper;
 
 namespace WebUI.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class RegisterController : BaseController
     {
         private IRegisterService _service;
