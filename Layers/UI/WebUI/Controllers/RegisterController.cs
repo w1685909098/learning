@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using ViewModel.Register;
 using WebUI.Helper;
@@ -29,9 +30,22 @@ namespace WebUI.Controllers
         [HttpPost]
         public ActionResult Index(UserModel model)
         {
+            #region Cache理解
+            string userCache = "userId";
+            UserModel CacheModel = HttpContext.Cache.Get(userCache) as UserModel;
+            if (CacheModel == null)
+            {
+                model = _service.GetByName(model.UserName);
+                HttpContext.Cache.Add(userCache, model,/*cachedenpendency*/null,
+                    DateTime.Now.AddSeconds(5), TimeSpan.Zero, CacheItemPriority.NotRemovable,
+                    (k, v, r) => { Console.WriteLine($"cache with key:{k} and value:{v} is deleted,reason is{r}"); });
+            }//else nothing
+
+
+            #endregion
             if (_service.GetByName(model.UserName) != null)
             {
-                ModelState.AddModelError(nameof(model.UserName), "* 用户名已存在，请重新输入" );
+                ModelState.AddModelError(nameof(model.UserName), "* 用户名已存在，请重新输入");
                 return View(model);
             }
             UserModel inviter = _service.GetByName(model.InviterName);
@@ -49,15 +63,15 @@ namespace WebUI.Controllers
             {
                 ModelState.AddModelError(nameof(model.Captcha), "* 验证码不正确，请重新输入");
             }
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
             _service.GetRegisterId(model);
-            CookieHelper.AddCookie((int)model.UserId,model.Password);
+            CookieHelper.AddCookie((int)model.UserId, model.Password);
             return View(model);
         }
     }
 
-   
+
 }
