@@ -12,7 +12,6 @@ using WebUI.Helper;
 
 namespace WebUI.Controllers
 {
-    [ValidateAntiForgeryToken]
     public class RegisterController : BaseController
     {
         private IRegisterService _service;
@@ -24,25 +23,26 @@ namespace WebUI.Controllers
         public ActionResult Index()
         {
             ViewBag.connectionString = ConfigurationManager.ConnectionStrings[0].Name;
+            #region Cache理解
+            //string userCache = "userId";
+            //UserModel CacheModel = HttpContext.Cache.Get(userCache) as UserModel;
+            //if (CacheModel == null)
+            //{
+            //    CacheModel = _service.GetByName("xx");
+            //    HttpContext.Cache.Add(userCache, CacheModel,/*cachedenpendency*/null,
+            //        DateTime.Now.AddSeconds(20), TimeSpan.Zero, CacheItemPriority.NotRemovable,
+            //        (k, v, r) => { Console.WriteLine($"cache with key:{k} and value:{v} is deleted,reason is{r}"); });
+            //}//else nothing
+            #endregion
             //throw new Exception();
-            return View();
+            return View(/*CacheModel*/);
         }
+
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Index(UserModel model)
         {
-            #region Cache理解
-            string userCache = "userId";
-            UserModel CacheModel = HttpContext.Cache.Get(userCache) as UserModel;
-            if (CacheModel == null)
-            {
-                model = _service.GetByName(model.UserName);
-                HttpContext.Cache.Add(userCache, model,/*cachedenpendency*/null,
-                    DateTime.Now.AddSeconds(5), TimeSpan.Zero, CacheItemPriority.NotRemovable,
-                    (k, v, r) => { Console.WriteLine($"cache with key:{k} and value:{v} is deleted,reason is{r}"); });
-            }//else nothing
-
-
-            #endregion
+     
             if (_service.GetByName(model.UserName) != null)
             {
                 ModelState.AddModelError(nameof(model.UserName), "* 用户名已存在，请重新输入");
