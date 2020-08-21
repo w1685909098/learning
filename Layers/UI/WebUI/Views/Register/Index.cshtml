@@ -1,4 +1,5 @@
 ﻿@model ViewModel.Register.UserModel
+@using DevTrends.MvcDonutCaching
 @{
     Layout = Layout;
 }
@@ -13,6 +14,7 @@
 <body>
     @using (Html.BeginForm())
     {
+        @*@Html.Action("","",true)*@
         <h1>数据库连接:@ViewBag.connectionString</h1>
         @*<h3>@Model.Password</h3>*@
         @Html.AntiForgeryToken()
@@ -43,8 +45,8 @@
         </div>
         <div>
             <label>验证码：</label><br />
-            @Html.TextBoxFor(m=>m.Captcha)
-            @Html.ValidationMessageFor(m=>m.Captcha)
+            @Html.TextBoxFor(m => m.Captcha)
+            @Html.ValidationMessageFor(m => m.Captcha)
             <img src="~/Shared/Captcha" />   <a href="">看不清楚？</a>
         </div>
         <button type="submit">提交</button>

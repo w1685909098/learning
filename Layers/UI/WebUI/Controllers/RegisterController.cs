@@ -1,4 +1,5 @@
-﻿using ProdService;
+﻿using DevTrends.MvcDonutCaching;
+using ProdService;
 using ServiceInterface;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace WebUI.Controllers
             _service = registerService;
         }
         // GET: Register
+        //[DonutOutputCache]
         public ActionResult Index()
         {
             ViewBag.connectionString = ConfigurationManager.ConnectionStrings[0].Name;
