@@ -19,6 +19,7 @@ namespace WebUI.Controllers
             _articleService = articleService;
         }
         // GET: Article
+        [OutputCache(Duration =50,Location =OutputCacheLocation.Any,VaryByParam ="id")]
         public ActionResult Index(int? id)
         {
             if (id == null)
