@@ -19,7 +19,8 @@ namespace WebUI.Controllers
             _articleService = articleService;
         }
         // GET: Article
-        [OutputCache(Duration =50,Location =OutputCacheLocation.Any,VaryByParam ="id")]
+       /* [OutputCache(Duration =50,Location =OutputCacheLocation.Any,VaryByParam ="id")] */ //单个配置
+       [OutputCache(CacheProfile ="ArticleIndex")]
         public ActionResult Index(int? id)
         {
             if (id == null)
