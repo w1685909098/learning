@@ -1,0 +1,39 @@
+﻿@model ViewModel.Password.ChangeModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Change</title>
+</head>
+<body>
+    <main>
+        @using (Html.BeginForm())
+        {
+            <div>
+                <label>原密码：</label><br />
+                @Html.PasswordFor(m => m.PresentPassword)
+                @Html.ValidationMessageFor(m => m.PresentPassword)
+            </div>
+            <div>
+                <label>新密码：</label><br />
+                @Html.PasswordFor(m => m.UpdatePassword)
+                @Html.ValidationMessageFor(m => m.UpdatePassword)
+            </div>
+            <div>
+                <label>确认密码：</label><br />
+                @Html.PasswordFor(m => m.ComfirmPassword)
+                @Html.ValidationMessageFor(m => m.ComfirmPassword)
+            </div>
+            <button type="submit">提交</button>
+            <button type="reset">重置</button>
+        }
+    </main>
+    <div>
+    </div>
+</body>
+</html>

@@ -47,7 +47,7 @@
             <label>验证码：</label><br />
             @Html.TextBoxFor(m => m.Captcha)
             @Html.ValidationMessageFor(m => m.Captcha)
-            <img src="~/Shared/Captcha" />   <a href="">看不清楚？</a>
+            <img src="~/Shared/Captcha?v=@Guid.NewGuid()" />   <a href="">看不清楚？</a>
         </div>
         <button type="submit">提交</button>
         <button type="reset">重置</button>

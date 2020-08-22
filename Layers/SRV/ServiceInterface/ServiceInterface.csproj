@@ -46,6 +46,7 @@
     <Compile Include="IEmailService.cs" />
     <Compile Include="IKeywordService.cs" />
     <Compile Include="ILogOnService.cs" />
+    <Compile Include="IPasswordService.cs" />
     <Compile Include="IPersonalInforService.cs" />
     <Compile Include="IRegisterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

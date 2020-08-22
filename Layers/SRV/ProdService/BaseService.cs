@@ -144,6 +144,32 @@ namespace ProdService
                 .ForMember(m => m.Captcha, opt => opt.Ignore())
                  .ReverseMap()
                  ;
+
+                cfg.CreateMap<User, ViewModel.Password.ChangeModel>(MemberList.None)
+                .ForMember(m => m.PresentPassword, opt => opt.MapFrom(u => u.Password))
+                .ForMember(m => m.Id, opt => opt.MapFrom(u => u.Id))
+                .ForMember(m => m.UpdatePassword, opt => opt.Ignore())
+                .ForMember(m => m.ComfirmPassword, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(u => u.Password, opt => opt.MapFrom(m => m.UpdatePassword));
+
+                cfg.CreateMap<User, ViewModel.Password.ForgetModel>(MemberList.None)
+               .ForMember(m => m.EmailAddress, opt => opt.MapFrom(u => u.BindingEmail.Address))
+               .ForMember(m => m.Id, opt => opt.MapFrom(u => u.Id))
+               .ForMember(m => m.UserName, opt => opt.MapFrom(u=>u.Name))
+               .ForMember(m => m.VerificationCode, opt => opt.Ignore())
+               .ReverseMap()
+               .ForMember(u => u.BindingEmail, opt => opt.MapFrom(m => m));
+
+                cfg.CreateMap<ViewModel.Password.ForgetModel, Email>(MemberList.None)
+                .ForMember(e => e.Address, opt => opt.MapFrom(m => m.EmailAddress));
+
+                cfg.CreateMap<ViewModel.Password.ResetModel, User>(MemberList.None)
+                .ForMember(u => u.Password, opt => opt.MapFrom(m => m.UpdatePassword))
+                .ReverseMap()
+                .ForMember(m=>m.Id,opt=>opt.MapFrom(u=>u.Id))
+                .ForMember(m=>m.UpdatePassword,opt=>opt.Ignore())
+                .ForMember(m=>m.ComfirmPassword,opt=>opt.Ignore());
             });
 #if DEBUG
             _mapperConfiguration.AssertConfigurationIsValid();
@@ -249,7 +275,7 @@ namespace ProdService
                 User currentUser = userRepository.FindEntity(Convert.ToInt32(id));
                 if (currentUser.Password != password)
                 {
-                    throw new Exception();
+                    throw new Exception();//更改密码时 cookie里面的密码与保存后的密码冲突
                 }
                 return Convert.ToInt32(id);
             }

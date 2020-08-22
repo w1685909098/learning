@@ -36,6 +36,10 @@ namespace WebUI.Controllers
                 ModelState.AddModelError(nameof(model.Password), "* 密码输入错误，请检查密码并重新输入");
                 return View(model);
             }
+            if (Session["captcha"] == null)
+            {
+                throw new Exception();
+            }
             if (model.Captcha!=Session["captcha"].ToString())
             {
                 ModelState.AddModelError(nameof(model.Captcha), "* 验证码输入不正确，请重新输入");
