@@ -13,7 +13,7 @@ namespace WebUI.Filter
         public IBaseService BaseService { get; set; }  //属性进行依赖注入
         public ContextPerRequest()
         {
-            BaseService = new BaseService();
+            //BaseService = new BaseService();
         }
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
@@ -30,6 +30,7 @@ namespace WebUI.Filter
                 }
                 BaseService.ClearContext();
             }
+            //BaseService.ClearContext();
         }
     }
 }

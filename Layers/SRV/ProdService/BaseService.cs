@@ -219,8 +219,7 @@ namespace ProdService
             {
                 if (currentContext != null)
                 {
-                    DbContextTransaction transaction = currentContext.Database.CurrentTransaction;
-                    using (transaction)
+                    using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
                     {
                         try
                         {
@@ -242,8 +241,7 @@ namespace ProdService
         {
             using (SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"])
             {
-                DbContextTransaction transaction = currentContext.Database.CurrentTransaction;
-                using (transaction)
+                using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
                 {
                     transaction.Rollback();
                 }
