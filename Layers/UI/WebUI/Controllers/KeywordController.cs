@@ -17,10 +17,10 @@ namespace WebUI.Controllers
             _keywordService = keywordService;
         }
         // GET: Keyword
-        public ActionResult _Items()
+        public PartialViewResult _Items()
         {
             IList<KeywordModel> model = _keywordService.GetRankedKeywordModels(15);
-            return View(model);
+            return PartialView(model);
         }
     }
 }
