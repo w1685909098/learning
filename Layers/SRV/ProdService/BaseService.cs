@@ -156,7 +156,7 @@ namespace ProdService
                 cfg.CreateMap<User, ViewModel.Password.ForgetModel>(MemberList.None)
                .ForMember(m => m.EmailAddress, opt => opt.MapFrom(u => u.BindingEmail.Address))
                .ForMember(m => m.Id, opt => opt.MapFrom(u => u.Id))
-               .ForMember(m => m.UserName, opt => opt.MapFrom(u=>u.Name))
+               .ForMember(m => m.UserName, opt => opt.MapFrom(u => u.Name))
                .ForMember(m => m.VerificationCode, opt => opt.Ignore())
                .ReverseMap()
                .ForMember(u => u.BindingEmail, opt => opt.MapFrom(m => m));
@@ -167,9 +167,9 @@ namespace ProdService
                 cfg.CreateMap<ViewModel.Password.ResetModel, User>(MemberList.None)
                 .ForMember(u => u.Password, opt => opt.MapFrom(m => m.UpdatePassword))
                 .ReverseMap()
-                .ForMember(m=>m.Id,opt=>opt.MapFrom(u=>u.Id))
-                .ForMember(m=>m.UpdatePassword,opt=>opt.Ignore())
-                .ForMember(m=>m.ComfirmPassword,opt=>opt.Ignore());
+                .ForMember(m => m.Id, opt => opt.MapFrom(u => u.Id))
+                .ForMember(m => m.UpdatePassword, opt => opt.Ignore())
+                .ForMember(m => m.ComfirmPassword, opt => opt.Ignore());
             });
 #if DEBUG
             _mapperConfiguration.AssertConfigurationIsValid();
@@ -182,69 +182,78 @@ namespace ProdService
                 return _mapperConfiguration.CreateMapper();
             }
         }
-
+        public void ClearContext()  
+        {
+            HttpContext.Current.Items["context"] = null;
+        }
         public void CommitTrans()
         {
-            SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"];
+            #region
+            //SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"];
+            //{
+            //    if (currentContext != null)
+            //    {
+            //        #region 手动释放资源
+            //        DbContextTransaction transaction = currentContext.Database.CurrentTransaction;
+            //        try
+            //        {
+            //            transaction.Commit();
+            //        }
+            //        catch (Exception)
+            //        {
+            //            transaction.Rollback();
+            //            throw;
+            //        }
+            //        finally
+            //        {
+            //            //currentContext.Dispose();
+            //            currentContext = null;
+            //        }
+            //#endregion
+            //currentContext.Database.CurrentTransaction.Commit();
+            //    } //else nothing
+            //}
+            #endregion
+            #region 自动释放资源
+            using (SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"])
             {
                 if (currentContext != null)
                 {
-                    #region 手动释放资源
                     DbContextTransaction transaction = currentContext.Database.CurrentTransaction;
-                    try
+                    using (transaction)
                     {
-                        transaction.Commit();
+                        try
+                        {
+                            currentContext.SaveChanges();
+                            transaction.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
-                    catch (Exception)
-                    {
-                        transaction.Rollback();
-                        throw;
-                    }
-                    finally
-                    {
-                        //currentContext.Dispose();
-                        currentContext = null;
-                    }
-                    #endregion
-                    //currentContext.Database.CurrentTransaction.Commit();
-
-                    #region 自动释放资源
-                    //using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
-                    //{
-                    //    try
-                    //    {
-                    //        currentContext.SaveChanges();
-                    //        transaction.Commit();
-                    //    }
-                    //    catch (Exception)
-                    //    {
-                    //        transaction.Rollback();
-                    //        throw;
-                    //    }
-                    //}
-                    #endregion
-
-                } //else nothing
+                }
             }
+            #endregion
+
         }
         public void RollbackTrans()
         {
             using (SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"])
             {
-                if (currentContext != null)
+                DbContextTransaction transaction = currentContext.Database.CurrentTransaction;
+                using (transaction)
                 {
-                    using (DbContextTransaction transaction = currentContext.Database.CurrentTransaction)
-                    {
-                        transaction.Rollback();
-                    }
-                } //else nothing
+                    transaction.Rollback();
+                }
             }
         }
         protected SqlDbContext context
         {
             get
             {
-                SqlDbContext currentContext = (SqlDbContext)HttpContext.Current.Items["context"];
+                SqlDbContext currentContext = HttpContext.Current.Items["context"] as SqlDbContext;
                 if (currentContext == null)
                 {
                     #region 自己的理解  每次 HttpContext.Current.Items["context"]  都为null

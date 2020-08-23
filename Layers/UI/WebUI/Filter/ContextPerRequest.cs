@@ -8,15 +8,19 @@ using System.Web.Mvc;
 
 namespace WebUI.Filter
 {
-    public class ContextPerRequest:ActionFilterAttribute
+    public class ContextPerRequest : ActionFilterAttribute
     {
         public IBaseService BaseService { get; set; }  //属性进行依赖注入
+        public ContextPerRequest()
+        {
+            BaseService = new BaseService();
+        }
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
-            if (! filterContext.IsChildAction)
+            if (!filterContext.IsChildAction)
             {
-                if (filterContext.Exception==null)
+                if (filterContext.Exception == null)
                 {
                     BaseService.CommitTrans();
                 }
@@ -24,6 +28,7 @@ namespace WebUI.Filter
                 {
                     BaseService.RollbackTrans();
                 }
+                BaseService.ClearContext();
             }
         }
     }

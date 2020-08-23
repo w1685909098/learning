@@ -10,5 +10,6 @@ namespace ServiceInterface
     {
         void CommitTrans();
         void RollbackTrans();
+        void ClearContext();
     }
 }

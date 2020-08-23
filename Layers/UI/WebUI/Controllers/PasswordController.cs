@@ -54,7 +54,7 @@ namespace WebUI.Controllers
         public ActionResult Forget(ForgetModel model)
         {
             //new EmailService().SendEmailHeiper(model.EmailAddress);//真
-            new EmailService().SendEmailHelper("1685909098@qq.com");//假的 开发便利
+            //new EmailService().SendEmailHelper("1685909098@qq.com");//假的 开发便利
             ForgetModel RepoModel = _passwordService.GetForgetModelByName(model.UserName);
             if (RepoModel!=null)
             {
