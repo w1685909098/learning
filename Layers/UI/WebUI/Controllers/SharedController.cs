@@ -25,11 +25,11 @@ namespace WebUI.Controllers
             Graphics drawing = Graphics.FromImage(image);  //生成画板
             drawing.Clear(Color.White); //清空画板
             string captcha = RandomString.GetRandomCode();
-            drawing.DrawString(captcha, new Font("宋体", 14),
+            drawing.DrawString(captcha, new Font("宋体", 14), 
                 new SolidBrush(Color.Black), new Point(25, 5));
             Session["captcha"] = captcha;
             MemoryStream stream = new MemoryStream();
-            image.Save(stream, ImageFormat.Jpeg);
+            image.Save(stream,ImageFormat.Jpeg);
             return File(stream.ToArray(), "image/png");
         }
         //public static string GetCaptcha()

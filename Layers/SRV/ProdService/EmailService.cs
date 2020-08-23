@@ -59,24 +59,23 @@ namespace ProdService
             currentUser.BindingEmail.Expires = DateTime.Now.AddMinutes(5);
             userRepository.UserSaveChanges(currentUser);
             string mailSubject = $"激活Email,邮箱验证码为{code}";
-            string mailBody = $"感谢你的Email绑定......https://www.baidu.com点击<a href='https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}'>重置密码</a>https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}进行验证";
+            string mailBody = $"感谢你的Email绑定......点击<a href='https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}'进行验证 >";
             ValidEmail(mailSubject, model.EmailAddress, mailBody);
         }
-        public  void SendEmailHelper(string address)
+        public void SendEmailHelper(string address)
         {
             //model.EmailAddress = "1685909098@qq.com";
-            User user = CurrentUser;
-            user.BindingEmail = new Email();
-            user.BindingEmail.Address = address;
+            CurrentUser.BindingEmail = new Email();
+            CurrentUser.BindingEmail.Address = address;
             //User currentUser = mapper.Map<User>(model);
             //currentUser.BindingEmail = new Email();
-            user.BindingEmail.Code = code;
+            CurrentUser.BindingEmail.Code = code;
             //currentUser.BindingEmail.Code = code;
-            user.BindingEmail.Expires = DateTime.Now.AddMinutes(5);
+            CurrentUser.BindingEmail.Expires = DateTime.Now.AddMinutes(5);
             //currentUser.BindingEmail.Expires = DateTime.Now.AddMinutes(5);
-            userRepository.UserSaveChanges(user);
+            userRepository.UserSaveChanges(CurrentUser);
             string mailSubject = $"激活Email,邮箱验证码为{code}";
-            string mailBody = $"感谢你的Email绑定......https://www.baidu.com点击<a href='https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}'进行验证 https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}";
+            string mailBody = $"感谢你的Email绑定......点击<a href='https://localhost:44380/Email/Activate?id={CurrentUserId}&code={code}'进行验证 >";
             ValidEmail(mailSubject, address, mailBody);
         }
 

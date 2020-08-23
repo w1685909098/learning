@@ -1,7 +1,6 @@
 ﻿@model ViewModel.Password.ForgetModel
 @{
-    //Layout = null;
-    Layout = Layout;
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -22,16 +21,13 @@
             </div>
             <div>
                 <label>通过用户名查找Email：</label><br />
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.EmailAddress)
             </div>
             <div>
                 <label>验证码：</label><br />
                 @Html.TextBoxFor(m => m.VerificationCode)
                 @Html.ValidationMessageFor(m => m.VerificationCode)
-                <img src="~/Shared/Captcha?v=@Guid.NewGuid()" />
             </div>
-            <button type="submit">提交</button>
-            <button type="reset">重置</button>
         }
     </main>
     <div>
