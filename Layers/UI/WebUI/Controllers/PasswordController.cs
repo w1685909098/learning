@@ -56,7 +56,11 @@ namespace WebUI.Controllers
             //new EmailService().SendEmailHeiper(model.EmailAddress);//真
             new EmailService().SendEmailHelper("1685909098@qq.com");//假的 开发便利
             ForgetModel RepoModel = _passwordService.GetForgetModelByName(model.UserName);
-            if (model.VerificationCode!=Session["Capthca"].ToString())
+            if (RepoModel!=null)
+            {
+                return View(RepoModel);
+            }
+            if (model.VerificationCode!=Session["Captcha"].ToString())
             {
                 ModelState.AddModelError(nameof(model.VerificationCode), "* 验证码不正确");
             }
@@ -65,7 +69,7 @@ namespace WebUI.Controllers
                 return View(model);
             }
             
-            return View(RepoModel);
+            return View(model);
         }
 
         public ActionResult Reset()
